@@ -1,0 +1,20 @@
+Package: shinylogs
+Title: Record Everything that Happens in a 'Shiny' Application
+Version: 0.0.0.9000
+Authors@R: c(person("Fanny", "Meyer", email = "fanny.meyer@dreamrs.fr", role = c("aut")),
+  person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
+  person("Typicode", role = "cph", comment = "lowdb library"),
+  person("JS Foundation", role = "cph", comment = "lodash library"))
+Description: Track usage of user interaction in a 'Shiny' application. Allow to save inputs clicked, output generated and eventually errors.
+License: GPL-3 | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    htmltools,
+    shiny (>= 1.1.0),
+    jsonlite,
+    data.table,
+    bit64,
+    nanotime,
+    digest
+RoxygenNote: 6.1.1
