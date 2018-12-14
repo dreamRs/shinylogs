@@ -4,10 +4,17 @@
 \alias{tracking_ui}
 \title{Insert dependencies to track usage of a Shiny app}
 \usage{
-tracking_ui()
+tracking_ui(on_unload = FALSE)
+}
+\arguments{
+\item{on_unload}{Logical, save log when user close the browser window or tab,
+if \code{TRUE} it prevent to create \code{shinylogs}
+input during normal use of the application, there will
+be created only on close, downside is that a popup will appear asking to close the page.}
 }
 \description{
-If used in \code{ui} of an application, this will create new \code{input}s available in the server.
+If used in \code{ui} of an application,
+ this will create new \code{input}s available in the server.
 }
 \note{
 The following \code{input}s will be accessible in the server:

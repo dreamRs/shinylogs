@@ -4,11 +4,16 @@
 \alias{track_usage}
 \title{Track usage of a Shiny app}
 \usage{
-track_usage(storage_mode = store_json(), exclude_users = NULL,
-  session = getDefaultReactiveDomain())
+track_usage(storage_mode = store_json(), on_unload = FALSE,
+  exclude_users = NULL, session = getDefaultReactiveDomain())
 }
 \arguments{
-\item{storage_mode}{Storage mode to use : \code{\link{store_json}}}
+\item{storage_mode}{Storage mode to use : \code{\link{store_json}}.}
+
+\item{on_unload}{Logical, save log when user close the browser window or tab,
+if \code{TRUE} it prevent to create \code{shinylogs}
+input during normal use of the application, there will
+be created only on close, downside is that a popup will appear asking to close the page.}
 
 \item{exclude_users}{Character vectors of user for whom it is not necessary to save the log.}
 

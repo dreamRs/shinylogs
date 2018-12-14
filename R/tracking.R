@@ -1,7 +1,13 @@
 
 #' @title Insert dependencies to track usage of a Shiny app
 #'
-#' @description If used in \code{ui} of an application, this will create new \code{input}s available in the server.
+#' @description If used in \code{ui} of an application,
+#'  this will create new \code{input}s available in the server.
+#'
+#' @param on_unload Logical, save log when user close the browser window or tab,
+#'  if \code{TRUE} it prevent to create \code{shinylogs}
+#'  input during normal use of the application, there will
+#'  be created only on close, downside is that a popup will appear asking to close the page.
 #'
 #' @note The following \code{input}s will be accessible in the server:
 #'
@@ -15,10 +21,19 @@
 #'
 #' @export
 #'
-#' @importFrom htmltools attachDependencies tags
-tracking_ui <- function() {
+#' @importFrom htmltools attachDependencies tags singleton
+#' @importFrom jsonlite toJSON
+tracking_ui <- function(on_unload = FALSE) {
+  tag_log <- tags$div(tags$script(
+    id = "shinylogs-tracking",
+    type = "application/json",
+    `data-for` = "shinylogs",
+    toJSON(list(
+      logsonunload = isTRUE(on_unload)
+    ), auto_unbox = TRUE, json_verbatim = TRUE)
+  ))
   attachDependencies(
-    x = tags$div(),
+    x = singleton(tag_log),
     value = list(
       lowdb_dependencies(),
       shinylogs_dependencies()
@@ -40,7 +55,11 @@ parse_log <- function(x, shinysession, name) {
 #'
 #' @description Used in Shiny \code{server} it will save everything that happens in a Shiny app.
 #'
-#' @param storage_mode Storage mode to use : \code{\link{store_json}}
+#' @param storage_mode Storage mode to use : \code{\link{store_json}}.
+#' @param on_unload Logical, save log when user close the browser window or tab,
+#'  if \code{TRUE} it prevent to create \code{shinylogs}
+#'  input during normal use of the application, there will
+#'  be created only on close, downside is that a popup will appear asking to close the page.
 #' @param exclude_users Character vectors of user for whom it is not necessary to save the log.
 #' @param session The shiny session.
 #'
@@ -50,14 +69,36 @@ parse_log <- function(x, shinysession, name) {
 #' @importFrom nanotime nanotime
 #' @importFrom bit64 as.integer64
 #' @importFrom digest digest
+#' @importFrom jsonlite toJSON
+#' @importFrom htmltools tags
 track_usage <- function(storage_mode = store_json(),
+                        on_unload = FALSE,
                         exclude_users = NULL,
                         session = getDefaultReactiveDomain()) {
   stopifnot(inherits(storage_mode, "shinylogs.storage_mode"))
   insertUI(
-    selector = "body",
-    ui = tracking_ui(),
+    selector = "body", where = "afterBegin",
+    ui = tags$script(
+      id = "shinylogs-tracking",
+      type = "application/json",
+      `data-for` = "shinylogs",
+      toJSON(list(
+        logsonunload = isTRUE(on_unload)
+      ), auto_unbox = TRUE, json_verbatim = TRUE)
+    ),
     immediate = TRUE,
+    session = session
+  )
+  insertUI(
+    selector = "body", where = "afterBegin",
+    ui = attachDependencies(
+      x = tags$div(),
+      value = list(
+        lowdb_dependencies(),
+        shinylogs_dependencies()
+      )
+    ),
+    immediate = FALSE,
     session = session
   )
   app_name <- basename(getwd())
