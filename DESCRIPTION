@@ -18,3 +18,5 @@ Imports:
     nanotime,
     digest
 RoxygenNote: 6.1.1
+URL: https://github.com/dreamRs/shinylogs
+BugReports: https://github.com/dreamRs/shinylogs/issues
