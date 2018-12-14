@@ -8,18 +8,16 @@
  */
 
 
-$('document').ready(function() {
+//$('document').ready(function() {
   // on unload or not
   var logsonunload = false;
 
   // config
-  //$('document').ready(function() {
-    var config = document.querySelectorAll('script[data-for="shinylogs"]');
-    console.log(config);
-    config = JSON.parse(config[0].innerHTML);
-    logsonunload = config.logsonunload;
-    console.log(logsonunload);
-  //});
+  var config = document.querySelectorAll('script[data-for="shinylogs"]');
+  //console.log(config);
+  config = JSON.parse(config[0].innerHTML);
+  logsonunload = config.logsonunload;
+  //console.log(logsonunload);
 
 
   // lowdb init
@@ -103,7 +101,7 @@ $('document').ready(function() {
   }
 
 
-});
+//});
 
 
 
