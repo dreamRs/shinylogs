@@ -7,7 +7,7 @@
 read_json_logs(path)
 }
 \arguments{
-\item{path}{Path of the directory containing JSON files.}
+\item{path}{Path of the directory containing JSON files or a vector of path to JSON files.}
 }
 \value{
 a list of \code{data.table}

@@ -1,7 +1,7 @@
 
 #' Read a directory containing JSON logs
 #'
-#' @param path Path of the directory containing JSON files.
+#' @param path Path of the directory containing JSON files or a vector of path to JSON files.
 #'
 #' @return a list of \code{data.table}
 #' @export
@@ -11,9 +11,17 @@
 #' @importFrom stats setNames
 #'
 read_json_logs <- function(path) {
-  jsons <- list.files(path = path, pattern = "\\.json$", full.names = TRUE)
-  if (length(jsons) == 0) {
-    stop("No JSON files to read in specified path", call. = FALSE)
+  if (length(path) == 1 && dir.exists(path)) {
+    jsons <- list.files(path = path, pattern = "\\.json$", full.names = TRUE)
+    if (length(jsons) == 0) {
+      stop("No JSON files to read in specified path", call. = FALSE)
+    }
+  } else if (length(path) > 1) {
+    jsons <- lapply(path, normalizePath, mustWork = TRUE)
+  } else if (length(path) == 1 &&grepl(pattern = "json$", x = path)) {
+    jsons <- normalizePath(path, mustWork = TRUE)
+  } else {
+    stop("'path' must be a directory containing JSON files or a a JSON file", call. = FALSE)
   }
   logs <- lapply(
     X = jsons,
