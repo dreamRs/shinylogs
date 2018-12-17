@@ -56,6 +56,7 @@ parse_log <- function(x, shinysession, name) {
 #' @description Used in Shiny \code{server} it will save everything that happens in a Shiny app.
 #'
 #' @param storage_mode Storage mode to use : \code{\link{store_json}}.
+#' @param exclude_input Regular expression to exclude inputs from tracking.
 #' @param on_unload Logical, save log when user close the browser window or tab,
 #'  if \code{TRUE} it prevent to create \code{shinylogs}
 #'  input during normal use of the application, there will
@@ -72,6 +73,7 @@ parse_log <- function(x, shinysession, name) {
 #' @importFrom jsonlite toJSON
 #' @importFrom htmltools tags
 track_usage <- function(storage_mode = store_json(),
+                        exclude_input = NULL,
                         on_unload = FALSE,
                         exclude_users = NULL,
                         session = getDefaultReactiveDomain()) {
@@ -82,9 +84,10 @@ track_usage <- function(storage_mode = store_json(),
       id = "shinylogs-tracking",
       type = "application/json",
       `data-for` = "shinylogs",
-      toJSON(list(
-        logsonunload = isTRUE(on_unload)
-      ), auto_unbox = TRUE, json_verbatim = TRUE)
+      toJSON(dropNulls(list(
+        logsonunload = isTRUE(on_unload),
+        excludeinput = exclude_input
+      )), auto_unbox = TRUE, json_verbatim = TRUE)
     ),
     immediate = TRUE,
     session = session

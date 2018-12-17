@@ -14,10 +14,15 @@
 
   // config
   var config = document.querySelectorAll('script[data-for="shinylogs"]');
-  //console.log(config);
   config = JSON.parse(config[0].innerHTML);
+  console.log(config);
   logsonunload = config.logsonunload;
   //console.log(logsonunload);
+
+  var re_ex_in = RegExp("^$");
+  if (config.hasOwnProperty("excludeinput")) {
+    re_ex_in = RegExp(config.excludeinput);
+  }
 
 
   // lowdb init
@@ -34,7 +39,7 @@
   // Track INPUTS
   $(document).on('shiny:inputchanged', function(event) {
     //console.log(event);
-    if (dont_track.indexOf(event.name) == -1 & regex_hidden.test(event.name) === false) {
+    if (dont_track.indexOf(event.name) == -1 & regex_hidden.test(event.name) === false & re_ex_in.test(event.name) === false) {
       //console.log(event);
       var lastInput = {name: event.name, timestamp: event.timeStamp, value: event.value, type: event.inputType};
       db.get('input').push(lastInput).write();
