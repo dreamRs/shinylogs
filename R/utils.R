@@ -14,3 +14,10 @@ get_timestamp <- function(time = NULL) {
 }
 
 
+parse_browser_data <- function(dat) {
+  dat <- as.data.frame(dat, stringsAsFactors = FALSE)
+  dat$browser_connected <- as.numeric(dat$browser_connected)
+  dat$browser_connected <- as.POSIXct(dat$browser_connected/1000, origin = "1970-01-01")
+  dat$browser_connected <- get_timestamp(dat$browser_connected)
+  dat
+}

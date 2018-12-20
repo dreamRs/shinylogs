@@ -1,6 +1,6 @@
 Package: shinylogs
 Title: Record Everything that Happens in a 'Shiny' Application
-Version: 0.0.0.9210
+Version: 0.0.0.9220
 Authors@R: c(person("Fanny", "Meyer", email = "fanny.meyer@dreamrs.fr", role = c("aut")),
   person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
   person("Typicode", role = "cph", comment = "lowdb library"),

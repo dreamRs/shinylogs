@@ -53,16 +53,20 @@ var browser_res = w + "x" + h;
 // Pixel ratio
 var pixel_ratio = window.devicePixelRatio;
 
+// Timestamp browser
+var browser_connected = new Date().getTime();
+
 // Send browser data
 Shiny.setInputValue(".shinylogs_browserData", {
   user_agent: ua,
   screen_res: screen_res,
   browser_res: browser_res,
-  pixel_ratio: pixel_ratio
+  pixel_ratio: pixel_ratio,
+  browser_connected: browser_connected
 });
 
 // Shiny input event to not track
-var dont_track = [ ".shinylogs_lastinput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output" ];
+var dont_track = [ ".shinylogs_lastinput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output", ".shinylogs_browserData" ];
 
 var regex_hidden = RegExp("hidden$");
 

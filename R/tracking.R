@@ -19,6 +19,8 @@
 #'
 #'   - \strong{.shinylogs_output} : all \code{output}s generated from the server
 #'
+#'   - \strong{.shinylogs_browserData} : information about the browser where application is displayed.
+#'
 #' @export
 #'
 #' @importFrom htmltools attachDependencies tags singleton
@@ -110,22 +112,25 @@ track_usage <- function(storage_mode = store_json(),
   init_log <- data.frame(
     app = app_name,
     user = user,
-    timestamp_connected = get_timestamp(timestamp),
+    server_connected = get_timestamp(timestamp),
     stringsAsFactors = FALSE
   )
   storage_mode$appname <- app_name
   storage_mode$timestamp <- format(as.integer64(nanotime(timestamp)), scientific = FALSE)
   onSessionEnded(
     fun = function() {
-      init_log$timestamp_disconnected <- get_timestamp(Sys.time())
+      init_log$server_disconnected <- get_timestamp(Sys.time())
       init_log$sessionid <- digest::digest(storage_mode$timestamp)
       logs <- c(isolate(session$input$.shinylogs_input),
                 isolate(session$input$.shinylogs_error),
                 isolate(session$input$.shinylogs_output))
-      logs$user <- init_log
+      browser_data <- isolate(session$input$.shinylogs_browserData)
+      browser_data <- parse_browser_data(browser_data)
+      logs$session <- cbind(init_log, browser_data)
       if (isTRUE(!user %in% exclude_users)) {
         write_logs(storage_mode, logs)
       }
+      return(invisible())
     },
     session = session
   )
