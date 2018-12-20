@@ -105,23 +105,19 @@ track_usage <- function(storage_mode = store_json(),
     session = session
   )
   app_name <- basename(getwd())
-  if (is.null(session$user)) {
-    user <- getOption("shinylogs.default_user", default = "")
-  } else {
-    user <- session$user
-  }
+  user <- get_user(session)
   timestamp <- Sys.time()
   init_log <- data.frame(
     app = app_name,
     user = user,
-    timestamp_connected = as.numeric(timestamp),
+    timestamp_connected = get_timestamp(timestamp),
     stringsAsFactors = FALSE
   )
   storage_mode$appname <- app_name
   storage_mode$timestamp <- format(as.integer64(nanotime(timestamp)), scientific = FALSE)
   onSessionEnded(
     fun = function() {
-      init_log$timestamp_disconnected <- as.numeric(Sys.time())
+      init_log$timestamp_disconnected <- get_timestamp(Sys.time())
       init_log$sessionid <- digest::digest(storage_mode$timestamp)
       logs <- c(isolate(session$input$.shinylogs_input),
                 isolate(session$input$.shinylogs_error),
@@ -134,4 +130,21 @@ track_usage <- function(storage_mode = store_json(),
     session = session
   )
 }
+
+
+get_user <- function(session) {
+  if (!is.null(session$user))
+    return(session$user)
+  user <- Sys.getenv("SHINYPROXY_USERNAME")
+  if (user != "") {
+    return(user)
+  } else {
+    getOption("shinylogs.default_user", default = Sys.info()[['user']])
+  }
+}
+
+
+
+
+
 
