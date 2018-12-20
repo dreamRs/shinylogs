@@ -8,7 +8,6 @@
  */
 
 
-//$('document').ready(function() {
   // on unload or not
   var logsonunload = false;
 
@@ -31,6 +30,22 @@
 
   // initialize local data storage
   db.defaults({ input: [], error: [], output: [] }).write();
+
+  // User Agent
+  var ua = window.navigator.userAgent;
+
+  // Screen resolution
+  var screen_res = window.screen.width + "x" + window.screen.height;
+  // Browser resolution
+  var w = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+  var h = window.innerHeight
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
+  var browser_res = w + "x" + h;
+  // Pixel ratio
+  var pixel_ratio = window.devicePixelRatio;
 
   // Shiny input event to not track
   var dont_track = [".shinylogs_lastinput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output"];
@@ -106,7 +121,7 @@
   }
 
 
-//});
+
 
 
 
