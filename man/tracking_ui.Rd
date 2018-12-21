@@ -19,7 +19,7 @@ If used in \code{ui} of an application,
 \note{
 The following \code{input}s will be accessible in the server:
 
-  - \strong{.shinylogs_lastinput} : last \code{input} used by the user
+  - \strong{.shinylogs_lastInput} : last \code{input} used by the user
 
   - \strong{.shinylogs_input} : all \code{input}s send from the browser to the server
 

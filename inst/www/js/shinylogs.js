@@ -14,7 +14,7 @@ var config = document.querySelectorAll('script[data-for="shinylogs"]');
 
 config = JSON.parse(config[0].innerHTML);
 
-console.log(config);
+//console.log(config);
 
 logsonunload = config.logsonunload;
 
@@ -87,9 +87,7 @@ $(document).on("shiny:inputchanged", function(event) {
     };
     db.get("input").push(lastInput).write();
     if (logsonunload === false) {
-      Shiny.setInputValue(".shinylogs_lastinput", lastInput, {
-        priority: "event"
-      });
+      Shiny.setInputValue(".shinylogs_lastInput:parse_lastInput", lastInput);
       var input_ = db.get("input").value();
       input_ = JSON.stringify(input_);
       Shiny.setInputValue(".shinylogs_input:parse_log", {

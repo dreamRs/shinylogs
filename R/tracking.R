@@ -11,7 +11,7 @@
 #'
 #' @note The following \code{input}s will be accessible in the server:
 #'
-#'   - \strong{.shinylogs_lastinput} : last \code{input} used by the user
+#'   - \strong{.shinylogs_lastInput} : last \code{input} used by the user
 #'
 #'   - \strong{.shinylogs_input} : all \code{input}s send from the browser to the server
 #'
@@ -51,6 +51,14 @@ parse_log <- function(x, shinysession, name) {
     X = x,
     FUN = fromJSON
   )
+}
+
+#' @importFrom anytime anytime
+parse_lastInput <- function(x, shinysession, name) {
+  if (!is.null(x)) {
+    x$timestamp <- anytime(x$timestamp)
+  }
+  return(x)
 }
 
 
