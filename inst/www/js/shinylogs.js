@@ -30,6 +30,8 @@ var adapter = new LocalStorage("db");
 
 var db = low(adapter);
 
+db.setState({});
+
 // initialize local data storage
 db.defaults({
   input: [],
@@ -70,7 +72,7 @@ if (logsonunload === false) {
 }
 
 // Shiny input event to not track
-var dont_track = [ ".shinylogs_lastinput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output", ".shinylogs_browserData" ];
+var dont_track = [ ".shinylogs_lastInput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output", ".shinylogs_browserData" ];
 
 var regex_hidden = RegExp("hidden$");
 
