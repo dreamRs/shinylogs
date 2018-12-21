@@ -27,10 +27,10 @@ read_json_logs <- function(path) {
     X = jsons,
     FUN = read_json
   )
-  user <- rbindlist(lapply(logs, extract_dt, what = "user"), fill = TRUE)
-  logs <- setNames(logs, user$sessionid)
+  session <- rbindlist(lapply(logs, extract_dt, what = "session"), fill = TRUE)
+  logs <- setNames(logs, session$sessionid)
   list(
-    user = user,
+    session = session,
     inputs = rbindlist(lapply(logs, extract_dt, what = "inputs"), fill = TRUE, idcol = "sessionid"),
     errors = rbindlist(lapply(logs, extract_dt, what = "errors"), fill = TRUE, idcol = "sessionid"),
     outputs = rbindlist(lapply(logs, extract_dt, what = "outputs"), fill = TRUE, idcol = "sessionid")
@@ -38,12 +38,15 @@ read_json_logs <- function(path) {
 }
 
 #' @importFrom data.table as.data.table :=
+#' @importFrom anytime anytime
 extract_dt <- function(x, what) {
   res <- x[[what]]
   if (!is.null(res)) {
     res <- rbindlist(lapply(res, as.data.table))
-    if (!is.null(res$timestamp)) {
-      res[, timestamp := as.POSIXct(timestamp/1000, origin = "1970-01-01")]
+    vars_time <- c("timestamp", "server_connected", "server_disconnected", "browser_connected")
+    vars_time <- intersect(names(res), vars_time)
+    if (length(vars_time) > 0) {
+      res[, (vars_time) := lapply(.SD, anytime), .SDcols = vars_time]
     }
     return(res)
   } else {

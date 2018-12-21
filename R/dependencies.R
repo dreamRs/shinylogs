@@ -18,3 +18,13 @@ lowdb_dependencies <- function() {
   )
 }
 
+#' @importFrom htmltools htmlDependency
+dayjs_dependencies <- function() {
+  htmlDependency(
+    name = "dayjs", version = "1.7.7",
+    src = list(href = "shinylogs", file = "www"), package = "shinylogs",
+    script = c("dayjs/dayjs.min.js")
+  )
+}
+
+

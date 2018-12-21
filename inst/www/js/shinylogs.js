@@ -54,16 +54,20 @@ var browser_res = w + "x" + h;
 var pixel_ratio = window.devicePixelRatio;
 
 // Timestamp browser
-var browser_connected = new Date().getTime();
+var browser_connected = dayjs().format();
 
 // Send browser data
-Shiny.setInputValue(".shinylogs_browserData", {
-  user_agent: ua,
-  screen_res: screen_res,
-  browser_res: browser_res,
-  pixel_ratio: pixel_ratio,
-  browser_connected: browser_connected
-});
+if (logsonunload === false) {
+  Shiny.setInputValue(".shinylogs_browserData", {
+    user_agent: ua,
+    screen_res: screen_res,
+    browser_res: browser_res,
+    pixel_ratio: pixel_ratio,
+    browser_connected: browser_connected
+  }, {
+    priority: "event"
+  });
+}
 
 // Shiny input event to not track
 var dont_track = [ ".shinylogs_lastinput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output", ".shinylogs_browserData" ];
@@ -77,7 +81,7 @@ $(document).on("shiny:inputchanged", function(event) {
     //console.log(event);
     var lastInput = {
       name: event.name,
-      timestamp: event.timeStamp,
+      timestamp: dayjs(event.timeStamp).format(),
       value: event.value,
       type: event.inputType
     };
@@ -103,7 +107,7 @@ $(document).on("shiny:error", function(event) {
   if (dont_track.indexOf(event.name) == -1) {
     var lastError = {
       name: event.name,
-      timestamp: event.timeStamp,
+      timestamp: dayjs(event.timeStamp).format(),
       error: event.error.message
     };
     db.get("error").push(lastError).write();
@@ -122,7 +126,7 @@ $(document).on("shiny:value", function(event) {
   //console.log(event);
   var lastOutput = {
     name: event.name,
-    timestamp: event.timeStamp,
+    timestamp: dayjs(event.timeStamp).format(),
     binding: event.binding.binding.name
   };
   db.get("output").push(lastOutput).write();
@@ -158,6 +162,13 @@ if (logsonunload === true) {
     output_ = JSON.stringify(output_);
     Shiny.setInputValue(".shinylogs_output:parse_log", {
       outputs: output_
+    });
+    Shiny.setInputValue(".shinylogs_browserData", {
+      user_agent: ua,
+      screen_res: screen_res,
+      browser_res: browser_res,
+      pixel_ratio: pixel_ratio,
+      browser_connected: browser_connected
     });
     return "Are you sure?";
   };

@@ -38,6 +38,7 @@ tracking_ui <- function(on_unload = FALSE) {
     x = singleton(tag_log),
     value = list(
       lowdb_dependencies(),
+      dayjs_dependencies(),
       shinylogs_dependencies()
     )
   )
@@ -100,6 +101,7 @@ track_usage <- function(storage_mode = store_json(),
       x = tags$div(),
       value = list(
         lowdb_dependencies(),
+        dayjs_dependencies(),
         shinylogs_dependencies()
       )
     ),
@@ -125,12 +127,11 @@ track_usage <- function(storage_mode = store_json(),
                 isolate(session$input$.shinylogs_error),
                 isolate(session$input$.shinylogs_output))
       browser_data <- isolate(session$input$.shinylogs_browserData)
-      browser_data <- parse_browser_data(browser_data)
+      browser_data <- as.data.frame(browser_data)
       logs$session <- cbind(init_log, browser_data)
       if (isTRUE(!user %in% exclude_users)) {
         write_logs(storage_mode, logs)
       }
-      return(invisible())
     },
     session = session
   )

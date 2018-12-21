@@ -1,6 +1,6 @@
 Package: shinylogs
 Title: Record Everything that Happens in a 'Shiny' Application
-Version: 0.0.0.9220
+Version: 0.0.0.9230
 Authors@R: c(person("Fanny", "Meyer", email = "fanny.meyer@dreamrs.fr", role = c("aut")),
   person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
   person("Typicode", role = "cph", comment = "lowdb library"),
@@ -16,7 +16,8 @@ Imports:
     data.table,
     bit64,
     nanotime,
-    digest
+    digest,
+    anytime
 RoxygenNote: 6.1.1
 URL: https://github.com/dreamRs/shinylogs
 BugReports: https://github.com/dreamRs/shinylogs/issues

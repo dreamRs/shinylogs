@@ -1,3 +1,3 @@
 
-utils::globalVariables(c("timestamp"))
+utils::globalVariables(c(".SD"))
 
