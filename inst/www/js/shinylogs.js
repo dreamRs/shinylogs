@@ -86,7 +86,7 @@ $(document).on("shiny:inputchanged", function(event) {
       timestamp: dayjs(event.timeStamp).format(),
       value: event.value,
       type: event.inputType,
-      binding: event.binding.name
+      binding: event.binding !== null ? event.binding.name : ''
     };
     db.get("input").push(lastInput).write();
     if (logsonunload === false) {
