@@ -42,7 +42,11 @@ read_json_logs <- function(path) {
 extract_dt <- function(x, what) {
   res <- x[[what]]
   if (!is.null(res)) {
-    res <- rbindlist(lapply(res, as.data.table))
+    if (identical(what, "session")) {
+      res <- as.data.table(res)
+    } else {
+      res <- rbindlist(lapply(res, as.data.table))
+    }
     vars_time <- c("timestamp", "server_connected", "server_disconnected", "browser_connected")
     vars_time <- intersect(names(res), vars_time)
     if (length(vars_time) > 0) {
