@@ -4,7 +4,8 @@ Version: 0.0.0.9600
 Authors@R: c(person("Fanny", "Meyer", email = "fanny.meyer@dreamrs.fr", role = c("aut")),
   person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
   person("Typicode", role = "cph", comment = "lowdb library"),
-  person("JS Foundation", role = "cph", comment = "lodash library"))
+  person("JS Foundation", role = "cph", comment = "lodash library"),
+  person("Mozilla", role = "cph", comment = "localForage library"))
 Description: Track usage of user interaction in a 'Shiny' application. Allow to save inputs clicked, output generated and eventually errors.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
