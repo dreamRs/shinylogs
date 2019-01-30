@@ -88,7 +88,22 @@ track_usage <- function(storage_mode = store_json(),
                         on_unload = FALSE,
                         exclude_users = NULL,
                         session = getDefaultReactiveDomain()) {
+
   stopifnot(inherits(storage_mode, "shinylogs.storage_mode"))
+
+  app_name <- basename(getwd())
+  user <- get_user(session)
+  timestamp <- Sys.time()
+  init_log <- data.frame(
+    app = app_name,
+    user = user,
+    server_connected = get_timestamp(timestamp),
+    stringsAsFactors = FALSE
+  )
+  storage_mode$appname <- app_name
+  storage_mode$timestamp <- format(as.integer64(nanotime(timestamp)), scientific = FALSE)
+  init_log$sessionid <- digest::digest(storage_mode$timestamp)
+
   insertUI(
     selector = "body", where = "afterBegin",
     ui = singleton(tags$script(
@@ -97,7 +112,8 @@ track_usage <- function(storage_mode = store_json(),
       `data-for` = "shinylogs",
       toJSON(dropNulls(list(
         logsonunload = isTRUE(on_unload),
-        excludeinput = exclude_input
+        excludeinput = exclude_input,
+        sessionid = init_log$sessionid
       )), auto_unbox = TRUE, json_verbatim = TRUE)
     )),
     immediate = TRUE,
@@ -118,21 +134,11 @@ track_usage <- function(storage_mode = store_json(),
     immediate = FALSE,
     session = session
   )
-  app_name <- basename(getwd())
-  user <- get_user(session)
-  timestamp <- Sys.time()
-  init_log <- data.frame(
-    app = app_name,
-    user = user,
-    server_connected = get_timestamp(timestamp),
-    stringsAsFactors = FALSE
-  )
-  storage_mode$appname <- app_name
-  storage_mode$timestamp <- format(as.integer64(nanotime(timestamp)), scientific = FALSE)
+
+
   onSessionEnded(
     fun = function() {
       init_log$server_disconnected <- get_timestamp(Sys.time())
-      init_log$sessionid <- digest::digest(storage_mode$timestamp)
       logs <- c(isolate(session$input$.shinylogs_input),
                 isolate(session$input$.shinylogs_error),
                 isolate(session$input$.shinylogs_output))

@@ -33,13 +33,13 @@ if (config.hasOwnProperty("excludeinput")) {
 
 //Initialize localForage instance
 var logsinputs = localforage.createInstance({
-  name: "inputs"
+  name: "inputs", storeName: config.sessionid
 });
 var logsoutputs = localforage.createInstance({
-  name: "outputs"
+  name: "outputs", storeName: config.sessionid
 });
 var logserrors = localforage.createInstance({
-  name: "errors"
+  name: "errors", storeName: config.sessionid
 });
 
 
