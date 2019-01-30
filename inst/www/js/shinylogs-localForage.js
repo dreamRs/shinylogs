@@ -89,32 +89,32 @@ $(document).on("shiny:inputchanged", function(event) {
       binding: event.binding !== null ? event.binding.name : ''
     };
     Shiny.setInputValue(".shinylogs_lastInput:parse_lastInput", lastInput);
-    logsinputs.setItem(ts, lastInput);
-    if (logsonunload === false) {
-      logsinputs.getItems(null, function(err, value) {
-        Shiny.setInputValue(".shinylogs_input:parse_log", {inputs: JSON.stringify(value)});
-      });
-    }
+    logsinputs.setItem(ts, lastInput).then(function(value) {
+      if (logsonunload === false) {
+        logsinputs.getItems(null, function(err, value) {
+          Shiny.setInputValue(".shinylogs_input:parse_log", {inputs: JSON.stringify(value)});
+        });
+      }
+    });
   }
 });
 
 // Track ERRORS
 $(document).on("shiny:error", function(event) {
   //console.log(event);
-  if (dont_track.indexOf(event.name) == -1) {
-    var ts = dayjs(event.timeStamp).format();
-    var lastError = {
-      name: event.name,
-      timestamp: ts,
-      error: event.error.message
-    };
-    logserrors.setItem(ts, lastError);
+  var ts = dayjs(event.timeStamp).format();
+  var lastError = {
+    name: event.name,
+    timestamp: ts,
+    error: event.error.message
+  };
+  logserrors.setItem(ts, lastError).then(function(value) {
     if (logsonunload === false) {
       logserrors.getItems(null, function(err, value) {
         Shiny.setInputValue(".shinylogs_error:parse_log", {errors: JSON.stringify(value)});
       });
     }
-  }
+  });
 });
 
 // Track OUTPUTs
@@ -126,12 +126,13 @@ $(document).on("shiny:value", function(event) {
     timestamp: ts,
     binding: event.binding.binding.name
   };
-  logsoutputs.setItem(ts, lastOutput);
-  if (logsonunload === false) {
-    logsoutputs.getItems(null, function(err, value) {
-      Shiny.setInputValue(".shinylogs_output:parse_log", {outputs: JSON.stringify(value)});
-    });
-  }
+  logsoutputs.setItem(ts, lastOutput).then(function(value) {
+    if (logsonunload === false) {
+      logsoutputs.getItems(null, function(err, value) {
+        Shiny.setInputValue(".shinylogs_output:parse_log", {outputs: JSON.stringify(value)});
+      });
+    }
+  });
 });
 
 if (logsonunload === true) {
