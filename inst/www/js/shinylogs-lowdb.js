@@ -1,7 +1,9 @@
 /*!
  * Copyright (c) 2018 dreamRs
  *
- * shinylogs, JavaScript bindings to record everything happens in a Shiny app
+ * shinylogs, JavaScript bindings to record
+ * everything happens in a Shiny app
+ * using Lowdb
  * https://github.com/dreamRs/shinylogs
  *
  * @version 0.0.1

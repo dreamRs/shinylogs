@@ -1,11 +1,18 @@
 
 
 #' @importFrom htmltools htmlDependency
-shinylogs_dependencies <- function() {
+shinylogs_ldb_dependencies <- function() {
   htmlDependency(
     name = "shinylogs", version = "0.0.1",
     src = list(href = "shinylogs", file = "www"), package = "shinylogs",
-    script = c("js/shinylogs.js")
+    script = c("js/shinylogs-lowdb.js")
+  )
+}
+shinylogs_lf_dependencies <- function() {
+  htmlDependency(
+    name = "shinylogs", version = "0.0.1",
+    src = list(href = "shinylogs", file = "www"), package = "shinylogs",
+    script = c("js/shinylogs-localForage.js")
   )
 }
 
@@ -27,4 +34,11 @@ dayjs_dependencies <- function() {
   )
 }
 
-
+#' @importFrom htmltools htmlDependency
+localforage_dependencies <- function() {
+  htmlDependency(
+    name = "localForage", version = "1.7.3",
+    src = list(href = "shinylogs", file = "www"), package = "shinylogs",
+    script = c("localForage/localforage.min.js", "localForage/localforage-getitems.js")
+  )
+}

@@ -6,7 +6,7 @@
 #' @return a list of \code{data.table}
 #' @export
 #'
-#' @importFrom jsonlite read_json
+#' @importFrom jsonlite fromJSON
 #' @importFrom data.table rbindlist
 #' @importFrom stats setNames
 #'
@@ -25,7 +25,7 @@ read_json_logs <- function(path) {
   }
   logs <- lapply(
     X = jsons,
-    FUN = read_json
+    FUN = fromJSON
   )
   session <- rbindlist(lapply(logs, extract_dt, what = "session"), fill = TRUE)
   logs <- setNames(logs, session$sessionid)

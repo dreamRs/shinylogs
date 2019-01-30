@@ -39,7 +39,7 @@ tracking_ui <- function(on_unload = FALSE) {
     value = list(
       lowdb_dependencies(),
       dayjs_dependencies(),
-      shinylogs_dependencies()
+      shinylogs_ldb_dependencies()
     )
   )
 }
@@ -82,7 +82,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #' @importFrom bit64 as.integer64
 #' @importFrom digest digest
 #' @importFrom jsonlite toJSON
-#' @importFrom htmltools tags
+#' @importFrom htmltools tags singleton
 track_usage <- function(storage_mode = store_json(),
                         exclude_input = NULL,
                         on_unload = FALSE,
@@ -91,7 +91,7 @@ track_usage <- function(storage_mode = store_json(),
   stopifnot(inherits(storage_mode, "shinylogs.storage_mode"))
   insertUI(
     selector = "body", where = "afterBegin",
-    ui = tags$script(
+    ui = singleton(tags$script(
       id = "shinylogs-tracking",
       type = "application/json",
       `data-for` = "shinylogs",
@@ -99,7 +99,7 @@ track_usage <- function(storage_mode = store_json(),
         logsonunload = isTRUE(on_unload),
         excludeinput = exclude_input
       )), auto_unbox = TRUE, json_verbatim = TRUE)
-    ),
+    )),
     immediate = TRUE,
     session = session
   )
@@ -108,9 +108,11 @@ track_usage <- function(storage_mode = store_json(),
     ui = attachDependencies(
       x = tags$div(),
       value = list(
-        lowdb_dependencies(),
+        # lowdb_dependencies(),
+        localforage_dependencies(),
         dayjs_dependencies(),
-        shinylogs_dependencies()
+        # shinylogs_ldb_dependencies()
+        shinylogs_lf_dependencies()
       )
     ),
     immediate = FALSE,
