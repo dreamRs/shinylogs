@@ -8,6 +8,7 @@
 #'  if \code{TRUE} it prevent to create \code{shinylogs}
 #'  input during normal use of the application, there will
 #'  be created only on close, downside is that a popup will appear asking to close the page.
+#' @param exclude_input Regular expression to exclude inputs from tracking.
 #'
 #' @note The following \code{input}s will be accessible in the server:
 #'
@@ -25,21 +26,29 @@
 #'
 #' @importFrom htmltools attachDependencies tags singleton
 #' @importFrom jsonlite toJSON
-tracking_ui <- function(on_unload = FALSE) {
+#' @importFrom nanotime nanotime
+#' @importFrom bit64 as.integer64
+#' @importFrom digest digest
+tracking_ui <- function(on_unload = FALSE, exclude_input = NULL) {
+  timestamp <- Sys.time()
+  timestamp <- format(as.integer64(nanotime(timestamp)), scientific = FALSE)
+  sessionid <- digest::digest(timestamp)
   tag_log <- tags$div(tags$script(
     id = "shinylogs-tracking",
     type = "application/json",
     `data-for` = "shinylogs",
     toJSON(list(
-      logsonunload = isTRUE(on_unload)
+      logsonunload = isTRUE(on_unload),
+      excludeinput = exclude_input,
+      sessionid = sessionid
     ), auto_unbox = TRUE, json_verbatim = TRUE)
   ))
   attachDependencies(
     x = singleton(tag_log),
     value = list(
-      lowdb_dependencies(),
+      localforage_dependencies(),
       dayjs_dependencies(),
-      shinylogs_ldb_dependencies()
+      shinylogs_lf_dependencies()
     )
   )
 }
@@ -124,10 +133,8 @@ track_usage <- function(storage_mode = store_json(),
     ui = attachDependencies(
       x = tags$div(),
       value = list(
-        # lowdb_dependencies(),
         localforage_dependencies(),
         dayjs_dependencies(),
-        # shinylogs_ldb_dependencies()
         shinylogs_lf_dependencies()
       )
     ),

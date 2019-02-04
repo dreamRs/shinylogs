@@ -4,13 +4,15 @@
 \alias{tracking_ui}
 \title{Insert dependencies to track usage of a Shiny app}
 \usage{
-tracking_ui(on_unload = FALSE)
+tracking_ui(on_unload = FALSE, exclude_input = NULL)
 }
 \arguments{
 \item{on_unload}{Logical, save log when user close the browser window or tab,
 if \code{TRUE} it prevent to create \code{shinylogs}
 input during normal use of the application, there will
 be created only on close, downside is that a popup will appear asking to close the page.}
+
+\item{exclude_input}{Regular expression to exclude inputs from tracking.}
 }
 \description{
 If used in \code{ui} of an application,

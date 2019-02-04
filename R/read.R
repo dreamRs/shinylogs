@@ -45,7 +45,7 @@ extract_dt <- function(x, what) {
     if (identical(what, "session")) {
       res <- as.data.table(res)
     } else {
-      res <- rbindlist(lapply(res, as.data.table))
+      res <- rbindlist(lapply(res, as.data.table), fill = TRUE)
     }
     vars_time <- c("timestamp", "server_connected", "server_disconnected", "browser_connected")
     vars_time <- intersect(names(res), vars_time)
