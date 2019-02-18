@@ -29,11 +29,17 @@ read_json_logs <- function(path) {
   )
   session <- rbindlist(lapply(logs, extract_dt, what = "session"), fill = TRUE)
   logs <- setNames(logs, session$sessionid)
+  inputs <- rbindlist(lapply(logs, extract_dt, what = "inputs"), fill = TRUE, idcol = "sessionid")
+  set_time(inputs)
+  errors <- rbindlist(lapply(logs, extract_dt, what = "errors"), fill = TRUE, idcol = "sessionid")
+  set_time(errors)
+  outputs <- rbindlist(lapply(logs, extract_dt, what = "outputs"), fill = TRUE, idcol = "sessionid")
+  set_time(outputs)
   list(
     session = session,
-    inputs = rbindlist(lapply(logs, extract_dt, what = "inputs"), fill = TRUE, idcol = "sessionid"),
-    errors = rbindlist(lapply(logs, extract_dt, what = "errors"), fill = TRUE, idcol = "sessionid"),
-    outputs = rbindlist(lapply(logs, extract_dt, what = "outputs"), fill = TRUE, idcol = "sessionid")
+    inputs = inputs,
+    errors = errors,
+    outputs = outputs
   )
 }
 
@@ -47,11 +53,6 @@ extract_dt <- function(x, what) {
     } else {
       res <- rbindlist(lapply(res, as.data.table), fill = TRUE)
     }
-    vars_time <- c("timestamp", "server_connected", "server_disconnected", "browser_connected")
-    vars_time <- intersect(names(res), vars_time)
-    if (length(vars_time) > 0) {
-      res[, (vars_time) := lapply(.SD, anytime), .SDcols = vars_time]
-    }
     return(res)
   } else {
     NULL
@@ -59,3 +60,10 @@ extract_dt <- function(x, what) {
 }
 
 
+set_time <- function(data) {
+  vars_time <- c("timestamp", "server_connected", "server_disconnected", "browser_connected")
+  vars_time <- intersect(names(data), vars_time)
+  if (length(vars_time) > 0) {
+    data[, (vars_time) := lapply(.SD, anytime), .SDcols = vars_time]
+  }
+}
