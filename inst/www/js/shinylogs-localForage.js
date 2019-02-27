@@ -25,10 +25,10 @@ if (config.length > 0) {
 var logsonunload = config.logsonunload;
 
 //console.log(logsonunload);
-var re_ex_in = RegExp("^$");
+var inputRE = RegExp("^$");
 
-if (config.hasOwnProperty("excludeinput")) {
-  re_ex_in = RegExp(config.excludeinput);
+if (config.hasOwnProperty("exclude_input_regex")) {
+  inputRE = RegExp(config.exclude_input_regex);
 }
 
 //Initialize localForage instance
@@ -71,16 +71,20 @@ if (logsonunload === false) {
 }
 
 // Shiny input event to not track
-var dont_track = [ ".shinylogs_lastInput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output", ".shinylogs_browserData" ];
+var dontTrack = [ ".shinylogs_lastInput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output", ".shinylogs_browserData" ];
+if (config.hasOwnProperty("exclude_input_id")) {
+  dontTrack = dontTrack.concat(config.exclude_input_id);
+}
 
-var regex_hidden = RegExp("hidden$");
+var hiddenRE = RegExp("hidden$");
 
 // Track INPUTS
 $(document).on("shiny:inputchanged", function(event) {
   //console.log(event);
-  if (dont_track.indexOf(event.name) == -1 & regex_hidden.test(event.name) === false & re_ex_in.test(event.name) === false) {
+  if (dontTrack.indexOf(event.name) == -1 & hiddenRE.test(event.name) === false & inputRE.test(event.name) === false) {
     //console.log(event);
     var ts = dayjs(event.timeStamp).format();
+    var alea = Math.floor(Math.random() * 10000);
     var lastInput = {
       name: event.name,
       timestamp: ts,
@@ -89,7 +93,7 @@ $(document).on("shiny:inputchanged", function(event) {
       binding: event.binding !== null ? event.binding.name : ''
     };
     Shiny.setInputValue(".shinylogs_lastInput:parse_lastInput", lastInput);
-    logsinputs.setItem(ts, lastInput).then(function(value) {
+    logsinputs.setItem(ts + '_' + alea, lastInput).then(function(value) {
       if (logsonunload === false) {
         logsinputs.getItems(null, function(err, value) {
           Shiny.setInputValue(".shinylogs_input:parse_log", {inputs: JSON.stringify(value)});
@@ -103,12 +107,13 @@ $(document).on("shiny:inputchanged", function(event) {
 $(document).on("shiny:error", function(event) {
   //console.log(event);
   var ts = dayjs(event.timeStamp).format();
+  var alea = Math.floor(Math.random() * 10000);
   var lastError = {
     name: event.name,
     timestamp: ts,
     error: event.error.message
   };
-  logserrors.setItem(ts, lastError).then(function(value) {
+  logserrors.setItem(ts + '_' + alea, lastError).then(function(value) {
     if (logsonunload === false) {
       logserrors.getItems(null, function(err, value) {
         Shiny.setInputValue(".shinylogs_error:parse_log", {errors: JSON.stringify(value)});
@@ -121,12 +126,13 @@ $(document).on("shiny:error", function(event) {
 $(document).on("shiny:value", function(event) {
   //console.log(event);
   var ts = dayjs(event.timeStamp).format();
+  var alea = Math.floor(Math.random() * 10000);
   var lastOutput = {
     name: event.name,
     timestamp: ts,
     binding: event.binding.binding.name
   };
-  logsoutputs.setItem(ts, lastOutput).then(function(value) {
+  logsoutputs.setItem(ts + '_' + alea, lastOutput).then(function(value) {
     if (logsonunload === false) {
       logsoutputs.getItems(null, function(err, value) {
         Shiny.setInputValue(".shinylogs_output:parse_log", {outputs: JSON.stringify(value)});
