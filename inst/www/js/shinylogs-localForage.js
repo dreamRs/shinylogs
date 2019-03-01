@@ -31,7 +31,7 @@ if (config.hasOwnProperty("exclude_input_regex")) {
   inputRE = RegExp(config.exclude_input_regex);
 }
 
-//Initialize localForage instance
+// Initialize localForage instance
 var logsinputs = localforage.createInstance({
   name: "inputs", storeName: config.sessionid
 });
@@ -41,6 +41,19 @@ var logsoutputs = localforage.createInstance({
 var logserrors = localforage.createInstance({
   name: "errors", storeName: config.sessionid
 });
+
+
+// Generate unique ID (from nanoid/non-secure)
+var url = 'bjectSymhasOwnPropf0123456789ABCDEFGHIJKLMNQRTUVWXYZvdfgiklquvxz';
+generateId = function (size) {
+  size = size || 21;
+  var id = '';
+  while (0 < size--) {
+    id += url[Math.random() * 64 | 0];
+  }
+  return id;
+};
+
 
 
 // ** session infos **//
@@ -84,7 +97,7 @@ $(document).on("shiny:inputchanged", function(event) {
   if (dontTrack.indexOf(event.name) == -1 & hiddenRE.test(event.name) === false & inputRE.test(event.name) === false) {
     //console.log(event);
     var ts = dayjs(event.timeStamp).format();
-    var alea = Math.floor(Math.random() * 10000);
+    var inputId = 'input' + generateId();
     var lastInput = {
       name: event.name,
       timestamp: ts,
@@ -93,10 +106,10 @@ $(document).on("shiny:inputchanged", function(event) {
       binding: event.binding !== null ? event.binding.name : ''
     };
     Shiny.setInputValue(".shinylogs_lastInput:parse_lastInput", lastInput);
-    logsinputs.setItem(ts + '_' + alea, lastInput).then(function(value) {
+    logsinputs.setItem(inputId, lastInput).then(function(value) {
       if (logsonunload === false) {
         logsinputs.getItems(null, function(err, value) {
-          Shiny.setInputValue(".shinylogs_input:parse_log", {inputs: JSON.stringify(value)});
+          Shiny.setInputValue(".shinylogs_input", {inputs: value});
         });
       }
     });
@@ -107,16 +120,16 @@ $(document).on("shiny:inputchanged", function(event) {
 $(document).on("shiny:error", function(event) {
   //console.log(event);
   var ts = dayjs(event.timeStamp).format();
-  var alea = Math.floor(Math.random() * 10000);
+  var errorId = 'error' + generateId();
   var lastError = {
     name: event.name,
     timestamp: ts,
     error: event.error.message
   };
-  logserrors.setItem(ts + '_' + alea, lastError).then(function(value) {
+  logserrors.setItem(errorId, lastError).then(function(value) {
     if (logsonunload === false) {
       logserrors.getItems(null, function(err, value) {
-        Shiny.setInputValue(".shinylogs_error:parse_log", {errors: JSON.stringify(value)});
+        Shiny.setInputValue(".shinylogs_error", {errors: value});
       });
     }
   });
@@ -126,16 +139,16 @@ $(document).on("shiny:error", function(event) {
 $(document).on("shiny:value", function(event) {
   //console.log(event);
   var ts = dayjs(event.timeStamp).format();
-  var alea = Math.floor(Math.random() * 10000);
+  var outputId = 'output' + generateId();
   var lastOutput = {
     name: event.name,
     timestamp: ts,
     binding: event.binding.binding.name
   };
-  logsoutputs.setItem(ts + '_' + alea, lastOutput).then(function(value) {
+  logsoutputs.setItem(outputId, lastOutput).then(function(value) {
     if (logsonunload === false) {
       logsoutputs.getItems(null, function(err, value) {
-        Shiny.setInputValue(".shinylogs_output:parse_log", {outputs: JSON.stringify(value)});
+        Shiny.setInputValue(".shinylogs_output", {outputs: value});
       });
     }
   });
@@ -149,13 +162,13 @@ if (logsonunload === true) {
       e.returnValue = "Are you sure?";
     }
     logsoutputs.getItems(null, function(err, value) {
-      Shiny.setInputValue(".shinylogs_output:parse_log", {outputs: JSON.stringify(value)});
+      Shiny.setInputValue(".shinylogs_output", {outputs: value});
     });
     logserrors.getItems(null, function(err, value) {
-      Shiny.setInputValue(".shinylogs_error:parse_log", {errors: JSON.stringify(value)});
+      Shiny.setInputValue(".shinylogs_error", {errors: value});
     });
     logsinputs.getItems(null, function(err, value) {
-      Shiny.setInputValue(".shinylogs_input:parse_log", {inputs: JSON.stringify(value)});
+      Shiny.setInputValue(".shinylogs_input", {inputs: value});
     });
     Shiny.setInputValue(".shinylogs_browserData", {
       user_agent: ua,
