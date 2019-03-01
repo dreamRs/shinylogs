@@ -2,6 +2,8 @@
 
 export(read_json_logs)
 export(store_json)
+export(store_null)
+export(store_rds)
 export(track_usage)
 export(tracking_ui)
 importFrom(anytime,anytime)
