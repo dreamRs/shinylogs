@@ -21,7 +21,7 @@ read_json_logs <- function(path) {
   } else if (length(path) == 1 &&grepl(pattern = "json$", x = path)) {
     jsons <- normalizePath(path, mustWork = TRUE)
   } else {
-    stop("'path' must be a directory containing JSON files or a a JSON file", call. = FALSE)
+    stop("'path' must be a directory containing JSON files or a JSON file", call. = FALSE)
   }
   logs <- lapply(
     X = jsons,
@@ -29,6 +29,7 @@ read_json_logs <- function(path) {
   )
   session <- rbindlist(lapply(logs, extract_dt, what = "session"), fill = TRUE)
   logs <- setNames(logs, session$sessionid)
+  set_time(session)
   inputs <- rbindlist(lapply(logs, extract_dt, what = "inputs"), fill = TRUE, idcol = "sessionid")
   set_time(inputs)
   errors <- rbindlist(lapply(logs, extract_dt, what = "errors"), fill = TRUE, idcol = "sessionid")
@@ -50,6 +51,13 @@ extract_dt <- function(x, what) {
   if (!is.null(res)) {
     if (identical(what, "session")) {
       res <- as.data.table(res)
+    } else if (identical(what, "inputs")) {
+      res <- rbindlist(lapply(res,
+                              function(u) {
+                                u[["value"]] <- list(u[["value"]])
+                                as.data.table(u)
+                              }),
+                       fill = TRUE)
     } else {
       res <- rbindlist(lapply(res, as.data.table), fill = TRUE)
     }
