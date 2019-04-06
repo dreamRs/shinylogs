@@ -52,12 +52,13 @@ extract_dt <- function(x, what) {
     if (identical(what, "session")) {
       res <- as.data.table(res)
     } else if (identical(what, "inputs")) {
-      res <- rbindlist(lapply(res,
-                              function(u) {
-                                u[["value"]] <- list(u[["value"]])
-                                as.data.table(u)
-                              }),
-                       fill = TRUE)
+      res <- rbindlist(lapply(
+        X = res,
+        FUN = function(u) {
+          u[["value"]] <- list(u[["value"]])
+          as.data.table(u)
+        }
+      ), fill = TRUE)
     } else {
       res <- rbindlist(lapply(res, as.data.table), fill = TRUE)
     }

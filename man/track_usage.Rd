@@ -6,7 +6,7 @@
 \usage{
 track_usage(storage_mode = store_json(), exclude_input_regex = NULL,
   exclude_input_id = NULL, on_unload = FALSE, exclude_users = NULL,
-  session = getDefaultReactiveDomain())
+  get_user = NULL, session = getDefaultReactiveDomain())
 }
 \arguments{
 \item{storage_mode}{Storage mode to use : \code{\link{store_json}}.}
@@ -21,6 +21,8 @@ input during normal use of the application, there will
 be created only on close, downside is that a popup will appear asking to close the page.}
 
 \item{exclude_users}{Character vectors of user for whom it is not necessary to save the log.}
+
+\item{get_user}{A \code{function} to get user name, it should return a character and take one argument: the Shiny session.}
 
 \item{session}{The shiny session.}
 }

@@ -83,6 +83,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #'  input during normal use of the application, there will
 #'  be created only on close, downside is that a popup will appear asking to close the page.
 #' @param exclude_users Character vectors of user for whom it is not necessary to save the log.
+#' @param get_user A \code{function} to get user name, it should return a character and take one argument: the Shiny session.
 #' @param session The shiny session.
 #'
 #' @export
@@ -98,11 +99,16 @@ track_usage <- function(storage_mode = store_json(),
                         exclude_input_id = NULL,
                         on_unload = FALSE,
                         exclude_users = NULL,
+                        get_user = NULL,
                         session = getDefaultReactiveDomain()) {
 
   stopifnot(inherits(storage_mode, "shinylogs.storage_mode"))
 
   app_name <- basename(getwd())
+  if (is.null(get_user))
+    get_user <- get_user_
+  if (!is.function(get_user))
+    stop("get_user must be a function", call. = FALSE)
   user <- get_user(session)
   timestamp <- Sys.time()
   init_log <- data.frame(
@@ -164,7 +170,7 @@ track_usage <- function(storage_mode = store_json(),
 }
 
 
-get_user <- function(session) {
+get_user_ <- function(session) {
   if (!is.null(session$user))
     return(session$user)
   user <- Sys.getenv("SHINYPROXY_USERNAME")
