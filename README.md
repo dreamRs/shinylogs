@@ -47,115 +47,115 @@ Example of JSON created (with the [Kmeans example app](https://shiny.rstudio.com
 
 ```
 {
-   "inputs":{
-      "input2m6NeSCL8OuaHaxzVpIHZ":{
-         "name":"xcol",
-         "timestamp":"2019-04-06T09:55:30+02:00",
+   "inputs":[
+      {
+         "name":"ycol",
+         "timestamp":"2019-04-07T13:39:40+02:00",
+         "value":"Sepal.Width",
+         "type":"",
+         "binding":"shiny.selectInput"
+      },
+      {
+         "name":"ycol",
+         "timestamp":"2019-04-07T13:39:35+02:00",
          "value":"Petal.Width",
          "type":"",
          "binding":"shiny.selectInput"
       },
-      "inputAhpPQmAJdNMLSqyk3m98x":{
+      {
          "name":"clusters",
-         "timestamp":"2019-04-06T09:55:28+02:00",
+         "timestamp":"2019-04-07T13:39:37+02:00",
          "value":5,
          "type":"shiny.number",
          "binding":"shiny.numberInput"
       },
-      "inputBlVCReqTM8CIeLWTUSo5W":{
-         "name":"ycol",
-         "timestamp":"2019-04-06T09:55:36+02:00",
-         "value":"Sepal.Width",
+      {
+         "name":"xcol",
+         "timestamp":"2019-04-07T13:39:33+02:00",
+         "value":"Sepal.Length",
          "type":"",
          "binding":"shiny.selectInput"
       },
-      "inputHH85n4k1PxfGZdbJtjWzR":{
+      {
          "name":"clusters",
-         "timestamp":"2019-04-06T09:55:27+02:00",
+         "timestamp":"2019-04-07T13:39:37+02:00",
          "value":4,
          "type":"shiny.number",
          "binding":"shiny.numberInput"
       },
-      "inputNsCkymia4WPIGVLelcrvW":{
+      {
          "name":"ycol",
-         "timestamp":"2019-04-06T09:55:24+02:00",
-         "value":"Petal.Length",
+         "timestamp":"2019-04-07T13:39:38+02:00",
+         "value":"Species",
          "type":"",
          "binding":"shiny.selectInput"
       },
-      "inputhTiXAmKSLOcZYk1jdT8O9":{
+      {
          "name":"clusters",
-         "timestamp":"2019-04-06T09:55:29+02:00",
+         "timestamp":"2019-04-07T13:39:37+02:00",
          "value":5,
          "type":"shiny.number",
          "binding":"shiny.numberInput"
       },
-      "inputv2N5ZSN6OYztLSzzCERMO":{
+      {
          "name":"xcol",
-         "timestamp":"2019-04-06T09:55:22+02:00",
+         "timestamp":"2019-04-07T13:39:32+02:00",
          "value":"Sepal.Width",
          "type":"",
          "binding":"shiny.selectInput"
-      },
-      "inputvID6EmzC3IAVRBH7G17we":{
-         "name":"ycol",
-         "timestamp":"2019-04-06T09:55:34+02:00",
-         "value":"Species",
-         "type":"",
-         "binding":"shiny.selectInput"
       }
-   },
-   "errors":{
-      "erroroj33WDsk86LqAC9Ve0QUU":{
+   ],
+   "errors":[
+      {
          "name":"plot1",
-         "timestamp":"2019-04-06T09:55:34+02:00",
+         "timestamp":"2019-04-07T13:39:39+02:00",
          "error":"NA/NaN/Inf in foreign function call (arg 1)"
       }
-   },
-   "outputs":{
-      "outputQMyfZdKESRVSvUxmrfsxM":{
+   ],
+   "outputs":[
+      {
          "name":"plot1",
-         "timestamp":"2019-04-06T09:55:28+02:00",
+         "timestamp":"2019-04-07T13:39:41+02:00",
          "binding":"shiny.imageOutput"
       },
-      "outputbGFyAfvK3niwfFsr9q9Cb":{
+      {
          "name":"plot1",
-         "timestamp":"2019-04-06T09:55:27+02:00",
+         "timestamp":"2019-04-07T13:39:35+02:00",
          "binding":"shiny.imageOutput"
       },
-      "outputfmScs2IjaCLwHGXgReBoD":{
+      {
          "name":"plot1",
-         "timestamp":"2019-04-06T09:55:31+02:00",
+         "timestamp":"2019-04-07T13:39:33+02:00",
          "binding":"shiny.imageOutput"
       },
-      "outputhvd3UYhvXv8k7Fv2lqF41":{
+      {
          "name":"plot1",
-         "timestamp":"2019-04-06T09:55:22+02:00",
+         "timestamp":"2019-04-07T13:39:37+02:00",
          "binding":"shiny.imageOutput"
       },
-      "outputmnUjmLE9wVgmLP4h19Lck":{
+      {
          "name":"plot1",
-         "timestamp":"2019-04-06T09:55:25+02:00",
+         "timestamp":"2019-04-07T13:39:32+02:00",
          "binding":"shiny.imageOutput"
       },
-      "outputoDVdKNtCnY6yUmaDtVBvs":{
+      {
          "name":"plot1",
-         "timestamp":"2019-04-06T09:55:36+02:00",
+         "timestamp":"2019-04-07T13:39:37+02:00",
          "binding":"shiny.imageOutput"
       }
-   },
+   ],
    "session":[
       {
          "app":"kmeans-example",
          "user":"pvictor",
-         "server_connected":"2019-04-06T09:55:20+0200",
-         "sessionid":"cbbebc3cc14f3e0e832cf9d2de772ca3",
-         "server_disconnected":"2019-04-06T09:55:38+0200",
+         "server_connected":"2019-04-07T13:39:30+0200",
+         "sessionid":"e32af32f5b664b6db175aaac1e0cd70a",
+         "server_disconnected":"2019-04-07T13:39:42+0200",
          "user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36",
          "screen_res":"1920x1080",
-         "browser_res":"949x917",
+         "browser_res":"1273x909",
          "pixel_ratio":1,
-         "browser_connected":"2019-04-06T09:55:21+02:00"
+         "browser_connected":"2019-04-07T13:39:31+02:00"
       }
    ]
 }

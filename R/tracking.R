@@ -54,11 +54,14 @@ tracking_ui <- function(on_unload = FALSE, exclude_input = NULL) {
 }
 
 
-#' @importFrom jsonlite fromJSON
+
+#' @importFrom stats setNames
 parse_log <- function(x, shinysession, name) {
   lapply(
     X = x,
-    FUN = fromJSON
+    FUN = function(x) {
+      setNames(x, NULL)
+    }
   )
 }
 
