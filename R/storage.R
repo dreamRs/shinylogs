@@ -99,6 +99,7 @@ write_logs_json <- function(opts, logs) {
     paste0("shinylogs_", opts$appname, "_", opts$timestamp, ".json")
   )
   jsonlite::write_json(x = logs, path = path, auto_unbox = TRUE)
+  return(invisible(path))
 }
 
 write_logs_rds <- function(opts, logs) {
@@ -107,6 +108,7 @@ write_logs_rds <- function(opts, logs) {
     paste0("shinylogs_", opts$appname, "_", opts$timestamp, ".rds")
   )
   saveRDS(object = logs, file = path)
+  return(invisible(path))
 }
 
 
@@ -133,7 +135,7 @@ write_logs_sqlite <- function(opts, logs) {
       }
     }
   )
-  invisible()
+  return(invisible(opts$path))
 }
 
 

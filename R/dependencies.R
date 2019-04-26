@@ -10,7 +10,7 @@ shinylogs_ldb_dependencies <- function() {
 }
 shinylogs_lf_dependencies <- function() {
   htmlDependency(
-    name = "shinylogs", version = "0.0.1",
+    name = "shinylogs", version = "0.1.0",
     src = list(href = "shinylogs", file = "assets"), package = "shinylogs",
     script = c("js/shinylogs-localForage.js")
   )
