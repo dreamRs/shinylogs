@@ -3,6 +3,7 @@ Title: Record Everything that Happens in a 'Shiny' Application
 Version: 0.1.2.900
 Authors@R: c(person("Fanny", "Meyer", email = "fanny.meyer@dreamrs.fr", role = c("aut")),
   person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
+  person("Silex Technologies", comment = "https://www.silex-ip.com", role = "fnd"),
   person("Typicode", role = "cph", comment = "lowdb library"),
   person("JS Foundation", role = "cph", comment = "lodash library"),
   person("Mozilla", role = "cph", comment = "localForage library"))
@@ -10,6 +11,9 @@ Description: Track usage of user interaction in a 'Shiny' application. Allow to 
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+URL: https://github.com/dreamRs/shinylogs
+BugReports: https://github.com/dreamRs/shinylogs/issues
 Imports: 
     htmltools,
     shiny (>= 1.1.0),
@@ -21,6 +25,5 @@ Imports:
     anytime,
     DBI,
     RSQLite
-RoxygenNote: 6.1.1
-URL: https://github.com/dreamRs/shinylogs
-BugReports: https://github.com/dreamRs/shinylogs/issues
+Suggests: 
+    testthat

@@ -5,6 +5,6 @@
 #' @noRd
 .onLoad <- function(...) {
   shiny::addResourcePath("shinylogs", system.file("assets", package = "shinylogs"))
-  shiny::registerInputHandler("parse_log", parse_log)
+  shiny::registerInputHandler("parse_logInput", parse_logInput)
   shiny::registerInputHandler("parse_lastInput", parse_lastInput)
 }

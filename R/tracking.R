@@ -56,7 +56,7 @@ tracking_ui <- function(on_unload = FALSE, exclude_input = NULL) {
 
 
 #' @importFrom stats setNames
-parse_log <- function(x, shinysession, name) {
+parse_logInput <- function(x, shinysession, name) {
   lapply(
     X = x,
     FUN = function(x) {

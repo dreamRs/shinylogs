@@ -3,9 +3,9 @@
 > Record everything (almost) that happens in a 'Shiny' application browser side. Powered by [localForage](https://github.com/localForage/localForage).
 
 [![Travis build status](https://travis-ci.org/dreamRs/shinylogs.svg?branch=master)](https://travis-ci.org/dreamRs/shinylogs)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
 
-:warning: This is experimental ! Feedback welcome !
 
 
 ## Installation

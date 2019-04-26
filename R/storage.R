@@ -118,8 +118,9 @@ write_logs_sqlite <- function(opts, logs) {
   lapply(
     X = names(logs),
     FUN = function(what) {
-      value <- extract_dt(logs, what)
+      value <- to_dt(list(logs), what, 1)
       if (!is.null(value)) {
+        value$sessionid <- NULL
         value <- value[, lapply(.SD, function(x) {
           if (is.list(x)) {
             x <- I(lapply(x, serialize, connection = NULL))

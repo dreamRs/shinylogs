@@ -109,7 +109,7 @@ $(document).on("shiny:inputchanged", function(event) {
     logsinputs.setItem(inputId, lastInput).then(function(value) {
       if (logsonunload === false) {
         logsinputs.getItems(null, function(err, value) {
-          Shiny.setInputValue(".shinylogs_input:parse_log", {inputs: value});
+          Shiny.setInputValue(".shinylogs_input:parse_logInput", {inputs: value});
         });
       }
     });
@@ -129,7 +129,7 @@ $(document).on("shiny:error", function(event) {
   logserrors.setItem(errorId, lastError).then(function(value) {
     if (logsonunload === false) {
       logserrors.getItems(null, function(err, value) {
-        Shiny.setInputValue(".shinylogs_error:parse_log", {errors: value});
+        Shiny.setInputValue(".shinylogs_error:parse_logInput", {errors: value});
       });
     }
   });
@@ -148,7 +148,7 @@ $(document).on("shiny:value", function(event) {
   logsoutputs.setItem(outputId, lastOutput).then(function(value) {
     if (logsonunload === false) {
       logsoutputs.getItems(null, function(err, value) {
-        Shiny.setInputValue(".shinylogs_output:parse_log", {outputs: value});
+        Shiny.setInputValue(".shinylogs_output:parse_logInput", {outputs: value});
       });
     }
   });
@@ -162,13 +162,13 @@ if (logsonunload === true) {
       e.returnValue = "Are you sure?";
     }
     logsoutputs.getItems(null, function(err, value) {
-      Shiny.setInputValue(".shinylogs_output:parse_log", {outputs: value});
+      Shiny.setInputValue(".shinylogs_output:parse_logInput", {outputs: value});
     });
     logserrors.getItems(null, function(err, value) {
-      Shiny.setInputValue(".shinylogs_error:parse_log", {errors: value});
+      Shiny.setInputValue(".shinylogs_error:parse_logInput", {errors: value});
     });
     logsinputs.getItems(null, function(err, value) {
-      Shiny.setInputValue(".shinylogs_input:parse_log", {inputs: value});
+      Shiny.setInputValue(".shinylogs_input:parse_logInput", {inputs: value});
     });
     Shiny.setInputValue(".shinylogs_browserData", {
       user_agent: ua,

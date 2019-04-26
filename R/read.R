@@ -27,15 +27,14 @@ read_json_logs <- function(path) {
     X = jsons,
     FUN = fromJSON
   )
-  session <- rbindlist(lapply(logs, extract_dt, what = "session"), fill = TRUE)
-  logs <- setNames(logs, session$sessionid)
-  set_time(session)
-  inputs <- rbindlist(lapply(logs, extract_dt, what = "inputs"), fill = TRUE, idcol = "sessionid")
-  set_time(inputs)
-  errors <- rbindlist(lapply(logs, extract_dt, what = "errors"), fill = TRUE, idcol = "sessionid")
-  set_time(errors)
-  outputs <- rbindlist(lapply(logs, extract_dt, what = "outputs"), fill = TRUE, idcol = "sessionid")
-  set_time(outputs)
+  session <- rbindlist(lapply(logs, `[[`, "session"), fill = TRUE)
+  setTime(session)
+  inputs <- to_dt(logs, "inputs", session$sessionid)
+  setTime(inputs)
+  errors <- to_dt(logs, "errors", session$sessionid)
+  setTime(errors)
+  outputs <- to_dt(logs, "outputs", session$sessionid)
+  setTime(outputs)
   list(
     session = session,
     inputs = inputs,
@@ -44,32 +43,25 @@ read_json_logs <- function(path) {
   )
 }
 
-#' @importFrom data.table as.data.table :=
-#' @importFrom anytime anytime
-extract_dt <- function(x, what) {
-  res <- x[[what]]
-  if (!is.null(res)) {
-    if (identical(what, "session")) {
-      res <- as.data.table(res)
-    } else if (identical(what, "inputs")) {
-      res <- rbindlist(lapply(
-        X = res,
-        FUN = function(u) {
-          u[["value"]] <- list(u[["value"]])
-          as.data.table(u)
-        }
-      ), fill = TRUE)
+#' @importFrom data.table rbindlist as.data.table
+to_dt <- function(logs, what, sessionid) {
+  l <- lapply(logs, `[[`, what)
+  l <- lapply(l, function(x) {
+    if (is.data.frame(x)) {
+      as.data.table(x)
     } else {
-      res <- rbindlist(lapply(res, as.data.table), fill = TRUE)
+      rbindlist(lapply(setNames(x, NULL), function(y) {
+        y$value <- list(y$value)
+        as.data.table(y)
+      }), fill = TRUE)
     }
-    return(res)
-  } else {
-    NULL
-  }
+  })
+  rbindlist(l = setNames(l, sessionid), fill = TRUE, idcol = "sessionid")
 }
 
-
-set_time <- function(data) {
+#' @importFrom anytime anytime
+#' @importFrom data.table :=
+setTime <- function(data) {
   vars_time <- c("timestamp", "server_connected", "server_disconnected", "browser_connected")
   vars_time <- intersect(names(data), vars_time)
   if (length(vars_time) > 0) {
