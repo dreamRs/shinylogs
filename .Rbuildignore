@@ -2,3 +2,4 @@
 ^shinylogs\.Rproj$
 ^\.Rproj\.user$
 dev/
+^cran-comments\.md$

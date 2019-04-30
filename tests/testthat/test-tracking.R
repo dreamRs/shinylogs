@@ -23,7 +23,12 @@ test_that("track_usage works", {
     }
   ))
 
-  tracking <- track_usage(on_unload = FALSE, exclude_input_regex = "^\\.", session = session)
+  tracking <- track_usage(
+    storage_mode = store_null(),
+    on_unload = FALSE,
+    exclude_input_regex = "^\\.",
+    session = session
+  )
 
   expect_is(session$funOnSessionEnded, "function")
   expect_length(session$listInsertUI, 2)
