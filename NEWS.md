@@ -1,3 +1,3 @@
-# shinybusy 0.1.1
+# shinylogs 0.1.3
 
-* First release : add spinner, progress bar, gif to indicate if an application is busy.
+* First release : Track and record the use of applications and the user's interactions with 'Shiny' inputs. Allow to save inputs clicked, output generated and eventually errors.
