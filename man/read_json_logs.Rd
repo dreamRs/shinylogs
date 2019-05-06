@@ -15,3 +15,11 @@ a list of \code{data.table}
 \description{
 Read a directory containing JSON logs
 }
+\examples{
+\dontrun{
+
+logs <- read_json_logs(path = "path/to/logs")
+
+}
+
+}

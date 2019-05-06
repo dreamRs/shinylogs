@@ -1,6 +1,6 @@
 Package: shinylogs
 Title: Record Everything that Happens in a 'Shiny' Application
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(person("Fanny", "Meyer", email = "fanny.meyer@dreamrs.fr", role = c("aut")),
   person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
   person("Silex Technologies", comment = "https://www.silex-ip.com", role = "fnd"),
@@ -8,7 +8,7 @@ Authors@R: c(person("Fanny", "Meyer", email = "fanny.meyer@dreamrs.fr", role = c
   person("Mozilla", role = "cph", comment = "localForage library"))
 Description: Track and record the use of applications and the user's interactions with 'Shiny' inputs.
   Allow to save inputs clicked, output generated and eventually errors.
-License: GPL-3 | file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

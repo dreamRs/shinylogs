@@ -7,6 +7,8 @@
 
 0 errors | 0 warnings | 1 note
 
-* Hello, this is a new release. Add functionalities to track usage of shiny apps.
-  Thank you! Victor
+* Re-submission to adress the following problems:
+  - LICENSE : remove the file and the reference in the DESCRIPTION
+  - examples : all exported functions have examples
+  - do not write by default or in the user's home filespace 
 

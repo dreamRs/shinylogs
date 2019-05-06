@@ -3,3 +3,4 @@
 ^\.Rproj\.user$
 dev/
 ^cran-comments\.md$
+^CRAN-RELEASE$

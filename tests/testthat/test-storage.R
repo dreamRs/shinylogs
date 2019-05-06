@@ -47,7 +47,7 @@ test_that("write_logs (sqlite) works", {
 })
 
 
-test_that("write_logs (sqlite) works", {
+test_that("write_logs (json) works", {
 
   samplelogs <- readRDS(file = system.file("testdata/samplelog.rds", package = "shinylogs"))
   tmp <- tempdir()
@@ -59,7 +59,7 @@ test_that("write_logs (sqlite) works", {
   expect_true(file.exists(out))
 })
 
-test_that("write_logs (sqlite) works", {
+test_that("write_logs (rds) works", {
 
   samplelogs <- readRDS(file = system.file("testdata/samplelog.rds", package = "shinylogs"))
   tmp <- tempdir()

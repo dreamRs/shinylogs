@@ -9,7 +9,8 @@ track_usage(storage_mode = store_json(), exclude_input_regex = NULL,
   get_user = NULL, session = getDefaultReactiveDomain())
 }
 \arguments{
-\item{storage_mode}{Storage mode to use : \code{\link{store_json}}.}
+\item{storage_mode}{Storage mode to use : \code{\link{store_json}}, \code{\link{store_rds}},
+\code{\link{store_sqlite}} or \code{\link{store_null}}.}
 
 \item{exclude_input_regex}{Regular expression to exclude inputs from tracking.}
 
@@ -22,12 +23,14 @@ be created only on close, downside is that a popup will appear asking to close t
 
 \item{exclude_users}{Character vectors of user for whom it is not necessary to save the log.}
 
-\item{get_user}{A \code{function} to get user name, it should return a character and take one argument: the Shiny session.}
+\item{get_user}{A \code{function} to get user name, it should
+return a character and take one argument: the Shiny session.}
 
 \item{session}{The shiny session.}
 }
 \description{
-Used in Shiny \code{server} it will save everything that happens in a Shiny app.
+Used in Shiny \code{server} it will record all inputs and
+ output changes and errors that occurs through an output.
 }
 \note{
 The following \code{input}s will be accessible in the server:
@@ -41,4 +44,148 @@ The following \code{input}s will be accessible in the server:
   - \strong{.shinylogs_output} : all \code{output}s generated from the server
 
   - \strong{.shinylogs_browserData} : information about the browser where application is displayed.
+}
+\examples{
+
+## Save logs on disk
+
+if (interactive()) {
+
+  # temp directory for writing logs
+  tmp <- tempdir()
+
+  # when app stop,
+  # navigate to the directory containing logs
+  onStop(function() {
+    browseURL(url = tmp)
+  })
+
+  # Classir Iris clustering with Shiny
+  ui <- fluidPage(
+
+    headerPanel("Iris k-means clustering"),
+
+    sidebarLayout(
+      sidebarPanel(
+        selectInput(
+          inputId = "xcol",
+          label = "X Variable",
+          choices = names(iris)
+        ),
+        selectInput(
+          inputId = "ycol",
+          label = "Y Variable",
+          choices = names(iris),
+          selected = names(iris)[[2]]
+        ),
+        numericInput(
+          inputId = "clusters",
+          label = "Cluster count",
+          value = 3,
+          min = 1,
+          max = 9
+        )
+      ),
+      mainPanel(
+        plotOutput("plot1")
+      )
+    )
+  )
+
+  server <- function(input, output, session) {
+
+    # Store JSON with logs in the temp dir
+    track_usage(
+      storage_mode = store_json(path = tmp)
+    )
+
+    # classic server logic
+
+    selectedData <- reactive({
+      iris[, c(input$xcol, input$ycol)]
+    })
+
+    clusters <- reactive({
+      kmeans(selectedData(), input$clusters)
+    })
+
+    output$plot1 <- renderPlot({
+      palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
+                "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
+
+      par(mar = c(5.1, 4.1, 0, 1))
+      plot(selectedData(),
+           col = clusters()$cluster,
+           pch = 20, cex = 3)
+      points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+    })
+
+  }
+
+  shinyApp(ui, server)
+
+}
+
+
+## Special inputs :
+
+if (interactive()) {
+  library(shiny)
+  library(shinylogs)
+
+  ui <- fluidPage(
+    tags$h2("Record inputs change"),
+    fluidRow(
+      column(
+        width = 3,
+        selectInput(
+          inputId = "select",
+          label = "Select input",
+          choices = month.name
+        ),
+        numericInput(
+          inputId = "numeric",
+          label = "Numerci input",
+          value = 4,
+          min = 0, max = 20
+        ),
+        checkboxGroupInput(
+          inputId = "checkboxGroup",
+          label = "Checkbox group input",
+          choices = LETTERS[1:5]
+        ),
+        sliderInput(
+          inputId = "slider",
+          label = "Slider input",
+          min = 0, max = 100, value = 50
+        )
+      ),
+      column(
+        width = 9,
+        tags$b("Last input:"),
+        verbatimTextOutput(outputId = "last_input"),
+        tags$b("Last input:"),
+        verbatimTextOutput(outputId = "all_inputs")
+      )
+    )
+  )
+
+  server <- function(input, output, session) {
+
+    track_usage(
+      storage_mode = store_null() # dont store on disk
+    )
+
+    output$last_input <- renderPrint({
+      input$.shinylogs_lastInput # last input triggered
+    })
+
+    output$all_inputs <- renderPrint({
+      input$.shinylogs_input # all inputs that have changed
+    })
+
+  }
+
+  shinyApp(ui, server)
+}
 }
