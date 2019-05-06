@@ -18,36 +18,7 @@
 #' }
 #'
 read_json_logs <- function(path) {
-  if (length(path) == 1 && dir.exists(path)) {
-    jsons <- list.files(path = path, pattern = "\\.json$", full.names = TRUE)
-    if (length(jsons) == 0) {
-      stop("No JSON files to read in specified path", call. = FALSE)
-    }
-  } else if (length(path) > 1) {
-    jsons <- lapply(path, normalizePath, mustWork = TRUE)
-  } else if (length(path) == 1 &&grepl(pattern = "json$", x = path)) {
-    jsons <- normalizePath(path, mustWork = TRUE)
-  } else {
-    stop("'path' must be a directory containing JSON files or a JSON file", call. = FALSE)
-  }
-  logs <- lapply(
-    X = jsons,
-    FUN = fromJSON
-  )
-  session <- rbindlist(lapply(logs, `[[`, "session"), fill = TRUE)
-  setTime(session)
-  inputs <- to_dt(logs, "inputs", session$sessionid)
-  setTime(inputs)
-  errors <- to_dt(logs, "errors", session$sessionid)
-  setTime(errors)
-  outputs <- to_dt(logs, "outputs", session$sessionid)
-  setTime(outputs)
-  list(
-    session = session,
-    inputs = inputs,
-    errors = errors,
-    outputs = outputs
-  )
+  read_logs(path = path, what = "json")
 }
 
 
@@ -70,22 +41,38 @@ read_json_logs <- function(path) {
 #'
 #' }
 read_rds_logs <- function(path) {
+  read_logs(path = path, what = "rds")
+}
+
+read_logs <- function(path, what) {
   if (length(path) == 1 && dir.exists(path)) {
-    rds <- list.files(path = path, pattern = "\\.rds$", full.names = TRUE)
-    if (length(rds) == 0) {
-      stop("No RDS files to read in specified path", call. = FALSE)
+    files <- list.files(path = path, pattern = sprintf("\\.%s$", what), full.names = TRUE)
+    if (length(files) == 0) {
+      stop(sprintf("No %s files to read in specified path", toupper(what)), call. = FALSE)
     }
   } else if (length(path) > 1) {
-    rds <- lapply(path, normalizePath, mustWork = TRUE)
-  } else if (length(path) == 1 &&grepl(pattern = "json$", x = path)) {
-    rds <- normalizePath(path, mustWork = TRUE)
+    files <- lapply(path, normalizePath, mustWork = TRUE)
+  } else if (length(path) == 1 && grepl(pattern = paste0(what, "$"), x = path)) {
+    files <- normalizePath(path, mustWork = TRUE)
   } else {
-    stop("'path' must be a directory containing RDS files or a RDS file", call. = FALSE)
+    stop(sprintf(
+      "'path' must be a directory containing %s files or a %s file",
+      toupper(what), toupper(what)
+    ), call. = FALSE)
   }
-  logs <- lapply(
-    X = rds,
-    FUN = readRDS
-  )
+  if (identical(what, "json")) {
+    logs <- lapply(
+      X = files,
+      FUN = fromJSON
+    )
+  } else if (identical(what, "rds")) {
+    logs <- lapply(
+      X = files,
+      FUN = readRDS
+    )
+  } else {
+    stop("Not implemented", call. = FALSE)
+  }
   session <- rbindlist(lapply(logs, `[[`, "session"), fill = TRUE)
   setTime(session)
   inputs <- to_dt(logs, "inputs", session$sessionid)
