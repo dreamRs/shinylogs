@@ -119,7 +119,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #'
 #' if (interactive()) {
 #'
-#'   # temp directory for writing logs
+#'   # temporary directory for writing logs
 #'   tmp <- tempdir()
 #'
 #'   # when app stop,
@@ -128,7 +128,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #'     browseURL(url = tmp)
 #'   })
 #'
-#'   # Classir Iris clustering with Shiny
+#'   # Classic Iris clustering with Shiny
 #'   ui <- fluidPage(
 #'
 #'     headerPanel("Iris k-means clustering"),
@@ -256,7 +256,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #'
 #'   shinyApp(ui, server)
 #' }
-track_usage <- function(storage_mode = store_json(),
+track_usage <- function(storage_mode,
                         exclude_input_regex = NULL,
                         exclude_input_id = NULL,
                         on_unload = FALSE,

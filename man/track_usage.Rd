@@ -4,7 +4,7 @@
 \alias{track_usage}
 \title{Track usage of a Shiny app}
 \usage{
-track_usage(storage_mode = store_json(), exclude_input_regex = NULL,
+track_usage(storage_mode, exclude_input_regex = NULL,
   exclude_input_id = NULL, on_unload = FALSE, exclude_users = NULL,
   get_user = NULL, session = getDefaultReactiveDomain())
 }
