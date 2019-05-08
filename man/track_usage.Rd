@@ -51,7 +51,7 @@ The following \code{input}s will be accessible in the server:
 
 if (interactive()) {
 
-  # temp directory for writing logs
+  # temporary directory for writing logs
   tmp <- tempdir()
 
   # when app stop,
@@ -60,7 +60,7 @@ if (interactive()) {
     browseURL(url = tmp)
   })
 
-  # Classir Iris clustering with Shiny
+  # Classic Iris clustering with Shiny
   ui <- fluidPage(
 
     headerPanel("Iris k-means clustering"),

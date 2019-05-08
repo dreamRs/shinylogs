@@ -16,10 +16,16 @@ a list of \code{data.table}
 Read a directory containing JSON logs
 }
 \examples{
-\dontrun{
 
-logs <- read_json_logs(path = "path/to/logs")
+# Read all JSON in a directory
+path_directory <- system.file("extdata/json", package = "shinylogs")
+logs <- read_json_logs(path = path_directory)
 
-}
+# Read a single file
+single_file <- dir(
+  path = system.file("extdata/json", package = "shinylogs"),
+  full.names = TRUE
+)[1]
+logs <- read_json_logs(path = single_file)
 
 }

@@ -11,11 +11,17 @@
 #' @importFrom stats setNames
 #'
 #' @examples
-#' \dontrun{
 #'
-#' logs <- read_json_logs(path = "path/to/logs")
+#' # Read all JSON in a directory
+#' path_directory <- system.file("extdata/json", package = "shinylogs")
+#' logs <- read_json_logs(path = path_directory)
 #'
-#' }
+#' # Read a single file
+#' single_file <- dir(
+#'   path = system.file("extdata/json", package = "shinylogs"),
+#'   full.names = TRUE
+#' )[1]
+#' logs <- read_json_logs(path = single_file)
 #'
 read_json_logs <- function(path) {
   read_logs(path = path, what = "json")
@@ -35,10 +41,12 @@ read_json_logs <- function(path) {
 #' @importFrom stats setNames
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' # Read all RDS in a directory
+#' logs <- read_rds_logs(path = "path/to/directory")
 #'
-#' logs <- read_rds_logs(path = "path/to/logs")
-#'
+#' # Read a single file
+#' logs <- read_rds_logs(path = "path/to/log.rds")
 #' }
 read_rds_logs <- function(path) {
   read_logs(path = path, what = "rds")

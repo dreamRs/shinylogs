@@ -7,8 +7,8 @@
 
 0 errors | 0 warnings | 1 note
 
-* Re-submission to adress the following problems:
-  - LICENSE : remove the file and the reference in the DESCRIPTION
-  - examples : all exported functions have examples
-  - do not write by default or in the user's home filespace 
+* Re-submission to replace \dontrun examples with executable ones.
+  Except for RDS one to avoid : 
+   - WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.
+  Thanks! Victor
 
