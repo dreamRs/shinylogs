@@ -10,7 +10,13 @@
 
 ## Installation
 
-You can install from GitHub:
+Install from CRAN with :
+
+```r
+install.packages("shinylogs")
+```
+
+Or install dev version from GitHub:
 
 ``` r
 remotes::install_github("dreamRs/shinylogs")
