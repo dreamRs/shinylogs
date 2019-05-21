@@ -168,4 +168,23 @@ Example of JSON created (with the [Kmeans example app](https://shiny.rstudio.com
 ```
 
 
+## Graphical examples of recorded outputs
+
+Data recorded on our Shiny-Server available here: http://shinyapps.dreamrs.fr/
+
+![](man/figures/connections-apps.png)
+
+![](man/figures/connections-day.png)
+
+
+Which tabs in [shinyWidgets](https://github.com/dreamRs/shinyWidgets) galery are the most seen : 
+
+![](man/figures/shinyWidgets-tabs.png)
+
+
+User-agent is recorded per connections and can be parsed with [uaparserjs](https://github.com/hrbrmstr/uaparserjs) :
+
+![](man/figures/ua-family.png)
+![](man/figures/ua-os.png)
+
 
