@@ -183,6 +183,7 @@ Which tabs in [shinyWidgets](https://github.com/dreamRs/shinyWidgets) galery are
 
 
 User-agent is recorded per connections and can be parsed with [uaparserjs](https://github.com/hrbrmstr/uaparserjs) :
+(unique users are not registered as we use the open source version of shiny-server)
 
 ![](man/figures/ua-family.png)
 ![](man/figures/ua-os.png)
