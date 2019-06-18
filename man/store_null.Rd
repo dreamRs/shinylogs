@@ -4,10 +4,14 @@
 \alias{store_null}
 \title{No storage on disk}
 \usage{
-store_null()
+store_null(console = TRUE)
+}
+\arguments{
+\item{console}{Print logs in R console.}
 }
 \description{
-Doesn't write anything, only the special inputs created by \code{track_usage} are available.
+Doesn't write anything, special inputs created by \code{track_usage}
+ are available in server and optionally logs are printed in console.
 }
 \examples{
 if (interactive()) {

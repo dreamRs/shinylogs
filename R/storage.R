@@ -100,7 +100,10 @@ store_json <- function(path) {
 
 #' @title No storage on disk
 #'
-#' @description Doesn't write anything, only the special inputs created by \code{track_usage} are available.
+#' @description Doesn't write anything, special inputs created by \code{track_usage}
+#'  are available in server and optionally logs are printed in console.
+#'
+#' @param console Print logs in R console.
 #'
 #' @export
 #'
@@ -164,8 +167,9 @@ store_json <- function(path) {
 #'
 #'   shinyApp(ui, server)
 #' }
-store_null <- function() {
+store_null <- function(console = TRUE) {
   store <- list(
+    console = console,
     mode = "null"
   )
   class(store) <- c(class(store), "shinylogs.storage_mode")

@@ -106,7 +106,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #'
 #'   - \strong{.shinylogs_browserData} : information about the browser where application is displayed.
 #'
-#' @importFrom shiny getDefaultReactiveDomain insertUI onSessionEnded isolate
+#' @importFrom shiny getDefaultReactiveDomain insertUI onSessionEnded isolate observe
 #' @importFrom nanotime nanotime
 #' @importFrom bit64 as.integer64
 #' @importFrom digest digest
@@ -314,6 +314,16 @@ track_usage <- function(storage_mode,
   )
 
 
+  if (isTRUE(storage_mode$console)) {
+    observe({
+      to_console(session$input$.shinylogs_browserData, init_log)
+    })
+    observe({
+      to_console(session$input$.shinylogs_lastInput)
+    })
+  }
+
+
   onSessionEnded(
     fun = function() {
       init_log$server_disconnected <- get_timestamp(Sys.time())
@@ -345,6 +355,14 @@ get_user_ <- function(session) {
 
 
 
-
+to_console <- function(obj, ...) {
+  if (!is.null(obj)) {
+    json <- jsonlite::toJSON(
+      x = c(obj, ...),
+      pretty = TRUE, auto_unbox = TRUE
+    )
+    print(json)
+  }
+}
 
 
