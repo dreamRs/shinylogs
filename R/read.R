@@ -103,6 +103,9 @@ to_dt <- function(logs, what, sessionid) {
   l <- lapply(logs, `[[`, what)
   l <- lapply(l, function(x) {
     if (is.data.frame(x)) {
+      if (is.data.frame(x$value)) {
+        x$value <- apply(X = x$value, MARGIN = 1, FUN = as.list)
+      }
       as.data.table(x)
     } else {
       rbindlist(lapply(setNames(x, NULL), function(y) {
