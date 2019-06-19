@@ -6,7 +6,8 @@
 \usage{
 track_usage(storage_mode, exclude_input_regex = NULL,
   exclude_input_id = NULL, on_unload = FALSE, exclude_users = NULL,
-  get_user = NULL, session = getDefaultReactiveDomain())
+  get_user = NULL, dependencies = TRUE,
+  session = getDefaultReactiveDomain())
 }
 \arguments{
 \item{storage_mode}{Storage mode to use : \code{\link{store_json}}, \code{\link{store_rds}},
@@ -25,6 +26,8 @@ be created only on close, downside is that a popup will appear asking to close t
 
 \item{get_user}{A \code{function} to get user name, it should
 return a character and take one argument: the Shiny session.}
+
+\item{dependencies}{Load dependencies.}
 
 \item{session}{The shiny session.}
 }
