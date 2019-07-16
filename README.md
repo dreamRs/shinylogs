@@ -177,7 +177,7 @@ Data recorded on our Shiny-Server available here: http://shinyapps.dreamrs.fr/
 ![](man/figures/connections-day.png)
 
 
-Which tabs in [shinyWidgets](https://github.com/dreamRs/shinyWidgets) galery are the most seen : 
+Which tabs in [shinyWidgets](https://github.com/dreamRs/shinyWidgets) gallery are the most seen : 
 
 ![](man/figures/shinyWidgets-tabs.png)
 

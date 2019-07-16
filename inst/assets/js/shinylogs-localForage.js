@@ -1,9 +1,9 @@
 /*!
- * Copyright (c) 2018 dreamRs
+ * Copyright (c) 2019 dreamRs
  *
  * shinylogs, JavaScript bindings to record
  * everything happens in a Shiny app
- * using Lowdb
+ * using LocalForage
  * https://github.com/dreamRs/shinylogs
  *
  * @version 0.0.2
