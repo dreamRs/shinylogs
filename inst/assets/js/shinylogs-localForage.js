@@ -85,7 +85,15 @@ if (logsonunload === false) {
 }
 
 // Shiny input event to not track
-var dontTrack = [ ".shinylogs_lastInput", ".shinylogs_input", ".shinylogs_error", ".shinylogs_output", ".shinylogs_browserData" ];
+var dontTrack = [
+  ".shinylogs_lastInput",
+  ".shinylogs_input",
+  ".shinylogs_error",
+  ".shinylogs_output",
+  ".shinylogs_browserData",
+  ".shinymanager_timeout"
+];
+
 if (config.hasOwnProperty("exclude_input_id")) {
   dontTrack = dontTrack.concat(config.exclude_input_id);
 }
@@ -95,8 +103,13 @@ var hiddenRE = RegExp("hidden$");
 // Track INPUTS
 $(document).on("shiny:inputchanged", function(event) {
   //console.log(event);
-  if (dontTrack.indexOf(event.name) == -1 & hiddenRE.test(event.name) === false & inputRE.test(event.name) === false) {
-    //console.log(event);
+  if (
+    (dontTrack.indexOf(event.name) == -1) &
+    (hiddenRE.test(event.name) === false) &
+    (inputRE.test(event.name) === false) &
+    (event.inputType != "shiny.password")
+  ) {
+    //console.log(event); "shiny.password"
     var ts = dayjs(event.timeStamp).format();
     var inputId = 'input' + generateId();
     var lastInput = {
