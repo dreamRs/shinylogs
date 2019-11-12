@@ -40,9 +40,11 @@ The following \code{input}s will be accessible in the server:
 if (interactive()) {
 
   library(shiny)
+  library(shinylogs)
 
   ui <- fluidPage(
 
+    # Load tracking dependencies
     use_tracking(),
 
     splitLayout(
@@ -52,6 +54,7 @@ if (interactive()) {
       selectInput("select", "Select:", names(iris))
     ),
 
+    tags$p("Last input used (name correspond to inputId:"),
     verbatimTextOutput("last")
   )
 

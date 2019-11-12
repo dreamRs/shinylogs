@@ -49,8 +49,7 @@ The following \code{input}s will be accessible in the server:
   - \strong{.shinylogs_browserData} : information about the browser where application is displayed.
 }
 \examples{
-
-## Save logs on disk
+# Save logs on disk ----------------------------------
 
 if (interactive()) {
 
@@ -129,8 +128,7 @@ if (interactive()) {
 
 }
 
-
-## Special inputs :
+# Logs in console & special inputs ------------------------
 
 if (interactive()) {
   library(shiny)
@@ -165,9 +163,9 @@ if (interactive()) {
       ),
       column(
         width = 9,
-        tags$b("Last input:"),
+        tags$b("Last input triggered:"),
         verbatimTextOutput(outputId = "last_input"),
-        tags$b("Last input:"),
+        tags$b("All inputs:"),
         verbatimTextOutput(outputId = "all_inputs")
       )
     )
@@ -175,16 +173,19 @@ if (interactive()) {
 
   server <- function(input, output, session) {
 
+    # dont store on disk, just show in R console
     track_usage(
-      storage_mode = store_null() # dont store on disk
+      storage_mode = store_null()
     )
 
+    # last input triggered
     output$last_input <- renderPrint({
-      input$.shinylogs_lastInput # last input triggered
+      input$.shinylogs_lastInput
     })
 
+    # all inputs that have changed
     output$all_inputs <- renderPrint({
-      input$.shinylogs_input # all inputs that have changed
+      input$.shinylogs_input
     })
 
   }

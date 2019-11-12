@@ -33,36 +33,7 @@
 #' @importFrom nanotime nanotime
 #' @importFrom digest digest
 #'
-#' @examples
-#' if (interactive()) {
-#'
-#'   library(shiny)
-#'
-#'   ui <- fluidPage(
-#'
-#'     use_tracking(),
-#'
-#'     splitLayout(
-#'       cellArgs = list(style = "height: 250px"),
-#'       radioButtons("radio", "Radio:", names(iris)),
-#'       checkboxGroupInput("checkbox", "Checkbox:", names(iris)),
-#'       selectInput("select", "Select:", names(iris))
-#'     ),
-#'
-#'     verbatimTextOutput("last")
-#'   )
-#'
-#'   server <- function(input, output, session) {
-#'
-#'     output$last <- renderPrint({
-#'       input$.shinylogs_lastInput
-#'     })
-#'
-#'   }
-#'
-#'   shinyApp(ui, server)
-#'
-#' }
+#' @example examples/use_tracking.R
 use_tracking <- function(on_unload = FALSE, exclude_input_regex = NULL, exclude_input_id = NULL) {
   app_name <- basename(getwd())
   timestamp <- Sys.time()
@@ -155,149 +126,8 @@ parse_lastInput <- function(x, shinysession, name) {
 #' @importFrom jsonlite toJSON
 #' @importFrom htmltools tags singleton
 #'
-#' @examples
-#'
-#' ## Save logs on disk
-#'
-#' if (interactive()) {
-#'
-#'   # temporary directory for writing logs
-#'   tmp <- tempdir()
-#'
-#'   # when app stop,
-#'   # navigate to the directory containing logs
-#'   onStop(function() {
-#'     browseURL(url = tmp)
-#'   })
-#'
-#'   # Classic Iris clustering with Shiny
-#'   ui <- fluidPage(
-#'
-#'     headerPanel("Iris k-means clustering"),
-#'
-#'     sidebarLayout(
-#'       sidebarPanel(
-#'         selectInput(
-#'           inputId = "xcol",
-#'           label = "X Variable",
-#'           choices = names(iris)
-#'         ),
-#'         selectInput(
-#'           inputId = "ycol",
-#'           label = "Y Variable",
-#'           choices = names(iris),
-#'           selected = names(iris)[[2]]
-#'         ),
-#'         numericInput(
-#'           inputId = "clusters",
-#'           label = "Cluster count",
-#'           value = 3,
-#'           min = 1,
-#'           max = 9
-#'         )
-#'       ),
-#'       mainPanel(
-#'         plotOutput("plot1")
-#'       )
-#'     )
-#'   )
-#'
-#'   server <- function(input, output, session) {
-#'
-#'     # Store JSON with logs in the temp dir
-#'     track_usage(
-#'       storage_mode = store_json(path = tmp)
-#'     )
-#'
-#'     # classic server logic
-#'
-#'     selectedData <- reactive({
-#'       iris[, c(input$xcol, input$ycol)]
-#'     })
-#'
-#'     clusters <- reactive({
-#'       kmeans(selectedData(), input$clusters)
-#'     })
-#'
-#'     output$plot1 <- renderPlot({
-#'       palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
-#'                 "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
-#'
-#'       par(mar = c(5.1, 4.1, 0, 1))
-#'       plot(selectedData(),
-#'            col = clusters()$cluster,
-#'            pch = 20, cex = 3)
-#'       points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
-#'     })
-#'
-#'   }
-#'
-#'   shinyApp(ui, server)
-#'
-#' }
-#'
-#'
-#' ## Special inputs :
-#'
-#' if (interactive()) {
-#'   library(shiny)
-#'   library(shinylogs)
-#'
-#'   ui <- fluidPage(
-#'     tags$h2("Record inputs change"),
-#'     fluidRow(
-#'       column(
-#'         width = 3,
-#'         selectInput(
-#'           inputId = "select",
-#'           label = "Select input",
-#'           choices = month.name
-#'         ),
-#'         numericInput(
-#'           inputId = "numeric",
-#'           label = "Numerci input",
-#'           value = 4,
-#'           min = 0, max = 20
-#'         ),
-#'         checkboxGroupInput(
-#'           inputId = "checkboxGroup",
-#'           label = "Checkbox group input",
-#'           choices = LETTERS[1:5]
-#'         ),
-#'         sliderInput(
-#'           inputId = "slider",
-#'           label = "Slider input",
-#'           min = 0, max = 100, value = 50
-#'         )
-#'       ),
-#'       column(
-#'         width = 9,
-#'         tags$b("Last input:"),
-#'         verbatimTextOutput(outputId = "last_input"),
-#'         tags$b("Last input:"),
-#'         verbatimTextOutput(outputId = "all_inputs")
-#'       )
-#'     )
-#'   )
-#'
-#'   server <- function(input, output, session) {
-#'
-#'     track_usage(
-#'       storage_mode = store_null() # dont store on disk
-#'     )
-#'
-#'     output$last_input <- renderPrint({
-#'       input$.shinylogs_lastInput # last input triggered
-#'     })
-#'
-#'     output$all_inputs <- renderPrint({
-#'       input$.shinylogs_input # all inputs that have changed
-#'     })
-#'
-#'   }
-#'
-#'   shinyApp(ui, server)
-#' }
+#' @example examples/track_usage-json.R
+#' @example examples/track_usage-console.R
 track_usage <- function(storage_mode,
                         exclude_input_regex = NULL,
                         exclude_input_id = NULL,
@@ -403,7 +233,7 @@ get_user_ <- function(session) {
 }
 
 
-
+#' @importFrom jsonlite toJSON
 to_console <- function(obj, ...) {
   if (!is.null(obj)) {
     json <- jsonlite::toJSON(
