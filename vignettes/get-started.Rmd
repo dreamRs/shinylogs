@@ -1,0 +1,109 @@
+---
+title: "Get started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{get-started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+```{r setup}
+library(shinylogs)
+```
+
+
+## How to use
+
+Add in your server : 
+
+```{r}
+# server
+track_usage(storage_mode = store_json(path = "logs/"))
+```
+
+It will store logs in a sub-folder `logs/` of your application.
+
+If needed (in complex application), you can force dependencies in UI with :
+
+```{r}
+# UI
+use_tracking()
+```
+
+
+
+## Storage modes
+
+Four modes are available:
+
+* `storage_json()` : store logs has separate JSON files (one by session).
+* `storage_rds()` : store logs has individually RDS files (one by session).
+* `storage_sqlite()` : store logs in a SQLite database.
+* `storage_json()` : don't store logs, print them in R console.
+
+On a server, if you want to save logs on disk, don't forget to set right permission on the folder you want to save logs.
+
+
+## Recorded informations
+
+### Session
+
+Those data are metadata about the application and the user's browser, here are the filed recorded : 
+
+* **app** : name of the application
+* **user** : name of the user (if using Shiny-server pro for example)
+* **server_connected** : timestamp of when application has been launched (server time)
+* **sessionid** : a session ID to match the session with other recorded informations (inputs, outputs, errors)
+* **server_disconnected** : timestamp of when the application was disconnected (server time)
+* **user_agent** : browser user-agent
+* **screen_res** : resolution of the user screen (width x height)
+* **browser_res** : resolution of the user browser (width x height)
+* **pixel_ratio** : pixel ratio of the browser
+* **browser_connected** : timestamp of when application has been launched (browser time, depends on user timezone)
+
+
+
+### Inputs
+
+Data about inputs, by default all inputs are recorded (even those not define by developper, like with {htmlwidgets} : {DT}, {leaflet}, ...)
+
+* **sessionid** : the same ID as in session object
+* **name** : inputId of the input
+* **timestamp** : timestamp when the input has changed
+* **value** : the value taken by the input (can be a list in case of complex input)
+* **type** : type of input (if defined)
+* **binding** : binding for the input (if defined)
+
+
+### Outputs
+
+Data recorded each time an output is refreshed :
+
+* **sessionid** : the same ID as in session object
+* **name** : outputId of the output
+* **timestamp** : timestamp when the output has been updated
+* **type** : type of output (if defined)
+* **binding** : binding for the output (if defined)
+
+
+### Errors
+
+Errors are recorded only when propagated to an output, this is red message users see in application :
+
+* **sessionid** : the same ID as in session object
+* **name** : outputId of the output where an error happened
+* **timestamp** : timestamp of the error
+* **error** : error message (if any)
+* **value** : additional data for the error (generally NULL)
+
+
+
+
