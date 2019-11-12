@@ -6,3 +6,6 @@ dev/
 ^CRAN-RELEASE$
 ^examples$
 ^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
