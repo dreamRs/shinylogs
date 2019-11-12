@@ -56,6 +56,10 @@ The function will record :
   - *outputs* : each time an output is re-generated
   - *session* : informations about user’s browser and the application
 
+See the vignette for more details (`?vignette("shinylogs")`) or the
+[online
+version](https://dreamrs.github.io/shinylogs/articles/shinylogs.html).
+
 ## Examples
 
 Some example of what is recorded with logs from applications available
