@@ -15,6 +15,9 @@ All logs will be written in the same file.
 \examples{
 if (interactive()) {
 
+  library(shiny)
+  library(shinylogs)
+
   # temp directory for writing logs
   tmp <- tempdir()
 

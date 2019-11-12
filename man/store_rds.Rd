@@ -15,6 +15,9 @@ One RDS will be written for each session of the application.
 \examples{
 if (interactive()) {
 
+  library(shiny)
+  library(shinylogs)
+
   # temp directory for writing logs
   tmp <- tempdir()
 
