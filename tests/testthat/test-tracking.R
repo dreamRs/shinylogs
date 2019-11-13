@@ -33,3 +33,14 @@ test_that("track_usage works", {
   expect_is(session$funOnSessionEnded, "function")
   expect_length(session$listInsertUI, 2)
 })
+
+
+
+test_that("to_console works", {
+
+  expect_output(to_console(list(a = 1)), "\"a\": 1")
+
+})
+
+
+
