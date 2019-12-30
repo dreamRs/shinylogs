@@ -44,10 +44,10 @@ use_tracking()
 
 Four modes are available:
 
-* `storage_json()` : store logs has separate JSON files (one by session).
-* `storage_rds()` : store logs has individually RDS files (one by session).
-* `storage_sqlite()` : store logs in a SQLite database.
-* `storage_json()` : don't store logs, print them in R console.
+* `store_json()` : store logs has separate JSON files (one by session).
+* `store_rds()` : store logs has individually RDS files (one by session).
+* `store_sqlite()` : store logs in a SQLite database.
+* `store_null()` : don't write logs on disk, print them in R console.
 
 On a server, if you want to save logs on disk, don't forget to set right permission on the folder you want to save logs.
 
@@ -70,6 +70,41 @@ Those data are metadata about the application and the user's browser, here are t
 * **browser_connected** : timestamp of when application has been launched (browser time, depends on user timezone)
 
 
+Example:
+
+```{r ex-session, eval=TRUE, echo=FALSE}
+data.frame(stringsAsFactors=FALSE,
+                   app = c("iris-cluster", "iris-cluster", "iris-cluster", "iris-cluster", "iris-cluster", "iris-cluster"),
+                  user = c("dreamRs", "dreamRs", "dreamRs", "dreamRs", "dreamRs", "dreamRs"),
+      server_connected = c("2019-06-19 14:07:09", "2019-06-19 14:56:32",
+                           "2019-06-19 14:57:45", "2019-06-19 15:03:00",
+                           "2019-06-19 15:08:53", "2019-08-04 10:58:47"),
+             sessionid = c("9815194cfaa6317fbea68ae9537d63d1",
+                           "0feeacf3201f5cca088059cec2b0a710",
+                           "8b12c138f159cc5805e136338dddac59",
+                           "f3950a1588b78d45c53c756a4136df67", "254cafb3d5866384f13022d066546cae",
+                           "8a431f4b90b3b1926047dd2539be0793"),
+   server_disconnected = c("2019-06-19 14:07:17", "2019-06-19 14:57:39",
+                           "2019-06-19 15:01:36", "2019-06-19 15:08:13",
+                           "2019-06-19 15:09:38", "2019-08-04 10:58:49"),
+            user_agent = c("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+                           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+                           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+                           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+                           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36", NA),
+            screen_res = c("1920x1080", "1920x1080", "1920x1080", "1920x1080",
+                           "1920x1080", NA),
+           browser_res = c("1574x724", "1920x937", "1920x937", "1920x937",
+                           "1920x937", NA),
+           pixel_ratio = c(1L, 1L, 1L, 1L, 1L, NA),
+     browser_connected = c("2019-06-19 14:07:09", "2019-06-19 14:56:32",
+                           "2019-06-19 14:57:45", "2019-06-19 15:03:00",
+                           "2019-06-19 15:08:53", NA)
+)
+```
+
+
+
 
 ### Inputs
 
@@ -81,6 +116,30 @@ Data about inputs, by default all inputs are recorded (even those not define by 
 * **value** : the value taken by the input (can be a list in case of complex input)
 * **type** : type of input (if defined)
 * **binding** : binding for the input (if defined)
+
+Example:
+
+```{r ex-inputs, eval=TRUE, echo=FALSE}
+data.frame(stringsAsFactors=FALSE,
+   sessionid = c("9815194cfaa6317fbea68ae9537d63d1",
+                 "9815194cfaa6317fbea68ae9537d63d1",
+                 "9815194cfaa6317fbea68ae9537d63d1", "9815194cfaa6317fbea68ae9537d63d1",
+                 "9815194cfaa6317fbea68ae9537d63d1", "9815194cfaa6317fbea68ae9537d63d1"),
+        name = c("xcol", "clusters", "clusters", "clusters", "clusters",
+                 "clusters"),
+   timestamp = c("2019-06-19 14:07:11", "2019-06-19 14:07:15",
+                 "2019-06-19 14:07:15", "2019-06-19 14:07:15",
+                 "2019-06-19 14:07:14", "2019-06-19 14:07:13"),
+       value = c("Sepal.Width", 6, 4, 5, 7, 4),
+        type = c(NA, "shiny.number", "shiny.number", "shiny.number",
+                 "shiny.number", "shiny.number"),
+     binding = c("shiny.selectInput", "shiny.numberInput", "shiny.numberInput",
+                 "shiny.numberInput", "shiny.numberInput",
+                 "shiny.numberInput")
+)
+```
+
+
 
 
 ### Outputs
@@ -94,6 +153,26 @@ Data recorded each time an output is refreshed :
 * **binding** : binding for the output (if defined)
 
 
+Example:
+
+```{r ex-outputs, eval=TRUE, echo=FALSE}
+data.frame(stringsAsFactors=FALSE,
+   sessionid = c("9815194cfaa6317fbea68ae9537d63d1",
+                 "9815194cfaa6317fbea68ae9537d63d1",
+                 "9815194cfaa6317fbea68ae9537d63d1", "9815194cfaa6317fbea68ae9537d63d1",
+                 "9815194cfaa6317fbea68ae9537d63d1", "9815194cfaa6317fbea68ae9537d63d1"),
+        name = c("plot1", "plot1", "plot1", "plot1", "plot1", "plot1"),
+   timestamp = c("2019-06-19 14:07:15", "2019-06-19 14:07:15",
+                 "2019-06-19 14:07:14", "2019-06-19 14:07:15",
+                 "2019-06-19 14:07:11", "2019-06-19 14:07:10"),
+     binding = c("shiny.imageOutput", "shiny.imageOutput", "shiny.imageOutput",
+                 "shiny.imageOutput", "shiny.imageOutput",
+                 "shiny.imageOutput")
+)
+```
+
+
+
 ### Errors
 
 Errors are recorded only when propagated through an output, this is the red message users see in application, infos saved are:
@@ -102,8 +181,18 @@ Errors are recorded only when propagated through an output, this is the red mess
 * **name** : outputId of the output where an error happened
 * **timestamp** : timestamp of the error
 * **error** : error message (if any)
-* **value** : additional data for the error (generally NULL)
+* **value** : additional data for the error (generally NULL) (if defined)
 
 
+Example:
+
+```{r ex-errors, eval=TRUE, echo=FALSE}
+data.frame(stringsAsFactors=FALSE,
+   sessionid = c("f8f50a3743023aae7d0d6350a2fd6841"),
+        name = c("plot1"),
+   timestamp = c("2019-06-19 14:07:18"),
+       error = c("NA/NaN/Inf in foreign function call (arg 1)")
+)
+```
 
 

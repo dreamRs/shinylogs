@@ -101,13 +101,13 @@
 <p>Four modes are available:</p>
 <ul>
 <li>
-<code>storage_json()</code> : store logs has separate JSON files (one by session).</li>
+<code><a href="../reference/store_json.html">store_json()</a></code> : store logs has separate JSON files (one by session).</li>
 <li>
-<code>storage_rds()</code> : store logs has individually RDS files (one by session).</li>
+<code><a href="../reference/store_rds.html">store_rds()</a></code> : store logs has individually RDS files (one by session).</li>
 <li>
-<code>storage_sqlite()</code> : store logs in a SQLite database.</li>
+<code><a href="../reference/store_sqlite.html">store_sqlite()</a></code> : store logs in a SQLite database.</li>
 <li>
-<code>storage_json()</code> : don’t store logs, print them in R console.</li>
+<code><a href="../reference/store_null.html">store_null()</a></code> : don’t write logs on disk, print them in R console.</li>
 </ul>
 <p>On a server, if you want to save logs on disk, don’t forget to set right permission on the folder you want to save logs.</p>
 </div>
@@ -140,6 +140,35 @@
 <li>
 <strong>browser_connected</strong> : timestamp of when application has been launched (browser time, depends on user timezone)</li>
 </ul>
+<p>Example:</p>
+<pre><code>#&gt;            app    user    server_connected                        sessionid
+#&gt; 1 iris-cluster dreamRs 2019-06-19 14:07:09 9815194cfaa6317fbea68ae9537d63d1
+#&gt; 2 iris-cluster dreamRs 2019-06-19 14:56:32 0feeacf3201f5cca088059cec2b0a710
+#&gt; 3 iris-cluster dreamRs 2019-06-19 14:57:45 8b12c138f159cc5805e136338dddac59
+#&gt; 4 iris-cluster dreamRs 2019-06-19 15:03:00 f3950a1588b78d45c53c756a4136df67
+#&gt; 5 iris-cluster dreamRs 2019-06-19 15:08:53 254cafb3d5866384f13022d066546cae
+#&gt; 6 iris-cluster dreamRs 2019-08-04 10:58:47 8a431f4b90b3b1926047dd2539be0793
+#&gt;   server_disconnected
+#&gt; 1 2019-06-19 14:07:17
+#&gt; 2 2019-06-19 14:57:39
+#&gt; 3 2019-06-19 15:01:36
+#&gt; 4 2019-06-19 15:08:13
+#&gt; 5 2019-06-19 15:09:38
+#&gt; 6 2019-08-04 10:58:49
+#&gt;                                                                                                            user_agent
+#&gt; 1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+#&gt; 2 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+#&gt; 3 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+#&gt; 4 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+#&gt; 5 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+#&gt; 6                                                                                                                &lt;NA&gt;
+#&gt;   screen_res browser_res pixel_ratio   browser_connected
+#&gt; 1  1920x1080    1574x724           1 2019-06-19 14:07:09
+#&gt; 2  1920x1080    1920x937           1 2019-06-19 14:56:32
+#&gt; 3  1920x1080    1920x937           1 2019-06-19 14:57:45
+#&gt; 4  1920x1080    1920x937           1 2019-06-19 15:03:00
+#&gt; 5  1920x1080    1920x937           1 2019-06-19 15:08:53
+#&gt; 6       &lt;NA&gt;        &lt;NA&gt;          NA                &lt;NA&gt;</code></pre>
 </div>
 <div id="inputs" class="section level3">
 <h3 class="hasAnchor">
@@ -159,6 +188,21 @@
 <li>
 <strong>binding</strong> : binding for the input (if defined)</li>
 </ul>
+<p>Example:</p>
+<pre><code>#&gt;                          sessionid     name           timestamp       value
+#&gt; 1 9815194cfaa6317fbea68ae9537d63d1     xcol 2019-06-19 14:07:11 Sepal.Width
+#&gt; 2 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           6
+#&gt; 3 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           4
+#&gt; 4 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           5
+#&gt; 5 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:14           7
+#&gt; 6 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:13           4
+#&gt;           type           binding
+#&gt; 1         &lt;NA&gt; shiny.selectInput
+#&gt; 2 shiny.number shiny.numberInput
+#&gt; 3 shiny.number shiny.numberInput
+#&gt; 4 shiny.number shiny.numberInput
+#&gt; 5 shiny.number shiny.numberInput
+#&gt; 6 shiny.number shiny.numberInput</code></pre>
 </div>
 <div id="outputs" class="section level3">
 <h3 class="hasAnchor">
@@ -176,6 +220,14 @@
 <li>
 <strong>binding</strong> : binding for the output (if defined)</li>
 </ul>
+<p>Example:</p>
+<pre><code>#&gt;                          sessionid  name           timestamp           binding
+#&gt; 1 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput
+#&gt; 2 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput
+#&gt; 3 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:14 shiny.imageOutput
+#&gt; 4 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput
+#&gt; 5 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:11 shiny.imageOutput
+#&gt; 6 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:10 shiny.imageOutput</code></pre>
 </div>
 <div id="errors" class="section level3">
 <h3 class="hasAnchor">
@@ -191,8 +243,13 @@
 <li>
 <strong>error</strong> : error message (if any)</li>
 <li>
-<strong>value</strong> : additional data for the error (generally NULL)</li>
+<strong>value</strong> : additional data for the error (generally NULL) (if defined)</li>
 </ul>
+<p>Example:</p>
+<pre><code>#&gt;                          sessionid  name           timestamp
+#&gt; 1 f8f50a3743023aae7d0d6350a2fd6841 plot1 2019-06-19 14:07:18
+#&gt;                                         error
+#&gt; 1 NA/NaN/Inf in foreign function call (arg 1)</code></pre>
 </div>
 </div>
   </div>
