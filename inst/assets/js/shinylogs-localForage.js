@@ -67,7 +67,7 @@ var browser_res = w + "x" + h;
 // Pixel ratio
 var pixel_ratio = window.devicePixelRatio;
 // Timestamp browser
-var browser_connected = dayjs().format();
+var browser_connected = dayjs().format("YYYY-MM-DD HH:mm:ss.SSSZZ");
 
 // Send browser data
 if (logsonunload === false) {
@@ -110,7 +110,7 @@ $(document).on("shiny:inputchanged", function(event) {
     (event.inputType != "shiny.password")
   ) {
     //console.log(event); "shiny.password"
-    var ts = dayjs(event.timeStamp).format();
+    var ts = dayjs(event.timeStamp).format("YYYY-MM-DD HH:mm:ss.SSSZZ");
     var inputId = 'input' + generateId();
     var lastInput = {
       name: event.name,
@@ -133,7 +133,7 @@ $(document).on("shiny:inputchanged", function(event) {
 // Track ERRORS
 $(document).on("shiny:error", function(event) {
   //console.log(event);
-  var ts = dayjs(event.timeStamp).format();
+  var ts = dayjs(event.timeStamp).format("YYYY-MM-DD HH:mm:ss.SSSZZ");
   var errorId = 'error' + generateId();
   var lastError = {
     name: event.name,
@@ -152,7 +152,7 @@ $(document).on("shiny:error", function(event) {
 // Track OUTPUTs
 $(document).on("shiny:value", function(event) {
   //console.log(event);
-  var ts = dayjs(event.timeStamp).format();
+  var ts = dayjs(event.timeStamp).format("YYYY-MM-DD HH:mm:ss.SSSZZ");
   var outputId = 'output' + generateId();
   var lastOutput = {
     name: event.name,

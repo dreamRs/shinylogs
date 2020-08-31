@@ -7,7 +7,7 @@ dropNulls <- function(x) {
 get_timestamp <- function(time = NULL) {
   if (is.null(time))
     time <- Sys.time()
-  format(time, format = "%Y-%m-%dT%H:%M:%S%z")
+  format(time, format = "%Y-%m-%d %H:%M:%OS3%z")
 }
 
 is_sqlite <- function(path) {
