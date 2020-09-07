@@ -1,7 +1,11 @@
+# shinylogs 0.1.8
+
+* Timestamp is now recorded in microseconds (fix [#6](https://github.com/dreamRs/shinylogs/issues/6)).
+
+
 # shinylogs 0.1.7
 
 * Fix a bug when used with {shinymanager} (fix [#2](https://github.com/dreamRs/shinylogs/issues/2)).
-* Timestamp is now recorded in microseconds (fix [#6](https://github.com/dreamRs/shinylogs/issues/6)).
 
 
 # shinylogs 0.1.6
