@@ -58,7 +58,7 @@ var browser_res = w + "x" + h;
 var pixel_ratio = window.devicePixelRatio;
 
 // Timestamp browser
-var browser_connected = dayjs().format();
+var browser_connected = dayjs().format("YYYY-MM-DD HH:mm:ss.SSSZZ");
 
 // Send browser data
 if (logsonunload === false) {
@@ -85,7 +85,7 @@ $(document).on("shiny:inputchanged", function(event) {
     //console.log(event);
     var lastInput = {
       name: event.name,
-      timestamp: dayjs(event.timeStamp).format(),
+      timestamp: dayjs(event.timeStamp).format("YYYY-MM-DD HH:mm:ss.SSSZZ"),
       value: event.value,
       type: event.inputType,
       binding: event.binding !== null ? event.binding.name : ''
@@ -110,7 +110,7 @@ $(document).on("shiny:error", function(event) {
   if (dont_track.indexOf(event.name) == -1) {
     var lastError = {
       name: event.name,
-      timestamp: dayjs(event.timeStamp).format(),
+      timestamp: dayjs().format("YYYY-MM-DD HH:mm:ss.SSSZZ"),
       error: event.error.message
     };
     db.get("error").push(lastError).write();
@@ -129,7 +129,7 @@ $(document).on("shiny:value", function(event) {
   //console.log(event);
   var lastOutput = {
     name: event.name,
-    timestamp: dayjs(event.timeStamp).format(),
+    timestamp: dayjs().format("YYYY-MM-DD HH:mm:ss.SSSZZ"),
     binding: event.binding.binding.name
   };
   db.get("output").push(lastOutput).write();
