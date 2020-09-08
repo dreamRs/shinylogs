@@ -9,18 +9,20 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/dreamRs/shinylogs.svg?branch=master)](https://travis-ci.org/dreamRs/shinylogs)
+[![version](http://www.r-pkg.org/badges/version/shinylogs)](https://CRAN.R-project.org/package=shinylogs)
+[![cran
+checks](https://cranchecks.info/badges/worst/shinylogs)](https://cranchecks.info/pkgs/shinylogs)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![Project Status: Active The project has reached a stable, usable state
 and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![version](http://www.r-pkg.org/badges/version/shinylogs)](https://CRAN.R-project.org/package=shinylogs)
-[![cran
-checks](https://cranchecks.info/badges/worst/shinylogs)](https://cranchecks.info/pkgs/shinylogs)
 [![Codecov test
 coverage](https://codecov.io/gh/dreamRs/shinylogs/branch/master/graph/badge.svg)](https://codecov.io/gh/dreamRs/shinylogs?branch=master)
+[![Travis build
+status](https://travis-ci.org/dreamRs/shinylogs.svg?branch=master)](https://travis-ci.org/dreamRs/shinylogs)
+[![R build
+status](https://github.com/dreamRs/shinylogs/workflows/R-CMD-check/badge.svg)](https://github.com/dreamRs/shinylogs/actions)
 <!-- badges: end -->
 
 ## Installation
