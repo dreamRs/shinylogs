@@ -41,7 +41,7 @@ read_json_logs <- function(path) {
 #' @importFrom stats setNames
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Read all RDS in a directory
 #' logs <- read_rds_logs(path = "path/to/directory")
 #'
@@ -64,7 +64,7 @@ read_logs <- function(path, what) {
     files <- normalizePath(path, mustWork = TRUE)
   } else {
     stop(sprintf(
-      "'path' must be a directory containing %s files or a %s file",
+      "'path' must be either:\n - a directory containing %s files\n - a single %s file",
       toupper(what), toupper(what)
     ), call. = FALSE)
   }

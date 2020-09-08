@@ -4,8 +4,11 @@
 \alias{use_tracking}
 \title{Insert dependencies to track usage of a Shiny app}
 \usage{
-use_tracking(on_unload = FALSE, exclude_input_regex = NULL,
-  exclude_input_id = NULL)
+use_tracking(
+  on_unload = FALSE,
+  exclude_input_regex = NULL,
+  exclude_input_id = NULL
+)
 }
 \arguments{
 \item{on_unload}{Logical, save log when user close the browser window or tab,

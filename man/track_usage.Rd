@@ -4,10 +4,16 @@
 \alias{track_usage}
 \title{Track usage of a Shiny app}
 \usage{
-track_usage(storage_mode, exclude_input_regex = NULL,
-  exclude_input_id = NULL, on_unload = FALSE, exclude_users = NULL,
-  get_user = NULL, dependencies = TRUE,
-  session = getDefaultReactiveDomain())
+track_usage(
+  storage_mode,
+  exclude_input_regex = NULL,
+  exclude_input_id = NULL,
+  on_unload = FALSE,
+  exclude_users = NULL,
+  get_user = NULL,
+  dependencies = TRUE,
+  session = getDefaultReactiveDomain()
+)
 }
 \arguments{
 \item{storage_mode}{Storage mode to use : \code{\link{store_json}}, \code{\link{store_rds}},

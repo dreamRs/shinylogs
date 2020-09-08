@@ -16,7 +16,7 @@ a list of \code{data.table}
 Read a directory containing RDS logs
 }
 \examples{
-\donttest{
+\dontrun{
 # Read all RDS in a directory
 logs <- read_rds_logs(path = "path/to/directory")
 
