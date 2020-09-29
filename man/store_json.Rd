@@ -9,6 +9,9 @@ store_json(path)
 \arguments{
 \item{path}{Path where to write JSON files.}
 }
+\value{
+A list that can be used in \code{\link{track_usage}}.
+}
 \description{
 One JSON will be written for each session of the application.
 }

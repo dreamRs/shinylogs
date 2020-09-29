@@ -9,6 +9,9 @@ store_null(console = TRUE)
 \arguments{
 \item{console}{Print logs in R console.}
 }
+\value{
+A list that can be used in \code{\link{track_usage}}.
+}
 \description{
 Doesn't write anything, special inputs created by \code{track_usage}
  are available in server and optionally logs are printed in console.

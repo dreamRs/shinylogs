@@ -1,6 +1,6 @@
 Package: shinylogs
 Title: Record Everything that Happens in a 'Shiny' Application
-Version: 0.1.7.9000
+Version: 0.1.7.9100
 Authors@R: c(person("Fanny", "Meyer", email = "fanny.meyer@dreamrs.fr", role = c("aut")),
   person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
   person("Silex Technologies", comment = "https://www.silex-ip.com", role = "fnd"),
@@ -24,7 +24,8 @@ Imports:
     digest,
     anytime,
     DBI,
-    RSQLite
+    RSQLite,
+    googledrive
 Suggests: 
     testthat,
     knitr,
