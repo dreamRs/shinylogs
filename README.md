@@ -87,3 +87,23 @@ User-agent is recorded per connection and can be parsed with
 not registered as we use the open source version of shiny-server)
 
 <img src="man/figures/ua-family.png" width="100%" /><img src="man/figures/ua-os.png" width="100%" />
+
+## Development
+
+This package use [{packer}](https://github.com/JohnCoene/packer) to
+manage JavaScript assets, see packer’s
+[documentation](https://packer.john-coene.com/#/) for more.
+
+Install nodes modules with:
+
+``` r
+packer::npm_install()
+```
+
+Modify `srcjs/exts/shinylogs.js`, then run:
+
+``` r
+packer::bundle()
+```
+
+Re-install R package and try `track_usage()` function.

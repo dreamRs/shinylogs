@@ -15,7 +15,7 @@ if (interactive()) {
       selectInput("select", "Select:", names(iris))
     ),
 
-    tags$p("Last input used (name correspond to inputId:"),
+    tags$p("Last input used, the 'name' slot correspond to inputId:"),
     verbatimTextOutput("last")
   )
 

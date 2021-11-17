@@ -1,18 +1,8 @@
-/*!
- * Copyright (c) 2019 dreamRs
- *
- * shinylogs, JavaScript bindings to record
- * everything happens in a Shiny app
- * using LocalForage
- * https://github.com/dreamRs/shinylogs
- *
- * @version 0.0.2
- */
-
-/*jshint
-  jquery: true
-*/
-/*global localforage, dayjs, Shiny */
+import "shiny";
+import * as dayjs from "dayjs";
+import localforage from "localforage";
+import { extendPrototype } from "localforage-getitems";
+extendPrototype(localforage);
 
 (function() {
   // config
@@ -24,7 +14,7 @@
     config = { logsonunload: false };
   }
 
-  //console.log(config);
+  // console.log(config);
 
   var logsonunload = config.logsonunload;
 
@@ -80,7 +70,24 @@
   // Timestamp browser
   var browser_connected = dayjs().format("YYYY-MM-DD HH:mm:ss.SSSZZ");
 
-  // Send browser data
+  // Send browser data if shiny initialized
+  if (typeof(window.Shiny) !== "undefined" && !!window.Shiny.setInputValue) {
+    Shiny.setInputValue(
+      ".shinylogs_browserData",
+      {
+        user_agent: ua,
+        screen_res: screen_res,
+        browser_res: browser_res,
+        pixel_ratio: pixel_ratio,
+        browser_connected: browser_connected
+      },
+      {
+        priority: "event"
+      }
+    );
+  }
+
+  // Send browser data when shiny is connected
   if (logsonunload === false) {
     $(document).on("shiny:connected", function() {
       Shiny.setInputValue(
@@ -222,4 +229,3 @@
     };
   }
 })();
-

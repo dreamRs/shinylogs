@@ -51,7 +51,7 @@ ui <- fluidPage(
       width = 9,
       tags$b("Last input:"),
       verbatimTextOutput(outputId = "last_input"),
-      tags$b("Last input:"),
+      tags$b("All inputs:"),
       verbatimTextOutput(outputId = "all_inputs")
     )
   )

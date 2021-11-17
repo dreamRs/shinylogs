@@ -4,3 +4,4 @@
 dev/
 inst/doc
 examples/.secrets/
+node_modules

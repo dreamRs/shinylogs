@@ -98,3 +98,21 @@ knitr::include_graphics("man/figures/ua-family.png")
 knitr::include_graphics("man/figures/ua-os.png")
 ```
 
+
+## Development
+
+This package use [{packer}](https://github.com/JohnCoene/packer) to manage JavaScript assets, see packer's [documentation](https://packer.john-coene.com/#/) for more.
+
+Install nodes modules with:
+
+```r
+packer::npm_install()
+```
+
+Modify `srcjs/exts/shinylogs.js`, then run:
+
+```r
+packer::bundle()
+```
+
+Re-install R package and try `track_usage()` function.

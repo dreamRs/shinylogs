@@ -58,9 +58,7 @@ use_tracking <- function(on_unload = FALSE, exclude_input_regex = NULL, exclude_
   attachDependencies(
     x = singleton(tag_log),
     value = list(
-      localforage_dependencies(),
-      dayjs_dependencies(),
-      shinylogs_lf_dependencies()
+      shinylogs_dependencies()
     )
   )
 }
@@ -178,9 +176,7 @@ track_usage <- function(storage_mode,
       ui = attachDependencies(
         x = tags$div(),
         value = list(
-          localforage_dependencies(),
-          dayjs_dependencies(),
-          shinylogs_lf_dependencies()
+          shinylogs_dependencies()
         )
       ),
       immediate = FALSE,
@@ -221,27 +217,6 @@ track_usage <- function(storage_mode,
 }
 
 
-get_user_ <- function(session) {
-  if (!is.null(session$user))
-    return(session$user)
-  user <- Sys.getenv("SHINYPROXY_USERNAME")
-  if (user != "") {
-    return(user)
-  } else {
-    getOption("shinylogs.default_user", default = Sys.info()[['user']])
-  }
-}
 
-
-#' @importFrom jsonlite toJSON
-to_console <- function(obj, ...) {
-  if (!is.null(obj)) {
-    json <- jsonlite::toJSON(
-      x = c(obj, ...),
-      pretty = TRUE, auto_unbox = TRUE
-    )
-    print(json)
-  }
-}
 
 

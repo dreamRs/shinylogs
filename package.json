@@ -1,0 +1,38 @@
+{
+  "name": "shinylogs",
+  "version": "1.0.0",
+  "description": "<!-- README.md is generated from README.Rmd. Please edit that file -->",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "man": "man",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "none": "webpack --config webpack.dev.js --mode=none",
+    "development": "webpack --config webpack.dev.js",
+    "production": "webpack --config webpack.prod.js",
+    "watch": "webpack --config webpack.dev.js -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dreamRs/shinylogs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dreamRs/shinylogs/issues"
+  },
+  "homepage": "https://github.com/dreamRs/shinylogs#readme",
+  "devDependencies": {
+    "dayjs": "^1.10.7",
+    "localforage": "^1.10.0",
+    "localforage-getitems": "^1.4.2",
+    "webpack": "^5.64.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-merge": "^5.8.0"
+  }
+}
