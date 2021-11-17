@@ -10,7 +10,7 @@ read_json_logs(path)
 \item{path}{Path of the directory containing JSON files or a vector of path to JSON files.}
 }
 \value{
-a list of \code{data.table}
+a \code{list} of \code{data.table}
 }
 \description{
 Read a directory containing JSON logs

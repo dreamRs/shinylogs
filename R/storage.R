@@ -5,7 +5,7 @@
 #'
 #' @param path Path where to write JSON files.
 #'
-#' @return A list that can be used in \code{\link{track_usage}}.
+#' @return A list that can be used in [track_usage()].
 #'
 #' @export
 #'
@@ -26,12 +26,12 @@ store_json <- function(path) {
 
 #' @title No storage on disk
 #'
-#' @description Doesn't write anything, special inputs created by \code{track_usage}
+#' @description Doesn't write anything, special inputs created by [track_usage()]
 #'  are available in server and optionally logs are printed in console.
 #'
 #' @param console Print logs in R console.
 #'
-#' @return A list that can be used in \code{\link{track_usage}}.
+#' @return A list that can be used in [track_usage()].
 #'
 #' @export
 #'
@@ -53,7 +53,7 @@ store_null <- function(console = TRUE) {
 #'
 #' @param path Path where to write RDS files.
 #'
-#' @return A list that can be used in \code{\link{track_usage}}.
+#' @return A list that can be used in [track_usage()].
 #'
 #' @export
 #'
@@ -78,7 +78,7 @@ store_rds <- function(path) {
 #'
 #' @param path Path to the SQLite file or a directory where to create one.
 #'
-#' @return A list that can be used in \code{\link{track_usage}}.
+#' @return A list that can be used in [track_usage()].
 #'
 #' @export
 #'
@@ -109,10 +109,10 @@ store_sqlite <- function(path) {
 #'
 #' @param path Path to folder on Drive where to send logs.
 #'
-#' @return A list that can be used in \code{\link{track_usage}}.
+#' @return A list that can be used in [track_usage()].
 #'
 #' @note See the {gargle} package to manage authentication, and especially
-#'  \href{https://cran.r-project.org/web/packages/gargle/vignettes/non-interactive-auth.html}{this link} to manage the process.
+#'  [this link](https://cran.r-project.org/web/packages/gargle/vignettes/non-interactive-auth.html) to manage the process.
 #'
 #' @export
 #'

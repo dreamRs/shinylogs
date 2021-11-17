@@ -10,14 +10,14 @@ store_googledrive(path)
 \item{path}{Path to folder on Drive where to send logs.}
 }
 \value{
-A list that can be used in \code{\link{track_usage}}.
+A list that can be used in \code{\link[=track_usage]{track_usage()}}.
 }
 \description{
 All logs will be written in the same file.
 }
 \note{
 See the {gargle} package to manage authentication, and especially
- \href{https://cran.r-project.org/web/packages/gargle/vignettes/non-interactive-auth.html}{this link} to manage the process.
+\href{https://cran.r-project.org/web/packages/gargle/vignettes/non-interactive-auth.html}{this link} to manage the process.
 }
 \examples{
 \dontrun{

@@ -10,7 +10,7 @@ read_rds_logs(path)
 \item{path}{Path of the directory containing RDS files or a vector of path to RDS files.}
 }
 \value{
-a list of \code{data.table}
+a \code{list} of \code{data.table}
 }
 \description{
 Read a directory containing RDS logs

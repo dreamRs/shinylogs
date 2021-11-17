@@ -3,7 +3,7 @@
 #'
 #' @param path Path of the directory containing JSON files or a vector of path to JSON files.
 #'
-#' @return a list of \code{data.table}
+#' @return a `list` of `data.table`
 #' @export
 #'
 #' @importFrom jsonlite fromJSON
@@ -33,7 +33,7 @@ read_json_logs <- function(path) {
 #'
 #' @param path Path of the directory containing RDS files or a vector of path to RDS files.
 #'
-#' @return a list of \code{data.table}
+#' @return a `list` of `data.table`
 #' @export
 #'
 #' @importFrom jsonlite fromJSON

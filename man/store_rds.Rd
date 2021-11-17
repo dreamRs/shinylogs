@@ -10,7 +10,7 @@ store_rds(path)
 \item{path}{Path where to write RDS files.}
 }
 \value{
-A list that can be used in \code{\link{track_usage}}.
+A list that can be used in \code{\link[=track_usage]{track_usage()}}.
 }
 \description{
 One RDS will be written for each session of the application.

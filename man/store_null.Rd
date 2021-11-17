@@ -10,11 +10,11 @@ store_null(console = TRUE)
 \item{console}{Print logs in R console.}
 }
 \value{
-A list that can be used in \code{\link{track_usage}}.
+A list that can be used in \code{\link[=track_usage]{track_usage()}}.
 }
 \description{
-Doesn't write anything, special inputs created by \code{track_usage}
- are available in server and optionally logs are printed in console.
+Doesn't write anything, special inputs created by \code{\link[=track_usage]{track_usage()}}
+are available in server and optionally logs are printed in console.
 }
 \examples{
 library(shiny)
