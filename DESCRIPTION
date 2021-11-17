@@ -21,13 +21,13 @@ Imports:
     bit64,
     nanotime,
     digest,
-    anytime,
-    DBI,
-    RSQLite,
-    googledrive
+    anytime
 Suggests: 
     testthat,
     knitr,
     rmarkdown,
-    covr
+    covr,
+    DBI,
+    RSQLite,
+    googledrive
 VignetteBuilder: knitr

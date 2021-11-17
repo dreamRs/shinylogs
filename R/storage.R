@@ -116,7 +116,6 @@ store_sqlite <- function(path) {
 #'
 #' @export
 #'
-#' @importFrom googledrive drive_has_token
 #'
 #' @examples
 #' \dontrun{
@@ -132,6 +131,8 @@ store_sqlite <- function(path) {
 #'
 #' }
 store_googledrive <- function(path) {
+  if (!requireNamespace(package = "googledrive"))
+    message("store_googledrive: Package 'googledrive' is required to run this function")
   if (!googledrive::drive_has_token()) {
     warning("store_googledrive: no token for Google Drive API found, using store_null(console = TRUE) as fallback.")
     return(store_null(console = TRUE))
@@ -182,8 +183,9 @@ write_logs_rds <- function(opts, logs) {
 }
 
 #' @importFrom jsonlite write_json
-#' @importFrom googledrive drive_upload
 write_logs_googledrive <- function(opts, logs) {
+  if (!requireNamespace(package = "googledrive"))
+    message("store_googledrive: Package 'googledrive' is required to run this function")
   path <- tempfile(fileext = ".json")
   jsonlite::write_json(x = logs, path = path, auto_unbox = TRUE)
   googledrive::drive_upload(
@@ -194,9 +196,12 @@ write_logs_googledrive <- function(opts, logs) {
   return(invisible(opts$path))
 }
 
-#' @importFrom DBI dbConnect dbDisconnect dbWriteTable
-#' @importFrom RSQLite SQLite
+
 write_logs_sqlite <- function(opts, logs) {
+  if (!requireNamespace(package = "DBI"))
+    message("store_sqlite: Package 'DBI' is required to run this function")
+  if (!requireNamespace(package = "RSQLite"))
+    message("store_sqlite: Package 'RSQLite' is required to run this function")
   con <- DBI::dbConnect(drv = RSQLite::SQLite(), dbname = opts$path)
   on.exit(DBI::dbDisconnect(conn = con))
   lapply(

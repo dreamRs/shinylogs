@@ -26,6 +26,9 @@ test_that("store_rds works", {
 
 test_that("store_sqlite works", {
 
+  testthat::skip_if_not_installed("DBI")
+  testthat::skip_if_not_installed("RSQLite")
+
   storage <- store_sqlite(path = tempdir())
 
   expect_is(storage, "shinylogs.storage_mode")
