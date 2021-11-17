@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Use RDS files as storage mode — store_rds • shinylogs</title>
+<title>Use custom function to save logs — store_custom • shinylogs</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Use RDS files as storage mode — store_rds" />
-<meta property="og:description" content="One RDS will be written for each session of the application." />
+<meta property="og:title" content="Use custom function to save logs — store_custom" />
+<meta property="og:description" content="Store logs tracked where you want by providing a custom
+function to write them in your prefered location." />
 
 
 
@@ -114,23 +115,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Use RDS files as storage mode</h1>
+    <h1>Use custom function to save logs</h1>
     <small class="dont-index">Source: <a href='https://github.com/dreamRs/shinylogs/blob/master/R/storage.R'><code>R/storage.R</code></a></small>
-    <div class="hidden name"><code>store_rds.Rd</code></div>
+    <div class="hidden name"><code>store_custom.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>One RDS will be written for each session of the application.</p>
+    <p>Store logs tracked where you want by providing a custom
+function to write them in your prefered location.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>store_rds</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>store_custom</span><span class='op'>(</span><span class='va'>FUN</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>Path where to write RDS files.</p></td>
+      <th>FUN</th>
+      <td><p>A <code>function</code> that take at least one argument <code>logs</code>, that will correspond to logs recorded as a <code>list</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Extra parameters that will be passed to <code>FUN</code>.</p></td>
     </tr>
     </table>
 
@@ -142,22 +148,7 @@
     <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://shiny.rstudio.com/'>shiny</a></span><span class='op'>)</span></span>
 <span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/dreamRs/shinylogs'>shinylogs</a></span><span class='op'>)</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># temp directory for writing logs</span></span>
-<span class='r-in'><span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='co'># when app stop,</span></span>
-<span class='r-in'><span class='co'># navigate to the directory containing logs</span></span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/onStop.html'>onStop</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/utils/browseURL.html'>browseURL</a></span><span class='op'>(</span>url <span class='op'>=</span> <span class='va'>tmp</span><span class='op'>)</span></span>
-<span class='r-in'><span class='op'>}</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> function () </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     .callbacks$remove(id)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;bytecode: 0x558abcb91f28&gt;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;environment: 0x558ac217ff30&gt;</span>
-<span class='r-in'></span>
-<span class='r-in'><span class='co'># Classir Iris clustering with Shiny</span></span>
+<span class='r-in'><span class='co'># Classic Iris clustering with Shiny</span></span>
 <span class='r-in'><span class='va'>ui</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span><span class='op'>(</span></span>
 <span class='r-in'></span>
 <span class='r-in'>  <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/headerPanel.html'>headerPanel</a></span><span class='op'>(</span><span class='st'>"Iris k-means clustering"</span><span class='op'>)</span>,</span>
@@ -191,9 +182,12 @@
 <span class='r-in'></span>
 <span class='r-in'><span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'></span>
-<span class='r-in'>  <span class='co'># Store RDS with logs in the temp dir</span></span>
+<span class='r-in'>  <span class='co'># Just take a look at what is generated</span></span>
 <span class='r-in'>  <span class='fu'><a href='track_usage.html'>track_usage</a></span><span class='op'>(</span></span>
-<span class='r-in'>    storage_mode <span class='op'>=</span> <span class='fu'>store_rds</span><span class='op'>(</span>path <span class='op'>=</span> <span class='va'>tmp</span><span class='op'>)</span></span>
+<span class='r-in'>    storage_mode <span class='op'>=</span> <span class='fu'>store_custom</span><span class='op'>(</span>FUN <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>logs</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>      <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>logs</span>, max.level <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'>      <span class='fu'><a href='https://rdrr.io/r/base/invisible.html'>invisible</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='op'>}</span><span class='op'>)</span></span>
 <span class='r-in'>  <span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'>  <span class='co'># classic server logic</span></span>
@@ -218,7 +212,6 @@
 <span class='r-in'>  <span class='op'>}</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='op'>}</span></span>
-<span class='r-in'></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'>  <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/shinyApp.html'>shinyApp</a></span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span></span>
