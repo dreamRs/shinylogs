@@ -17,7 +17,7 @@ All logs will be written in the same file.
 }
 \note{
 See the {gargle} package to manage authentication, and especially
-\href{https://cran.r-project.org/web/packages/gargle/vignettes/non-interactive-auth.html}{this link} to manage the process.
+\href{https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html}{this vignette from {gargle} package} to manage the process.
 }
 \examples{
 \dontrun{

@@ -112,7 +112,7 @@ store_sqlite <- function(path) {
 #' @return A list that can be used in [track_usage()].
 #'
 #' @note See the {gargle} package to manage authentication, and especially
-#'  [this link](https://cran.r-project.org/web/packages/gargle/vignettes/non-interactive-auth.html) to manage the process.
+#'  [this vignette from {gargle} package](https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html) to manage the process.
 #'
 #' @export
 #'
