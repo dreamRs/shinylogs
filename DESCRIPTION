@@ -1,6 +1,6 @@
 Package: shinylogs
 Title: Record Everything that Happens in a 'Shiny' Application
-Version: 0.1.7.9000
+Version: 0.1.7.9100
 Authors@R: c(person("Fanny", "Meyer", role = "aut"),
   person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
   person("Silex Technologies", comment = "https://www.silex-ip.com", role = "fnd"),
@@ -10,7 +10,7 @@ Description: Track and record the use of applications and the user's interaction
   Allow to save inputs clicked, output generated and eventually errors.
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 URL: https://github.com/dreamRs/shinylogs
 BugReports: https://github.com/dreamRs/shinylogs/issues
 Imports: 
@@ -23,7 +23,8 @@ Imports:
     digest,
     anytime,
     DBI,
-    RSQLite
+    RSQLite,
+    googledrive
 Suggests: 
     testthat,
     knitr,

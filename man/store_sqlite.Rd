@@ -9,6 +9,9 @@ store_sqlite(path)
 \arguments{
 \item{path}{Path to the SQLite file or a directory where to create one.}
 }
+\value{
+A list that can be used in \code{\link{track_usage}}.
+}
 \description{
 All logs will be written in the same file.
 }

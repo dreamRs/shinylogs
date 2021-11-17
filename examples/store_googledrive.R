@@ -1,16 +1,14 @@
 library(shiny)
 library(shinylogs)
 
-# temp directory for writing logs
-tmp <- tempdir()
+# Use any email to connect
+options(gargle_oauth_email = TRUE)
+## Connect to Google Drive, for example:
+googledrive::drive_auth(token = readRDS(".secrets/oauth-token.rds"))
+## more here => https://gargle.r-lib.org/articles/non-interactive-auth.html
 
-# when app stop,
-# navigate to the directory containing logs
-onStop(function() {
-  browseURL(url = tmp)
-})
 
-# Classir Iris clustering with Shiny
+# Classic Iris clustering with Shiny
 ui <- fluidPage(
 
   headerPanel("Iris k-means clustering"),
@@ -44,10 +42,8 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
 
-  # Store RDS with logs in the temp dir
-  track_usage(
-    storage_mode = store_rds(path = tmp)
-  )
+  # Store JSON with logs in the temp dir
+  track_usage(storage_mode = store_googledrive(path = "shinylogs/"))
 
   # classic server logic
 
@@ -72,6 +68,6 @@ server <- function(input, output, session) {
 
 }
 
-
 if (interactive())
   shinyApp(ui, server)
+

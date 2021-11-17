@@ -5,6 +5,8 @@
 #'
 #' @param path Path where to write JSON files.
 #'
+#' @return A list that can be used in \code{\link{track_usage}}.
+#'
 #' @export
 #'
 #' @example examples/store_json.R
@@ -29,6 +31,8 @@ store_json <- function(path) {
 #'
 #' @param console Print logs in R console.
 #'
+#' @return A list that can be used in \code{\link{track_usage}}.
+#'
 #' @export
 #'
 #' @example examples/store_null.R
@@ -48,6 +52,8 @@ store_null <- function(console = TRUE) {
 #' @description One RDS will be written for each session of the application.
 #'
 #' @param path Path where to write RDS files.
+#'
+#' @return A list that can be used in \code{\link{track_usage}}.
 #'
 #' @export
 #'
@@ -72,6 +78,8 @@ store_rds <- function(path) {
 #'
 #' @param path Path to the SQLite file or a directory where to create one.
 #'
+#' @return A list that can be used in \code{\link{track_usage}}.
+#'
 #' @export
 #'
 #' @example examples/store_sqlite.R
@@ -94,6 +102,50 @@ store_sqlite <- function(path) {
 }
 
 
+
+#' @title Use Google Drive as storage mode
+#'
+#' @description All logs will be written in the same file.
+#'
+#' @param path Path to folder on Drive where to send logs.
+#'
+#' @return A list that can be used in \code{\link{track_usage}}.
+#'
+#' @note See the {gargle} package to manage authentication, and especially
+#'  \href{https://cran.r-project.org/web/packages/gargle/vignettes/non-interactive-auth.html}{this link} to manage the process.
+#'
+#' @export
+#'
+#' @importFrom googledrive drive_has_token
+#'
+#' @examples
+#' \dontrun{
+#' # In your global, manage Google Drive access
+#' drive_auth(path = "/path/to/your/service-account-token.json")
+#' # see https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html
+#' # to manage your token securely
+#'
+#' # Then in server, use:
+#' track_usage(storage_mode = store_googledrive(path = "my-logs/"))
+#'
+#' # you may have to share my-logs/ folder with your service account
+#'
+#' }
+store_googledrive <- function(path) {
+  if (!googledrive::drive_has_token()) {
+    warning("store_googledrive: no token for Google Drive API found, using store_null(console = TRUE) as fallback.")
+    return(store_null(console = TRUE))
+  }
+  store <- list(
+    mode = "googledrive",
+    path = path
+  )
+  class(store) <- c(class(store), "shinylogs.storage_mode")
+  return(store)
+}
+
+
+
 write_logs <- function(opts, logs) {
   if (opts$mode == "json") {
     write_logs_json(opts, logs)
@@ -103,6 +155,8 @@ write_logs <- function(opts, logs) {
     invisible()
   } else if (opts$mode == "sqlite") {
     write_logs_sqlite(opts, logs)
+  } else if (opts$mode == "googledrive") {
+    write_logs_googledrive(opts, logs)
   } else {
     stop("Not implemented!", call. = FALSE)
   }
@@ -127,6 +181,18 @@ write_logs_rds <- function(opts, logs) {
   return(invisible(path))
 }
 
+#' @importFrom jsonlite write_json
+#' @importFrom googledrive drive_upload
+write_logs_googledrive <- function(opts, logs) {
+  path <- tempfile(fileext = ".json")
+  jsonlite::write_json(x = logs, path = path, auto_unbox = TRUE)
+  googledrive::drive_upload(
+    media = path,
+    path = opts$path,
+    name = paste0("shinylogs_", opts$appname, "_", opts$timestamp, ".json")
+  )
+  return(invisible(opts$path))
+}
 
 #' @importFrom DBI dbConnect dbDisconnect dbWriteTable
 #' @importFrom RSQLite SQLite
