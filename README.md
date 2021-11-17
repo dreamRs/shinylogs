@@ -13,14 +13,12 @@
 [![cran
 checks](https://cranchecks.info/badges/worst/shinylogs)](https://cranchecks.info/pkgs/shinylogs)
 [![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active The project has reached a stable, usable state
 and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Codecov test
-coverage](https://codecov.io/gh/dreamRs/shinylogs/branch/master/graph/badge.svg)](https://codecov.io/gh/dreamRs/shinylogs?branch=master)
-[![Travis build
-status](https://travis-ci.org/dreamRs/shinylogs.svg?branch=master)](https://travis-ci.org/dreamRs/shinylogs)
+coverage](https://codecov.io/gh/dreamRs/shinylogs/branch/master/graph/badge.svg)](https://app.codecov.io/gh/dreamRs/shinylogs?branch=master)
 [![R build
 status](https://github.com/dreamRs/shinylogs/workflows/R-CMD-check/badge.svg)](https://github.com/dreamRs/shinylogs/actions)
 <!-- badges: end -->
@@ -28,17 +26,18 @@ status](https://github.com/dreamRs/shinylogs/workflows/R-CMD-check/badge.svg)](h
 ## Installation
 
 You can install the released version of shinylogs from
-[CRAN](https://CRAN.R-project.org) with:
+[CRAN](https://CRAN.R-project.org/package=shinylogs) with:
 
 ``` r
 install.packages("shinylogs")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
+And the development version from
+[GitHub](https://github.com/dreamRs/shinylogs) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("dreamRs/shinylogs")
+# install.packages("remotes")
+remotes::install_github("dreamRs/shinylogs")
 ```
 
 ## Usage
@@ -54,11 +53,11 @@ track_usage(storage_mode = store_json(path = "logs/"))
 
 The function will record :
 
-  - *inputs* : each time an input change, name, timestamp and value will
+-   *inputs* : each time an input change, name, timestamp and value will
     be saved
-  - *errors* : errors propagated through outputs
-  - *outputs* : each time an output is re-generated
-  - *session* : informations about user’s browser and the application
+-   *errors* : errors propagated through outputs
+-   *outputs* : each time an output is re-generated
+-   *session* : informations about user’s browser and the application
 
 See the vignette for more details (`?vignette("shinylogs")`) or the
 [online
