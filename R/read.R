@@ -55,6 +55,7 @@ read_rds_logs <- function(path) {
 read_logs <- function(path, what) {
   if (length(path) == 1 && dir.exists(path)) {
     files <- list.files(path = path, pattern = sprintf("\\.%s$", what), full.names = TRUE)
+    files <- files[file.size(files) > 0]
     if (length(files) == 0) {
       stop(sprintf("No %s files to read in specified path", toupper(what)), call. = FALSE)
     }
