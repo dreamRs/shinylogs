@@ -2,6 +2,7 @@
 
 export(read_json_logs)
 export(read_rds_logs)
+export(store_custom)
 export(store_googledrive)
 export(store_json)
 export(store_null)

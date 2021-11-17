@@ -146,6 +146,32 @@ store_googledrive <- function(path) {
 }
 
 
+#' @title Use custom function to save logs
+#'
+#' @description Store logs tracked where you want by providing a custom
+#'  function to write them in your prefered location.
+#'
+#' @param FUN A `function` that take at least one argument `logs`, that will correspond to logs recorded as a `list`.
+#' @param ... Extra parameters that will be passed to `FUN`.
+#'
+#' @return A list that can be used in [track_usage()].
+#' @export
+#'
+#' @example examples/store_custom.R
+store_custom <- function(FUN, ...) {
+  FUN <- match.fun(FUN)
+  store <- list(
+    mode = "custom",
+    FUN = FUN,
+    extra = list(...)
+  )
+  class(store) <- c(class(store), "shinylogs.storage_mode")
+  return(store)
+}
+
+
+
+# Gather all methods ------------------------------------------------------
 
 write_logs <- function(opts, logs) {
   if (opts$mode == "json") {
@@ -158,10 +184,30 @@ write_logs <- function(opts, logs) {
     write_logs_sqlite(opts, logs)
   } else if (opts$mode == "googledrive") {
     write_logs_googledrive(opts, logs)
+  } else if (opts$mode == "custom") {
+
+    tryCatch(
+      do.call(
+        what = opts$FUN,
+        args = c(list(logs = logs), opts$extra)
+      ),
+      error = function(e) {
+        warning(
+          "Error in writing logs with custom storage: ",
+          e$message,
+          call. = FALSE
+        )
+      }
+    )
+
   } else {
-    stop("Not implemented!", call. = FALSE)
+    stop("Storage mode not implemented!", call. = FALSE)
   }
 }
+
+
+
+# Write methods -----------------------------------------------------------
 
 #' @importFrom jsonlite write_json
 write_logs_json <- function(opts, logs) {
