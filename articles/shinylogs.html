@@ -111,8 +111,32 @@
 <code><a href="../reference/store_sqlite.html">store_sqlite()</a></code> : store logs in a SQLite database.</li>
 <li>
 <code><a href="../reference/store_null.html">store_null()</a></code> : don’t write logs on disk, print them in R console.</li>
+<li>
+<code><a href="../reference/store_custom.html">store_custom()</a></code> : use a custom function to save logs wherever you want.</li>
+<li>
+<code><a href="../reference/store_googledrive.html">store_googledrive()</a></code> : store logs(as JSON files) in Googledrive.</li>
 </ul>
-<p>On a server, if you want to save logs on disk, don’t forget to set right permission on the folder you want to save logs.</p>
+</div>
+<div id="deployment-method" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deployment-method" class="anchor"></a>Deployment method</h2>
+<div id="shiny-server-rstudio-connect" class="section level3">
+<h3 class="hasAnchor">
+<a href="#shiny-server-rstudio-connect" class="anchor"></a>Shiny server, RStudio Connect</h3>
+<p>On a server, if you want to save logs on disk, don’t forget to set write permission on the folder you want to save logs.</p>
+<p>On RStudio Connect, you need to use an absolute path to specify the directory where to save logs. You can find more information here: <a href="https://support.rstudio.com/hc/en-us/articles/360007981134-Persistent-Storage-on-RStudio-Connect">Persistent Storage on RStudio Connect</a></p>
+</div>
+<div id="shinyproxy" class="section level3">
+<h3 class="hasAnchor">
+<a href="#shinyproxy" class="anchor"></a>ShinyProxy</h3>
+<p>With ShinyProxy, you can use a Docker volume to write logs outside of the application container. In <code>application.yml</code>, you can something like this in the specs describing the application:</p>
+<pre><code>container-volumes: [ "/var/log/shinylogs:/root/logs" ]</code></pre>
+</div>
+<div id="shinyapps-io" class="section level3">
+<h3 class="hasAnchor">
+<a href="#shinyapps-io" class="anchor"></a>shinyapps.io</h3>
+<p>There’s no persistent data storage on shinyapps.io, so you can’t save logs as JSON or RDS files, you have to use a remote storage method. You can use the builtin method provided to send logs in Googledrive with <code>store_googledrive</code> or use <code>store_custom</code> to send logs wherever you want (dropbox, remote database, …).</p>
+</div>
 </div>
 <div id="recorded-informations" class="section level2">
 <h2 class="hasAnchor">
