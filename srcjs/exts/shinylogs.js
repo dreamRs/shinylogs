@@ -180,10 +180,15 @@ extendPrototype(localforage);
     //console.log(event);
     var ts = dayjs(event.timeStamp).format("YYYY-MM-DD HH:mm:ss.SSSZZ");
     var outputId = "output" + generateId();
+    try {
+      var bindingName = event.binding.binding.name;
+    } catch(e) {
+      var bindingName = "";
+    };
     var lastOutput = {
       name: event.name,
       timestamp: ts,
-      binding: event.binding.binding.name
+      binding: bindingName
     };
     logsoutputs.setItem(outputId, lastOutput).then(function(value) {
       if (logsonunload === false) {
