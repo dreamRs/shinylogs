@@ -48,8 +48,31 @@ Four modes are available:
 * `store_rds()` : store logs has individually RDS files (one by session).
 * `store_sqlite()` : store logs in a SQLite database.
 * `store_null()` : don't write logs on disk, print them in R console.
+* `store_custom()` : use a custom function to save logs wherever you want.
+* `store_googledrive()` : store logs(as JSON files) in Googledrive.
 
-On a server, if you want to save logs on disk, don't forget to set right permission on the folder you want to save logs.
+
+## Deployment method
+
+### Shiny server, RStudio Connect
+
+On a server, if you want to save logs on disk, don't forget to set write permission on the folder you want to save logs.
+
+On RStudio Connect, you need to use an absolute path to specify the directory where to save logs. You can find more information here: [Persistent Storage on RStudio Connect](https://support.rstudio.com/hc/en-us/articles/360007981134-Persistent-Storage-on-RStudio-Connect)
+
+
+### ShinyProxy
+
+With ShinyProxy, you can use a Docker volume to write logs outside of the application container. In `application.yml`, you can something like this in the specs describing the application:
+
+```
+container-volumes: [ "/var/log/shinylogs:/root/logs" ]
+```
+
+### shinyapps.io
+
+There's no persistent data storage on shinyapps.io, so you can't save logs as JSON or RDS files, you have to use a remote storage method. You can use the builtin method provided to send logs in Googledrive with `store_googledrive` or use `store_custom` to send logs wherever you want (dropbox, remote database, ...).
+
 
 
 ## Recorded informations
