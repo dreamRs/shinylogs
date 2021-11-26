@@ -1,12 +1,11 @@
 ## Test environments
-* local OS Windows 10 install, R 3.6.1
-* ubuntu 14.04 (on travis-ci), R 3.6.1
-* win-builder (devel and release)
+* local R installation, R 4.1.2
+* ubuntu 20.04, Windows 10, macOS (on GitHub Actions), R 4.1.2
+* win-builder (devel)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 note
 
-* Fix a bug when using with an other package (shinymanager) .
-  Thanks! Victor
+* New features, rewrited internal JS code. Thanks! Victor
 

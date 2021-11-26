@@ -1,4 +1,4 @@
-# shinylogs (unreleased)
+# shinylogs 0.2.0
 
 * Timestamp is now recorded in microseconds (fix [#6](https://github.com/dreamRs/shinylogs/issues/6)).
 * Added `store_googledrive()` to store logs as json in Google drive.
