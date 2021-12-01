@@ -12,7 +12,8 @@
 #'  be created only on close, downside is that a popup will appear asking to close the page.
 #' @param exclude_input_regex Regular expression to exclude inputs from tracking.
 #' @param exclude_input_id Vector of `inputId` to exclude from tracking.
-#'
+#' @param app_name Name of the app as a character string. If `NULL`, `basename(getwd())` is used.
+#' 
 #' @note The following `input`s will be accessible in the server:
 #'
 #'   - **.shinylogs_lastInput** : last `input` used by the user
@@ -34,8 +35,12 @@
 #' @importFrom digest digest
 #'
 #' @example examples/use_tracking.R
-use_tracking <- function(on_unload = FALSE, exclude_input_regex = NULL, exclude_input_id = NULL) {
-  app_name <- basename(getwd())
+use_tracking <- function(on_unload = FALSE, 
+                         exclude_input_regex = NULL, 
+                         exclude_input_id = NULL,
+                         app_name = NULL) {
+  if (is.null(app_name)) 
+    app_name <- basename(getwd())
   timestamp <- Sys.time()
   init_log <- data.frame(
     app = app_name,
@@ -97,6 +102,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #'  if `TRUE` it prevent to create `shinylogs`
 #'  input during normal use of the application, there will
 #'  be created only on close, downside is that a popup will appear asking to close the page.
+#' @param app_name Name of the app as a character string. If `NULL`, `basename(getwd())` is used.
 #' @param exclude_users Character vectors of user for whom it is not necessary to save the log.
 #' @param get_user A `function` to get user name, it should
 #'  return a character and take one argument: the Shiny session.
@@ -130,6 +136,7 @@ track_usage <- function(storage_mode,
                         exclude_input_regex = NULL,
                         exclude_input_id = NULL,
                         on_unload = FALSE,
+                        app_name = NULL,
                         exclude_users = NULL,
                         get_user = NULL,
                         dependencies = TRUE,
@@ -137,7 +144,8 @@ track_usage <- function(storage_mode,
 
   stopifnot(inherits(storage_mode, "shinylogs.storage_mode"))
 
-  app_name <- basename(getwd())
+  if (is.null(app_name))
+    app_name <- basename(getwd())
   if (is.null(get_user))
     get_user <- get_user_
   if (!is.function(get_user))
