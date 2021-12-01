@@ -7,7 +7,8 @@
 use_tracking(
   on_unload = FALSE,
   exclude_input_regex = NULL,
-  exclude_input_id = NULL
+  exclude_input_id = NULL,
+  app_name = NULL
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ be created only on close, downside is that a popup will appear asking to close t
 \item{exclude_input_regex}{Regular expression to exclude inputs from tracking.}
 
 \item{exclude_input_id}{Vector of \code{inputId} to exclude from tracking.}
+
+\item{app_name}{Name of the app as a character string. If \code{NULL}, \code{basename(getwd())} is used.}
 }
 \description{
 If used in UI of an application,
