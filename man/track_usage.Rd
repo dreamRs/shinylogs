@@ -9,8 +9,8 @@ track_usage(
   exclude_input_regex = NULL,
   exclude_input_id = NULL,
   on_unload = FALSE,
-  exclude_users = NULL,
   app_name = NULL,
+  exclude_users = NULL,
   get_user = NULL,
   dependencies = TRUE,
   session = getDefaultReactiveDomain()
@@ -29,9 +29,9 @@ if \code{TRUE} it prevent to create \code{shinylogs}
 input during normal use of the application, there will
 be created only on close, downside is that a popup will appear asking to close the page.}
 
-\item{exclude_users}{Character vectors of user for whom it is not necessary to save the log.}
-
 \item{app_name}{Name of the app as a character string. If \code{NULL}, \code{basename(getwd())} is used.}
+
+\item{exclude_users}{Character vectors of user for whom it is not necessary to save the log.}
 
 \item{get_user}{A \code{function} to get user name, it should
 return a character and take one argument: the Shiny session.}

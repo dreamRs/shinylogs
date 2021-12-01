@@ -102,8 +102,8 @@ parse_lastInput <- function(x, shinysession, name) {
 #'  if `TRUE` it prevent to create `shinylogs`
 #'  input during normal use of the application, there will
 #'  be created only on close, downside is that a popup will appear asking to close the page.
-#' @param exclude_users Character vectors of user for whom it is not necessary to save the log.
 #' @param app_name Name of the app as a character string. If `NULL`, `basename(getwd())` is used.
+#' @param exclude_users Character vectors of user for whom it is not necessary to save the log.
 #' @param get_user A `function` to get user name, it should
 #'  return a character and take one argument: the Shiny session.
 #' @param dependencies Load dependencies in client, can be set to `FALSE` if [use_tracking()] has been called in UI.
@@ -136,8 +136,8 @@ track_usage <- function(storage_mode,
                         exclude_input_regex = NULL,
                         exclude_input_id = NULL,
                         on_unload = FALSE,
-                        exclude_users = NULL,
                         app_name = NULL,
+                        exclude_users = NULL,
                         get_user = NULL,
                         dependencies = TRUE,
                         session = getDefaultReactiveDomain()) {
