@@ -125,13 +125,19 @@
 <div class="section level3">
 <h3 id="shinyproxy">ShinyProxy<a class="anchor" aria-label="anchor" href="#shinyproxy"></a>
 </h3>
-<p>With ShinyProxy, you can use a Docker volume to write logs outside of the application container. In <code>application.yml</code>, you can something like this in the specs describing the application:</p>
+<p>With <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a>, you can use a Docker volume to write logs outside of the application container. In <code>application.yml</code>, you can something like this in the specs describing the application:</p>
 <pre><code>container-volumes: [ "/var/log/shinylogs:/root/logs" ]</code></pre>
+<p><code>/var/log/shinylogs</code> is a directory on the server where you deploy your applications with ShinyProxy. <code>/root/logs</code> is a directory inside your Docker image, it’s the path you can use in <code><a href="../reference/track_usage.html">track_usage()</a></code>, e.g. :</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/track_usage.html">track_usage</a></span><span class="op">(</span>
+  storage_mode <span class="op">=</span> <span class="fu"><a href="../reference/store_json.html">store_json</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"/root/logs"</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="shinyapps-io">shinyapps.io<a class="anchor" aria-label="anchor" href="#shinyapps-io"></a>
 </h3>
 <p>There’s no persistent data storage on shinyapps.io, so you can’t save logs as JSON or RDS files, you have to use a remote storage method. You can use the builtin method provided to send logs in Googledrive with <code>store_googledrive</code> or use <code>store_custom</code> to send logs wherever you want (dropbox, remote database, …).</p>
+<p>To use Googledrive, you’ll need to work with Google’s API and set auth to your account, see <a href="https://gargle.r-lib.org/index.html" class="external-link">{gargle} documentation</a> for examples and how to.</p>
 </div>
 </div>
 <div class="section level2">
