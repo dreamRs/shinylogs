@@ -63,16 +63,25 @@ On RStudio Connect, you need to use an absolute path to specify the directory wh
 
 ### ShinyProxy
 
-With ShinyProxy, you can use a Docker volume to write logs outside of the application container. In `application.yml`, you can something like this in the specs describing the application:
+With [ShinyProxy](https://www.shinyproxy.io/), you can use a Docker volume to write logs outside of the application container. In `application.yml`, you can something like this in the specs describing the application:
 
 ```
 container-volumes: [ "/var/log/shinylogs:/root/logs" ]
+```
+
+`/var/log/shinylogs` is a directory on the server where you deploy your applications with ShinyProxy. `/root/logs` is a directory inside your Docker image, it's the path you can use in `track_usage()`, e.g. :
+
+```r
+track_usage(
+  storage_mode = store_json(path = "/root/logs")
+)
 ```
 
 ### shinyapps.io
 
 There's no persistent data storage on shinyapps.io, so you can't save logs as JSON or RDS files, you have to use a remote storage method. You can use the builtin method provided to send logs in Googledrive with `store_googledrive` or use `store_custom` to send logs wherever you want (dropbox, remote database, ...).
 
+To use Googledrive, you'll need to work with Google's API and set auth to your account, see [{gargle} documentation](https://gargle.r-lib.org/index.html) for examples and how to.
 
 
 ## Recorded informations
