@@ -1,3 +1,9 @@
+# shinylogs (unreleased)
+
+* `track_usage()` has new arguments:
+  + `app_name`: explicitly set application's name, thanks to [@PaulC91](https://github.com/PaulC91)
+  + `what`: elements to record between `"session"`, `"input"`, `"output"` and `"error"`.
+
 # shinylogs 0.2.0
 
 * Timestamp is now recorded in microseconds (fix [#6](https://github.com/dreamRs/shinylogs/issues/6)).

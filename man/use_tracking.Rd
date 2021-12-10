@@ -5,23 +5,27 @@
 \title{Insert dependencies to track usage of a Shiny app}
 \usage{
 use_tracking(
-  on_unload = FALSE,
+  what = c("session", "input", "output", "error"),
   exclude_input_regex = NULL,
   exclude_input_id = NULL,
+  on_unload = FALSE,
   app_name = NULL
 )
 }
 \arguments{
-\item{on_unload}{Logical, save log when user close the browser window or tab,
-if \code{TRUE} it prevent to create \code{shinylogs}
-input during normal use of the application, there will
-be created only on close, downside is that a popup will appear asking to close the page.}
+\item{what}{Elements to record between \code{"session"}, \code{"input"}, \code{"output"} and \code{"error"}.}
 
 \item{exclude_input_regex}{Regular expression to exclude inputs from tracking.}
 
 \item{exclude_input_id}{Vector of \code{inputId} to exclude from tracking.}
 
-\item{app_name}{Name of the app as a character string. If \code{NULL}, \code{basename(getwd())} is used.}
+\item{on_unload}{Logical, save log when user close the browser window or tab,
+if \code{TRUE} it prevent to create \code{shinylogs}
+input during normal use of the application, there will
+be created only on close, downside is that a popup will appear asking to close the page.}
+
+\item{app_name}{Name of the app as a character string.
+If \code{NULL}, \code{basename(getwd())} (name of the folder where application is located) is used.}
 }
 \description{
 If used in UI of an application,
@@ -30,7 +34,7 @@ Set \code{dependencies = FALSE} in \code{\link[=track_usage]{track_usage()}}
 server-side to load dependencies only once.
 }
 \note{
-The following \code{input}s will be accessible in the server:
+The following \code{input}s will be accessible in the server (according to what is used in \code{record} argument):
 \itemize{
 \item \strong{.shinylogs_lastInput} : last \code{input} used by the user
 \item \strong{.shinylogs_input} : all \code{input}s send from the browser to the server

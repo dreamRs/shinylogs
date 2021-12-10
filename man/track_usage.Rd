@@ -6,6 +6,7 @@
 \usage{
 track_usage(
   storage_mode,
+  what = c("session", "input", "output", "error"),
   exclude_input_regex = NULL,
   exclude_input_id = NULL,
   on_unload = FALSE,
@@ -20,6 +21,8 @@ track_usage(
 \item{storage_mode}{Storage mode to use : \code{\link[=store_json]{store_json()}}, \code{\link[=store_rds]{store_rds()}},
 \code{\link[=store_sqlite]{store_sqlite()}} or \code{\link[=store_null]{store_null()}}.}
 
+\item{what}{Elements to record between \code{"session"}, \code{"input"}, \code{"output"} and \code{"error"}.}
+
 \item{exclude_input_regex}{Regular expression to exclude inputs from tracking.}
 
 \item{exclude_input_id}{Vector of \code{inputId} to exclude from tracking.}
@@ -29,7 +32,8 @@ if \code{TRUE} it prevent to create \code{shinylogs}
 input during normal use of the application, there will
 be created only on close, downside is that a popup will appear asking to close the page.}
 
-\item{app_name}{Name of the app as a character string. If \code{NULL}, \code{basename(getwd())} is used.}
+\item{app_name}{Name of the app as a character string.
+If \code{NULL}, \code{basename(getwd())} (name of the folder where application is located) is used.}
 
 \item{exclude_users}{Character vectors of user for whom it is not necessary to save the log.}
 

@@ -5,16 +5,18 @@
 #'  this will create new `input`s available in the server.
 #'  Set `dependencies = FALSE` in [track_usage()]
 #'  server-side to load dependencies only once.
-#'
+#' 
+#' @param what Elements to record between `"session"`, `"input"`, `"output"` and `"error"`.
+#' @param exclude_input_regex Regular expression to exclude inputs from tracking.
+#' @param exclude_input_id Vector of `inputId` to exclude from tracking.
 #' @param on_unload Logical, save log when user close the browser window or tab,
 #'  if `TRUE` it prevent to create `shinylogs`
 #'  input during normal use of the application, there will
 #'  be created only on close, downside is that a popup will appear asking to close the page.
-#' @param exclude_input_regex Regular expression to exclude inputs from tracking.
-#' @param exclude_input_id Vector of `inputId` to exclude from tracking.
-#' @param app_name Name of the app as a character string. If `NULL`, `basename(getwd())` is used.
+#' @param app_name Name of the app as a character string.
+#'  If `NULL`, `basename(getwd())` (name of the folder where application is located) is used.
 #' 
-#' @note The following `input`s will be accessible in the server:
+#' @note The following `input`s will be accessible in the server (according to what is used in `record` argument):
 #'
 #'   - **.shinylogs_lastInput** : last `input` used by the user
 #'
@@ -35,10 +37,12 @@
 #' @importFrom digest digest
 #'
 #' @example examples/use_tracking.R
-use_tracking <- function(on_unload = FALSE, 
+use_tracking <- function(what = c("session", "input", "output", "error"),
                          exclude_input_regex = NULL, 
                          exclude_input_id = NULL,
+                         on_unload = FALSE, 
                          app_name = NULL) {
+  what <- match.arg(what, several.ok = TRUE)
   if (is.null(app_name)) 
     app_name <- basename(getwd())
   timestamp <- Sys.time()
@@ -54,6 +58,7 @@ use_tracking <- function(on_unload = FALSE,
     type = "application/json",
     `data-for` = "shinylogs",
     toJSON(dropNulls(list(
+      what = what,
       logsonunload = isTRUE(on_unload),
       exclude_input_regex = exclude_input_regex,
       exclude_input_id = exclude_input_id,
@@ -96,13 +101,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #'
 #' @param storage_mode Storage mode to use : [store_json()], [store_rds()],
 #'  [store_sqlite()] or [store_null()].
-#' @param exclude_input_regex Regular expression to exclude inputs from tracking.
-#' @param exclude_input_id Vector of `inputId` to exclude from tracking.
-#' @param on_unload Logical, save log when user close the browser window or tab,
-#'  if `TRUE` it prevent to create `shinylogs`
-#'  input during normal use of the application, there will
-#'  be created only on close, downside is that a popup will appear asking to close the page.
-#' @param app_name Name of the app as a character string. If `NULL`, `basename(getwd())` is used.
+#' @inheritParams use_tracking
 #' @param exclude_users Character vectors of user for whom it is not necessary to save the log.
 #' @param get_user A `function` to get user name, it should
 #'  return a character and take one argument: the Shiny session.
@@ -133,6 +132,7 @@ parse_lastInput <- function(x, shinysession, name) {
 #' @example examples/track_usage-json.R
 #' @example examples/track_usage-console.R
 track_usage <- function(storage_mode,
+                        what = c("session", "input", "output", "error"),
                         exclude_input_regex = NULL,
                         exclude_input_id = NULL,
                         on_unload = FALSE,
@@ -141,9 +141,8 @@ track_usage <- function(storage_mode,
                         get_user = NULL,
                         dependencies = TRUE,
                         session = getDefaultReactiveDomain()) {
-
   stopifnot(inherits(storage_mode, "shinylogs.storage_mode"))
-
+  what <- match.arg(what, several.ok = TRUE)
   if (is.null(app_name))
     app_name <- basename(getwd())
   if (is.null(get_user))
@@ -170,6 +169,7 @@ track_usage <- function(storage_mode,
         type = "application/json",
         `data-for` = "shinylogs",
         toJSON(dropNulls(list(
+          what = what,
           logsonunload = isTRUE(on_unload),
           exclude_input_regex = exclude_input_regex,
           exclude_input_id = exclude_input_id,
