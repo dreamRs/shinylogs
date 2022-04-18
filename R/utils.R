@@ -17,10 +17,10 @@ get_user_ <- function(session) {
   if (!is.null(session$user))
     return(session$user)
   user <- Sys.getenv("SHINYPROXY_USERNAME")
-  if (user != "") {
+  if (!identical(user, "")) {
     return(user)
   } else {
-    getOption("shinylogs.default_user", default = Sys.info()[['user']])
+    getOption("shinylogs.default_user", default = Sys.info()[["user"]])
   }
 }
 
