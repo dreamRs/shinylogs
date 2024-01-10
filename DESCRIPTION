@@ -11,7 +11,7 @@ License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/dreamRs/shinylogs
+URL: https://github.com/dreamRs/shinylogs, https://dreamrs.github.io/shinylogs/
 BugReports: https://github.com/dreamRs/shinylogs/issues
 Imports: 
     htmltools,
