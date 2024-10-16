@@ -9,7 +9,9 @@
 
 <!-- badges: start -->
 
-[![version](https://www.r-pkg.org/badges/version/shinylogs)](https://CRAN.R-project.org/package=shinylogs)
+[![version](http://www.r-pkg.org/badges/version/shinylogs)](https://CRAN.R-project.org/package=shinylogs)
+[![cran
+checks](https://cranchecks.info/badges/worst/shinylogs)](https://cranchecks.info/pkgs/shinylogs)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active The project has reached a stable, usable state
@@ -17,8 +19,7 @@ and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Codecov test
 coverage](https://codecov.io/gh/dreamRs/shinylogs/branch/master/graph/badge.svg)](https://app.codecov.io/gh/dreamRs/shinylogs?branch=master)
-[![R build
-status](https://github.com/dreamRs/shinylogs/workflows/R-CMD-check/badge.svg)](https://github.com/dreamRs/shinylogs/actions)
+[![R-CMD-check](https://github.com/dreamRs/shinylogs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dreamRs/shinylogs/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Installation
@@ -51,11 +52,11 @@ track_usage(storage_mode = store_json(path = "logs/"))
 
 The function will record :
 
--   *inputs* : each time an input change, name, timestamp and value will
-    be saved
--   *errors* : errors propagated through outputs
--   *outputs* : each time an output is re-generated
--   *session* : informations about user’s browser and the application
+- *inputs* : each time an input change, name, timestamp and value will
+  be saved
+- *errors* : errors propagated through outputs
+- *outputs* : each time an output is re-generated
+- *session* : informations about user’s browser and the application
 
 See the vignette for more details (`?vignette("shinylogs")`) or the
 [online

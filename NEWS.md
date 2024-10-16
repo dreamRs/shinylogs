@@ -1,3 +1,8 @@
+# shinylogs 0.2.2
+
+*  Add check for Shinyproxy username HTTP header [#29](https://github.com/dreamRs/shinylogs/pull/29) 
+
+
 # shinylogs 0.2.1
 
 * `track_usage()` has new arguments:

@@ -1,14 +1,10 @@
 url: https://dreamrs.github.io/shinylogs
-
 template:
   bootstrap: 5
-  bootswatch: zephyr
+  bootswatch: sandstone
   bslib:
     base_font: {google: "Poppins"}
     primary: "#112446"
-
-navbar:
-  bg: primary
 
 authors:
   Victor Perrier:
