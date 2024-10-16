@@ -5,92 +5,78 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="shinylogs">
 <title>Record logs in shiny apps • shinylogs</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Poppins-0.4.1/font.css" rel="stylesheet">
-<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Record logs in shiny apps">
-<meta property="og:description" content="shinylogs">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Poppins-0.4.9/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Record logs in shiny apps">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">shinylogs</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item">
-  <a class="nav-link" href="../articles/shinylogs.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/shinylogs.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/dreamRs/shinylogs/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/dreamRs/shinylogs/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
 
 
-<script src="shinylogs_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Record logs in shiny apps</h1>
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+
+      <h1>Record logs in shiny apps</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dreamRs/shinylogs/blob/HEAD/vignettes/shinylogs.Rmd" class="external-link"><code>vignettes/shinylogs.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dreamRs/shinylogs/blob/master/vignettes/shinylogs.Rmd" class="external-link"><code>vignettes/shinylogs.Rmd</code></a></small>
       <div class="d-none name"><code>shinylogs.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinylogs" class="external-link">shinylogs</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinylogs" class="external-link">shinylogs</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="how-to-use">How to use<a class="anchor" aria-label="anchor" href="#how-to-use"></a>
 </h2>
 <p>Add in your server :</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># server</span>
-<span class="fu"><a href="../reference/track_usage.html">track_usage</a></span><span class="op">(</span>storage_mode <span class="op">=</span> <span class="fu"><a href="../reference/store_json.html">store_json</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"logs/"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>It will store logs in a sub-folder <code>logs/</code> of your application.</p>
-<p>If needed (in complex application), you can force dependencies in UI with :</p>
+<code class="sourceCode R"><span><span class="co"># server</span></span>
+<span><span class="fu"><a href="../reference/track_usage.html">track_usage</a></span><span class="op">(</span>storage_mode <span class="op">=</span> <span class="fu"><a href="../reference/store_json.html">store_json</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"logs/"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>It will store logs in a sub-folder <code>logs/</code> of your
+application.</p>
+<p>If needed (in complex application), you can force dependencies in UI
+with :</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># UI</span>
-<span class="fu"><a href="../reference/use_tracking.html">use_tracking</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># UI</span></span>
+<span><span class="fu"><a href="../reference/use_tracking.html">use_tracking</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="storage-modes">Storage modes<a class="anchor" aria-label="anchor" href="#storage-modes"></a>
@@ -98,17 +84,22 @@
 <p>Four modes are available:</p>
 <ul>
 <li>
-<code><a href="../reference/store_json.html">store_json()</a></code> : store logs has separate JSON files (one by session).</li>
+<code><a href="../reference/store_json.html">store_json()</a></code> : store logs has separate JSON files (one
+by session).</li>
 <li>
-<code><a href="../reference/store_rds.html">store_rds()</a></code> : store logs has individually RDS files (one by session).</li>
+<code><a href="../reference/store_rds.html">store_rds()</a></code> : store logs has individually RDS files
+(one by session).</li>
 <li>
 <code><a href="../reference/store_sqlite.html">store_sqlite()</a></code> : store logs in a SQLite database.</li>
 <li>
-<code><a href="../reference/store_null.html">store_null()</a></code> : don’t write logs on disk, print them in R console.</li>
+<code><a href="../reference/store_null.html">store_null()</a></code> : don’t write logs on disk, print them in
+R console.</li>
 <li>
-<code><a href="../reference/store_custom.html">store_custom()</a></code> : use a custom function to save logs wherever you want.</li>
+<code><a href="../reference/store_custom.html">store_custom()</a></code> : use a custom function to save logs
+wherever you want.</li>
 <li>
-<code><a href="../reference/store_googledrive.html">store_googledrive()</a></code> : store logs(as JSON files) in Googledrive.</li>
+<code><a href="../reference/store_googledrive.html">store_googledrive()</a></code> : store logs(as JSON files) in
+Googledrive.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -117,25 +108,40 @@
 <div class="section level3">
 <h3 id="shiny-server-rstudio-connect">Shiny server, RStudio Connect<a class="anchor" aria-label="anchor" href="#shiny-server-rstudio-connect"></a>
 </h3>
-<p>On a server, if you want to save logs on disk, don’t forget to set write permission on the folder you want to save logs.</p>
-<p>On RStudio Connect, you need to use an absolute path to specify the directory where to save logs. You can find more information here: <a href="https://support.rstudio.com/hc/en-us/articles/360007981134-Persistent-Storage-on-RStudio-Connect" class="external-link">Persistent Storage on RStudio Connect</a></p>
+<p>On a server, if you want to save logs on disk, don’t forget to set
+write permission on the folder you want to save logs.</p>
+<p>On RStudio Connect, you need to use an absolute path to specify the
+directory where to save logs. You can find more information here: <a href="https://support.rstudio.com/hc/en-us/articles/360007981134-Persistent-Storage-on-RStudio-Connect" class="external-link">Persistent
+Storage on RStudio Connect</a></p>
 </div>
 <div class="section level3">
 <h3 id="shinyproxy">ShinyProxy<a class="anchor" aria-label="anchor" href="#shinyproxy"></a>
 </h3>
-<p>With <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a>, you can use a Docker volume to write logs outside of the application container. In <code>application.yml</code>, you can something like this in the specs describing the application:</p>
+<p>With <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a>, you can use
+a Docker volume to write logs outside of the application container. In
+<code>application.yml</code>, you can something like this in the specs
+describing the application:</p>
 <pre><code>container-volumes: [ "/var/log/shinylogs:/root/logs" ]</code></pre>
-<p><code>/var/log/shinylogs</code> is a directory on the server where you deploy your applications with ShinyProxy. <code>/root/logs</code> is a directory inside your Docker image, it’s the path you can use in <code><a href="../reference/track_usage.html">track_usage()</a></code>, e.g. :</p>
+<p><code>/var/log/shinylogs</code> is a directory on the server where
+you deploy your applications with ShinyProxy. <code>/root/logs</code> is
+a directory inside your Docker image, it’s the path you can use in
+<code><a href="../reference/track_usage.html">track_usage()</a></code>, e.g. :</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/track_usage.html">track_usage</a></span><span class="op">(</span>
-  storage_mode <span class="op">=</span> <span class="fu"><a href="../reference/store_json.html">store_json</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"/root/logs"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/track_usage.html">track_usage</a></span><span class="op">(</span></span>
+<span>  storage_mode <span class="op">=</span> <span class="fu"><a href="../reference/store_json.html">store_json</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"/root/logs"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="shinyapps-io">shinyapps.io<a class="anchor" aria-label="anchor" href="#shinyapps-io"></a>
 </h3>
-<p>There’s no persistent data storage on shinyapps.io, so you can’t save logs as JSON or RDS files, you have to use a remote storage method. You can use the builtin method provided to send logs in Googledrive with <code>store_googledrive</code> or use <code>store_custom</code> to send logs wherever you want (dropbox, remote database, …).</p>
-<p>To use Googledrive, you’ll need to work with Google’s API and set auth to your account, see <a href="https://gargle.r-lib.org/index.html" class="external-link">{gargle} documentation</a> for examples and how to.</p>
+<p>There’s no persistent data storage on shinyapps.io, so you can’t save
+logs as JSON or RDS files, you have to use a remote storage method. You
+can use the builtin method provided to send logs in Googledrive with
+<code>store_googledrive</code> or use <code>store_custom</code> to send
+logs wherever you want (dropbox, remote database, …).</p>
+<p>To use Googledrive, you’ll need to work with Google’s API and set
+auth to your account, see <a href="https://gargle.r-lib.org/index.html" class="external-link">{gargle} documentation</a>
+for examples and how to.</p>
 </div>
 </div>
 <div class="section level2">
@@ -144,92 +150,103 @@
 <div class="section level3">
 <h3 id="session">Session<a class="anchor" aria-label="anchor" href="#session"></a>
 </h3>
-<p>Those data are metadata about the application and the user’s browser, here are the filed recorded :</p>
+<p>Those data are metadata about the application and the user’s browser,
+here are the filed recorded :</p>
 <ul>
 <li>
 <strong>app</strong> : name of the application</li>
 <li>
-<strong>user</strong> : name of the user (if using Shiny-server pro for example)</li>
+<strong>user</strong> : name of the user (if using Shiny-server pro
+for example)</li>
 <li>
-<strong>server_connected</strong> : timestamp of when application has been launched (server time)</li>
+<strong>server_connected</strong> : timestamp of when application
+has been launched (server time)</li>
 <li>
-<strong>sessionid</strong> : a session ID to match the session with other recorded informations (inputs, outputs, errors)</li>
+<strong>sessionid</strong> : a session ID to match the session with
+other recorded informations (inputs, outputs, errors)</li>
 <li>
-<strong>server_disconnected</strong> : timestamp of when the application was disconnected (server time)</li>
+<strong>server_disconnected</strong> : timestamp of when the
+application was disconnected (server time)</li>
 <li>
 <strong>user_agent</strong> : browser user-agent</li>
 <li>
-<strong>screen_res</strong> : resolution of the user screen (width x height)</li>
+<strong>screen_res</strong> : resolution of the user screen (width x
+height)</li>
 <li>
-<strong>browser_res</strong> : resolution of the user browser (width x height)</li>
+<strong>browser_res</strong> : resolution of the user browser (width
+x height)</li>
 <li>
 <strong>pixel_ratio</strong> : pixel ratio of the browser</li>
 <li>
-<strong>browser_connected</strong> : timestamp of when application has been launched (browser time, depends on user timezone)</li>
+<strong>browser_connected</strong> : timestamp of when application
+has been launched (browser time, depends on user timezone)</li>
 </ul>
 <p>Example:</p>
-<pre><code><span class="co">#&gt;            app    user    server_connected                        sessionid</span>
-<span class="co">#&gt; 1 iris-cluster dreamRs 2019-06-19 14:07:09 9815194cfaa6317fbea68ae9537d63d1</span>
-<span class="co">#&gt; 2 iris-cluster dreamRs 2019-06-19 14:56:32 0feeacf3201f5cca088059cec2b0a710</span>
-<span class="co">#&gt; 3 iris-cluster dreamRs 2019-06-19 14:57:45 8b12c138f159cc5805e136338dddac59</span>
-<span class="co">#&gt; 4 iris-cluster dreamRs 2019-06-19 15:03:00 f3950a1588b78d45c53c756a4136df67</span>
-<span class="co">#&gt; 5 iris-cluster dreamRs 2019-06-19 15:08:53 254cafb3d5866384f13022d066546cae</span>
-<span class="co">#&gt; 6 iris-cluster dreamRs 2019-08-04 10:58:47 8a431f4b90b3b1926047dd2539be0793</span>
-<span class="co">#&gt;   server_disconnected</span>
-<span class="co">#&gt; 1 2019-06-19 14:07:17</span>
-<span class="co">#&gt; 2 2019-06-19 14:57:39</span>
-<span class="co">#&gt; 3 2019-06-19 15:01:36</span>
-<span class="co">#&gt; 4 2019-06-19 15:08:13</span>
-<span class="co">#&gt; 5 2019-06-19 15:09:38</span>
-<span class="co">#&gt; 6 2019-08-04 10:58:49</span>
-<span class="co">#&gt;                                                                                                            user_agent</span>
-<span class="co">#&gt; 1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span>
-<span class="co">#&gt; 2 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span>
-<span class="co">#&gt; 3 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span>
-<span class="co">#&gt; 4 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span>
-<span class="co">#&gt; 5 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span>
-<span class="co">#&gt; 6                                                                                                                &lt;NA&gt;</span>
-<span class="co">#&gt;   screen_res browser_res pixel_ratio   browser_connected</span>
-<span class="co">#&gt; 1  1920x1080    1574x724           1 2019-06-19 14:07:09</span>
-<span class="co">#&gt; 2  1920x1080    1920x937           1 2019-06-19 14:56:32</span>
-<span class="co">#&gt; 3  1920x1080    1920x937           1 2019-06-19 14:57:45</span>
-<span class="co">#&gt; 4  1920x1080    1920x937           1 2019-06-19 15:03:00</span>
-<span class="co">#&gt; 5  1920x1080    1920x937           1 2019-06-19 15:08:53</span>
-<span class="co">#&gt; 6       &lt;NA&gt;        &lt;NA&gt;          NA                &lt;NA&gt;</span></code></pre>
+<pre><code><span><span class="co">#&gt;            app    user    server_connected                        sessionid</span></span>
+<span><span class="co">#&gt; 1 iris-cluster dreamRs 2019-06-19 14:07:09 9815194cfaa6317fbea68ae9537d63d1</span></span>
+<span><span class="co">#&gt; 2 iris-cluster dreamRs 2019-06-19 14:56:32 0feeacf3201f5cca088059cec2b0a710</span></span>
+<span><span class="co">#&gt; 3 iris-cluster dreamRs 2019-06-19 14:57:45 8b12c138f159cc5805e136338dddac59</span></span>
+<span><span class="co">#&gt; 4 iris-cluster dreamRs 2019-06-19 15:03:00 f3950a1588b78d45c53c756a4136df67</span></span>
+<span><span class="co">#&gt; 5 iris-cluster dreamRs 2019-06-19 15:08:53 254cafb3d5866384f13022d066546cae</span></span>
+<span><span class="co">#&gt; 6 iris-cluster dreamRs 2019-08-04 10:58:47 8a431f4b90b3b1926047dd2539be0793</span></span>
+<span><span class="co">#&gt;   server_disconnected</span></span>
+<span><span class="co">#&gt; 1 2019-06-19 14:07:17</span></span>
+<span><span class="co">#&gt; 2 2019-06-19 14:57:39</span></span>
+<span><span class="co">#&gt; 3 2019-06-19 15:01:36</span></span>
+<span><span class="co">#&gt; 4 2019-06-19 15:08:13</span></span>
+<span><span class="co">#&gt; 5 2019-06-19 15:09:38</span></span>
+<span><span class="co">#&gt; 6 2019-08-04 10:58:49</span></span>
+<span><span class="co">#&gt;                                                                                                            user_agent</span></span>
+<span><span class="co">#&gt; 1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span></span>
+<span><span class="co">#&gt; 2 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span></span>
+<span><span class="co">#&gt; 3 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span></span>
+<span><span class="co">#&gt; 4 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span></span>
+<span><span class="co">#&gt; 5 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</span></span>
+<span><span class="co">#&gt; 6                                                                                                                &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   screen_res browser_res pixel_ratio   browser_connected</span></span>
+<span><span class="co">#&gt; 1  1920x1080    1574x724           1 2019-06-19 14:07:09</span></span>
+<span><span class="co">#&gt; 2  1920x1080    1920x937           1 2019-06-19 14:56:32</span></span>
+<span><span class="co">#&gt; 3  1920x1080    1920x937           1 2019-06-19 14:57:45</span></span>
+<span><span class="co">#&gt; 4  1920x1080    1920x937           1 2019-06-19 15:03:00</span></span>
+<span><span class="co">#&gt; 5  1920x1080    1920x937           1 2019-06-19 15:08:53</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;        &lt;NA&gt;          NA                &lt;NA&gt;</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="inputs">Inputs<a class="anchor" aria-label="anchor" href="#inputs"></a>
 </h3>
-<p>Data about inputs, by default all inputs are recorded (even those not define by developper, like with {htmlwidgets} : {DT}, {leaflet}, …)</p>
+<p>Data about inputs, by default all inputs are recorded (even those not
+define by developper, like with {htmlwidgets} : {DT}, {leaflet}, …)</p>
 <ul>
 <li>
 <strong>sessionid</strong> : the same ID as in session object</li>
 <li>
 <strong>name</strong> : inputId of the input</li>
 <li>
-<strong>timestamp</strong> : timestamp when the input has changed</li>
+<strong>timestamp</strong> : timestamp when the input has
+changed</li>
 <li>
-<strong>value</strong> : the value taken by the input (can be a list in case of complex input)</li>
+<strong>value</strong> : the value taken by the input (can be a list
+in case of complex input)</li>
 <li>
 <strong>type</strong> : type of input (if defined)</li>
 <li>
 <strong>binding</strong> : binding for the input (if defined)</li>
 </ul>
 <p>Example:</p>
-<pre><code><span class="co">#&gt;                          sessionid     name           timestamp       value</span>
-<span class="co">#&gt; 1 9815194cfaa6317fbea68ae9537d63d1     xcol 2019-06-19 14:07:11 Sepal.Width</span>
-<span class="co">#&gt; 2 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           6</span>
-<span class="co">#&gt; 3 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           4</span>
-<span class="co">#&gt; 4 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           5</span>
-<span class="co">#&gt; 5 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:14           7</span>
-<span class="co">#&gt; 6 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:13           4</span>
-<span class="co">#&gt;           type           binding</span>
-<span class="co">#&gt; 1         &lt;NA&gt; shiny.selectInput</span>
-<span class="co">#&gt; 2 shiny.number shiny.numberInput</span>
-<span class="co">#&gt; 3 shiny.number shiny.numberInput</span>
-<span class="co">#&gt; 4 shiny.number shiny.numberInput</span>
-<span class="co">#&gt; 5 shiny.number shiny.numberInput</span>
-<span class="co">#&gt; 6 shiny.number shiny.numberInput</span></code></pre>
+<pre><code><span><span class="co">#&gt;                          sessionid     name           timestamp       value</span></span>
+<span><span class="co">#&gt; 1 9815194cfaa6317fbea68ae9537d63d1     xcol 2019-06-19 14:07:11 Sepal.Width</span></span>
+<span><span class="co">#&gt; 2 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           6</span></span>
+<span><span class="co">#&gt; 3 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           4</span></span>
+<span><span class="co">#&gt; 4 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:15           5</span></span>
+<span><span class="co">#&gt; 5 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:14           7</span></span>
+<span><span class="co">#&gt; 6 9815194cfaa6317fbea68ae9537d63d1 clusters 2019-06-19 14:07:13           4</span></span>
+<span><span class="co">#&gt;           type           binding</span></span>
+<span><span class="co">#&gt; 1         &lt;NA&gt; shiny.selectInput</span></span>
+<span><span class="co">#&gt; 2 shiny.number shiny.numberInput</span></span>
+<span><span class="co">#&gt; 3 shiny.number shiny.numberInput</span></span>
+<span><span class="co">#&gt; 4 shiny.number shiny.numberInput</span></span>
+<span><span class="co">#&gt; 5 shiny.number shiny.numberInput</span></span>
+<span><span class="co">#&gt; 6 shiny.number shiny.numberInput</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="outputs">Outputs<a class="anchor" aria-label="anchor" href="#outputs"></a>
@@ -241,66 +258,68 @@
 <li>
 <strong>name</strong> : outputId of the output</li>
 <li>
-<strong>timestamp</strong> : timestamp when the output has been updated</li>
+<strong>timestamp</strong> : timestamp when the output has been
+updated</li>
 <li>
 <strong>type</strong> : type of output (if defined)</li>
 <li>
 <strong>binding</strong> : binding for the output (if defined)</li>
 </ul>
 <p>Example:</p>
-<pre><code><span class="co">#&gt;                          sessionid  name           timestamp           binding</span>
-<span class="co">#&gt; 1 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput</span>
-<span class="co">#&gt; 2 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput</span>
-<span class="co">#&gt; 3 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:14 shiny.imageOutput</span>
-<span class="co">#&gt; 4 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput</span>
-<span class="co">#&gt; 5 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:11 shiny.imageOutput</span>
-<span class="co">#&gt; 6 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:10 shiny.imageOutput</span></code></pre>
+<pre><code><span><span class="co">#&gt;                          sessionid  name           timestamp           binding</span></span>
+<span><span class="co">#&gt; 1 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput</span></span>
+<span><span class="co">#&gt; 2 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput</span></span>
+<span><span class="co">#&gt; 3 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:14 shiny.imageOutput</span></span>
+<span><span class="co">#&gt; 4 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:15 shiny.imageOutput</span></span>
+<span><span class="co">#&gt; 5 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:11 shiny.imageOutput</span></span>
+<span><span class="co">#&gt; 6 9815194cfaa6317fbea68ae9537d63d1 plot1 2019-06-19 14:07:10 shiny.imageOutput</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="errors">Errors<a class="anchor" aria-label="anchor" href="#errors"></a>
 </h3>
-<p>Errors are recorded only when propagated through an output, this is the red message users see in application, infos saved are:</p>
+<p>Errors are recorded only when propagated through an output, this is
+the red message users see in application, infos saved are:</p>
 <ul>
 <li>
 <strong>sessionid</strong> : the same ID as in session object</li>
 <li>
-<strong>name</strong> : outputId of the output where an error happened</li>
+<strong>name</strong> : outputId of the output where an error
+happened</li>
 <li>
 <strong>timestamp</strong> : timestamp of the error</li>
 <li>
 <strong>error</strong> : error message (if any)</li>
 <li>
-<strong>value</strong> : additional data for the error (generally NULL) (if defined)</li>
+<strong>value</strong> : additional data for the error (generally
+NULL) (if defined)</li>
 </ul>
 <p>Example:</p>
-<pre><code><span class="co">#&gt;                          sessionid  name           timestamp</span>
-<span class="co">#&gt; 1 f8f50a3743023aae7d0d6350a2fd6841 plot1 2019-06-19 14:07:18</span>
-<span class="co">#&gt;                                         error</span>
-<span class="co">#&gt; 1 NA/NaN/Inf in foreign function call (arg 1)</span></code></pre>
+<pre><code><span><span class="co">#&gt;                          sessionid  name           timestamp</span></span>
+<span><span class="co">#&gt; 1 f8f50a3743023aae7d0d6350a2fd6841 plot1 2019-06-19 14:07:18</span></span>
+<span><span class="co">#&gt;                                         error</span></span>
+<span><span class="co">#&gt; 1 NA/NaN/Inf in foreign function call (arg 1)</span></span></code></pre>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by <a href="https://twitter.com/_mfaan" class="external-link"><img src="https://pbs.twimg.com/profile_images/912313931326218240/o1-wvA18_normal.jpg"> Fanny Meyer</a>, <a href="https://twitter.com/_pvictorr" class="external-link"><img src="https://pbs.twimg.com/profile_images/844237339404722177/E1U61aM8_normal.jpg"> Victor Perrier</a>, Silex Technologies.</p>
+  <p>Developed by <a href="https://twitter.com/_mfaan" class="external-link"><img src="https://pbs.twimg.com/profile_images/912313931326218240/o1-wvA18_normal.jpg"> Fanny Meyer</a>, <a href="https://twitter.com/_pvictorr" class="external-link"><img src="https://pbs.twimg.com/profile_images/844237339404722177/E1U61aM8_normal.jpg"> Victor Perrier</a>, Silex Technologies.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
