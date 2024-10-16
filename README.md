@@ -9,7 +9,7 @@
 
 <!-- badges: start -->
 
-[![version](http://www.r-pkg.org/badges/version/shinylogs)](https://CRAN.R-project.org/package=shinylogs)
+[![version](https://www.r-pkg.org/badges/version/shinylogs)](https://CRAN.R-project.org/package=shinylogs)
 [![cran
 checks](https://cranchecks.info/badges/worst/shinylogs)](https://cranchecks.info/pkgs/shinylogs)
 [![Lifecycle:

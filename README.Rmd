@@ -18,8 +18,7 @@ knitr::opts_chunk$set(
 > Logging tool for Shiny applications: record inputs or outputs changes, and infos about user's session. All recording is done client-side to not slow down the application and occupy the server.
 
 <!-- badges: start -->
-[![version](http://www.r-pkg.org/badges/version/shinylogs)](https://CRAN.R-project.org/package=shinylogs)
-[![cran checks](https://cranchecks.info/badges/worst/shinylogs)](https://cranchecks.info/pkgs/shinylogs)
+[![version](https://www.r-pkg.org/badges/version/shinylogs)](https://CRAN.R-project.org/package=shinylogs)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Codecov test coverage](https://codecov.io/gh/dreamRs/shinylogs/branch/master/graph/badge.svg)](https://app.codecov.io/gh/dreamRs/shinylogs?branch=master)
