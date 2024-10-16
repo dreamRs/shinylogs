@@ -16,6 +16,8 @@ is_sqlite <- function(path) {
 get_user_ <- function(session) {
   if (!is.null(session$user))
     return(session$user)
+  if (!is.null(session$request$HTTP_X_SP_USERID))
+    return(session$request$HTTP_X_SP_USERID)
   user <- Sys.getenv("SHINYPROXY_USERNAME")
   if (!identical(user, "")) {
     return(user)
