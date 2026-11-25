@@ -1,0 +1,55 @@
+# Changelog
+
+## shinylogs 0.2.2
+
+- Add check for Shinyproxy username HTTP header
+  [\#29](https://github.com/dreamRs/shinylogs/pull/29)
+
+## shinylogs 0.2.1
+
+CRAN release: 2022-04-18
+
+- [`track_usage()`](https://dreamrs.github.io/shinylogs/reference/track_usage.md)
+  has new arguments:
+  - `app_name`: explicitly set application’s name, thanks to
+    [@PaulC91](https://github.com/PaulC91)
+  - `what`: elements to record between `"session"`, `"input"`,
+    `"output"` and `"error"`.
+
+## shinylogs 0.2.0
+
+CRAN release: 2021-11-26
+
+- Timestamp is now recorded in microseconds (fix
+  [\#6](https://github.com/dreamRs/shinylogs/issues/6)).
+- Added
+  [`store_googledrive()`](https://dreamrs.github.io/shinylogs/reference/store_googledrive.md)
+  to store logs as json in Google drive.
+- Added
+  [`store_custom()`](https://dreamrs.github.io/shinylogs/reference/store_custom.md)
+  to use a custom function to deal with logs generated.
+- Use [{packer}](https://github.com/JohnCoene/packer) to manage
+  JavaScript assets.
+
+## shinylogs 0.1.7
+
+CRAN release: 2019-08-21
+
+- Fix a bug when used with {shinymanager} (fix
+  [\#2](https://github.com/dreamRs/shinylogs/issues/2)).
+
+## shinylogs 0.1.6
+
+CRAN release: 2019-07-18
+
+- `use_tracking` is now exported to load dependencies directly in UI,
+  usefull for big applications.
+- Ability to print logs recorded in the console.
+
+## shinylogs 0.1.5
+
+CRAN release: 2019-05-09
+
+- First release : Track and record the use of applications and the
+  user’s interactions with ‘Shiny’ inputs. Allow to save inputs clicked,
+  output generated and eventually errors.

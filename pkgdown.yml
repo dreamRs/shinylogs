@@ -1,9 +1,9 @@
-pandoc: 3.1.11
-pkgdown: 2.1.1
+pandoc: 3.8.3
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   shinylogs: shinylogs.html
-last_built: 2024-10-16T15:02Z
+last_built: 2026-11-25T11:00Z
 urls:
   reference: https://dreamrs.github.io/shinylogs/reference
   article: https://dreamrs.github.io/shinylogs/articles
