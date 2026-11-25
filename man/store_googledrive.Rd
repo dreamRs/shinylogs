@@ -16,8 +16,8 @@ A list that can be used in \code{\link[=track_usage]{track_usage()}}.
 All logs will be written in the same file.
 }
 \note{
-See the {gargle} package to manage authentication, and especially
-\href{https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html}{this vignette from {gargle} package} to manage the process.
+See the \{gargle\} package to manage authentication, and especially
+\href{https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html}{this vignette from \{gargle\} package} to manage the process.
 }
 \examples{
 \dontrun{

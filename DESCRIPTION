@@ -9,7 +9,6 @@ Description: Track and record the use of applications and the user's interaction
   as well as the errors displayed in the interface.
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/dreamRs/shinylogs, https://dreamrs.github.io/shinylogs/
 BugReports: https://github.com/dreamRs/shinylogs/issues
@@ -31,3 +30,4 @@ Suggests:
     RSQLite,
     googledrive
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0
